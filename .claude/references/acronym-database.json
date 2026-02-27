@@ -86,6 +86,32 @@
       "subsequent": ["Cisco Connection Online"],
       "deprecated": true,
       "notes": "Never use CCO acronym - always spell out"
+    },
+    "IOS": {
+      "expansion": "Internetwork Operating System",
+      "full_name": "Cisco IOS Software",
+      "first_use": "Cisco IOS Software",
+      "subsequent": ["Cisco IOS", "IOS"],
+      "deprecated": false,
+      "well_known": true,
+      "notes": "Well-established Cisco OS; typically no expansion needed after first use"
+    },
+    "IOS-XE": {
+      "expansion": "IOS Extended Edition",
+      "full_name": "Cisco IOS XE Software",
+      "first_use": "Cisco IOS XE Software",
+      "subsequent": ["Cisco IOS XE", "IOS XE"],
+      "deprecated": false,
+      "well_known": true,
+      "notes": "Next-generation IOS for enterprise platforms"
+    },
+    "IOS-XR": {
+      "expansion": "IOS Extended Routing",
+      "full_name": "Cisco IOS XR Software",
+      "first_use": "Cisco IOS XR Software",
+      "subsequent": ["Cisco IOS XR", "IOS XR"],
+      "deprecated": false,
+      "notes": "Carrier-grade modular IOS"
     }
   },
   "trademarks": {
@@ -356,6 +382,18 @@
       "expansion": "Yet Another Next Generation",
       "expand_first_use": false,
       "notes": "Typically not expanded - query if unsure"
+    },
+    "NETCONF": {
+      "expansion": "Network Configuration Protocol",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "IETF standard protocol for network management"
+    },
+    "RESTCONF": {
+      "expansion": "REST-based Configuration Protocol",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "RESTful interface for YANG-based management"
     }
   },
   "data_center": {
@@ -672,6 +710,62 @@
       "type": "cli_keyword",
       "skip": true,
       "notes": "CLI mode keyword"
+    },
+    "GET": {
+      "type": "http_method",
+      "skip": true,
+      "notes": "HTTP method - not an acronym requiring expansion"
+    },
+    "POST": {
+      "type": "http_method",
+      "skip": true,
+      "notes": "HTTP method"
+    },
+    "PUT": {
+      "type": "http_method",
+      "skip": true,
+      "notes": "HTTP method"
+    },
+    "DELETE": {
+      "type": "http_method",
+      "skip": true,
+      "notes": "HTTP method"
+    },
+    "PATCH": {
+      "type": "http_method",
+      "skip": true,
+      "notes": "HTTP method"
+    },
+    "XE": {
+      "type": "os_suffix",
+      "skip": true,
+      "notes": "When standalone, refers to IOS-XE - see cisco_products.IOS-XE"
+    },
+    "XR": {
+      "type": "os_suffix",
+      "skip": true,
+      "notes": "When standalone, refers to IOS-XR - see cisco_products.IOS-XR"
+    },
+    "PRODUCTION": {
+      "type": "environment",
+      "skip": true,
+      "notes": "Common environment name, not an acronym"
+    },
+    "STAGING": {
+      "type": "environment",
+      "skip": true,
+      "notes": "Common environment name"
+    },
+    "DEV": {
+      "type": "environment",
+      "skip": true,
+      "notes": "Short for development"
+    },
+    "IT": {
+      "type": "ambiguous",
+      "skip": false,
+      "expansion": "Information Technology",
+      "notes": "Context-dependent - may be acronym or pronoun; flag as QUERY"
     }
   },
   "emerging_unverified": {
@@ -701,7 +795,8 @@
     "known_updates": [
       "FMC/FTD deprecated per 2025 Cisco branding update",
       "Azure AD → Microsoft Entra ID (2023 rebrand)",
-      "Added data_center, security_802.1x, interface_cli, skip_patterns categories (Feature 015)"
+      "Added data_center, security_802.1x, interface_cli, skip_patterns categories (Feature 015)",
+      "Added IOS/IOS-XE/IOS-XR, NETCONF/RESTCONF, HTTP methods, environment names (Feature 016)"
     ],
     "pending_review": []
   }
