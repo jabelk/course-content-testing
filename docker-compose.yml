@@ -1,0 +1,88 @@
+# Course Content Testing - Docker Compose
+#
+# Usage:
+#   docker-compose up -d          # Start MCP server
+#   docker-compose run cli <args> # Run CLI commands
+#   docker-compose down           # Stop services
+#
+# For Cisco internal deployment:
+#   1. Update image registry in .env
+#   2. Configure persistent storage paths
+#   3. Set up reverse proxy for SSE endpoint
+
+services:
+  # MCP Server (SSE mode) - for network access
+  mcp-server:
+    build: .
+    image: ${REGISTRY:-}course-content-testing:${VERSION:-latest}
+    container_name: editorial-mcp-server
+    command: ["--mcp-server", "--port", "8000", "--host", "0.0.0.0"]
+    ports:
+      - "${MCP_PORT:-8000}:8000"
+    volumes:
+      - ./input:/app/input:ro
+      - ./output:/app/output
+      - rules-data:/app/data/rules
+      - acronyms-data:/app/data/acronyms
+    environment:
+      - RULES_FILE=/app/data/rules/editorial_rules.yaml
+      - ACRONYM_DB=/app/data/acronyms/acronym-database.json
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # CLI runner - for batch processing
+  cli:
+    build: .
+    image: ${REGISTRY:-}course-content-testing:${VERSION:-latest}
+    volumes:
+      - ./input:/app/input:ro
+      - ./output:/app/output
+      - rules-data:/app/data/rules
+      - acronyms-data:/app/data/acronyms
+    environment:
+      - RULES_FILE=/app/data/rules/editorial_rules.yaml
+      - ACRONYM_DB=/app/data/acronyms/acronym-database.json
+    profiles:
+      - cli
+
+  # Rules updater - syncs rules from Git
+  rules-sync:
+    image: alpine/git:latest
+    container_name: editorial-rules-sync
+    volumes:
+      - rules-data:/data/rules
+      - acronyms-data:/data/acronyms
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - |
+        # Clone or pull latest rules
+        if [ -d /tmp/repo/.git ]; then
+          cd /tmp/repo && git pull
+        else
+          git clone --depth 1 https://github.com/CiscoLearning/course-content-testing.git /tmp/repo
+        fi
+        # Copy updated files
+        cp /tmp/repo/tools/editorial_rules.yaml /data/rules/
+        cp /tmp/repo/.claude/references/acronym-database.json /data/acronyms/
+        echo "Rules synced at $(date)"
+    profiles:
+      - sync
+
+# Persistent volumes for rules and acronyms
+# These survive container restarts and can be backed up
+volumes:
+  rules-data:
+    driver: local
+  acronyms-data:
+    driver: local
+
+# Network for internal communication
+networks:
+  default:
+    name: editorial-network

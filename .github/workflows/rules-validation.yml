@@ -1,0 +1,177 @@
+# Rules Validation Workflow
+# Triggered when editorial_rules.yaml or acronym-database.json changes
+# Validates syntax and posts a summary of changes
+
+name: Rules Validation
+
+on:
+  pull_request:
+    paths:
+      - 'tools/editorial_rules.yaml'
+      - '.claude/references/acronym-database.json'
+  push:
+    paths:
+      - 'tools/editorial_rules.yaml'
+      - '.claude/references/acronym-database.json'
+
+jobs:
+  validate-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Need history for diff
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Validate YAML rules
+        id: yaml-validate
+        run: |
+          python << 'EOF'
+          import yaml
+          import sys
+
+          try:
+              with open('tools/editorial_rules.yaml') as f:
+                  data = yaml.safe_load(f)
+
+              rules = data.get('rules', [])
+              enabled = sum(1 for r in rules if r.get('enabled', True))
+              disabled = len(rules) - enabled
+
+              print(f"✓ Valid YAML")
+              print(f"  Total rules: {len(rules)}")
+              print(f"  Enabled: {enabled}")
+              print(f"  Disabled: {disabled}")
+
+              # Check for required fields
+              for rule in rules:
+                  if 'id' not in rule:
+                      print(f"⚠ Rule missing 'id' field: {rule}")
+                      sys.exit(1)
+                  if 'pattern' not in rule and rule.get('pattern_type') != 'stateful':
+                      print(f"⚠ Rule {rule['id']} missing 'pattern' field")
+
+              print("✓ All rules have required fields")
+
+          except Exception as e:
+              print(f"✗ Validation failed: {e}")
+              sys.exit(1)
+          EOF
+
+      - name: Validate acronym database
+        id: json-validate
+        run: |
+          python << 'EOF'
+          import json
+          import sys
+
+          try:
+              with open('.claude/references/acronym-database.json') as f:
+                  data = json.load(f)
+
+              # Count acronyms by category
+              categories = {}
+              total = 0
+              for key, value in data.items():
+                  if key == '_metadata':
+                      continue
+                  if isinstance(value, dict):
+                      count = len(value)
+                      categories[key] = count
+                      total += count
+
+              print(f"✓ Valid JSON")
+              print(f"  Total acronyms: {total}")
+              print(f"  Categories: {len(categories)}")
+              for cat, count in sorted(categories.items()):
+                  print(f"    {cat}: {count}")
+
+          except Exception as e:
+              print(f"✗ Validation failed: {e}")
+              sys.exit(1)
+          EOF
+
+      - name: Generate diff summary
+        if: github.event_name == 'pull_request'
+        id: diff-summary
+        run: |
+          echo "## Rules Changes Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Check editorial_rules.yaml changes
+          if git diff --name-only origin/main...HEAD | grep -q "editorial_rules.yaml"; then
+            echo "### Editorial Rules Changes" >> $GITHUB_STEP_SUMMARY
+            echo '```diff' >> $GITHUB_STEP_SUMMARY
+            git diff origin/main...HEAD -- tools/editorial_rules.yaml | head -100 >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi
+
+          # Check acronym-database.json changes
+          if git diff --name-only origin/main...HEAD | grep -q "acronym-database.json"; then
+            echo "### Acronym Database Changes" >> $GITHUB_STEP_SUMMARY
+            echo '```diff' >> $GITHUB_STEP_SUMMARY
+            git diff origin/main...HEAD -- .claude/references/acronym-database.json | head -100 >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Post PR comment with changes
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            // Run validation scripts and capture output
+            const { execSync } = require('child_process');
+
+            let yamlOutput = '';
+            let jsonOutput = '';
+
+            try {
+              yamlOutput = execSync('python -c "import yaml; data=yaml.safe_load(open(\'tools/editorial_rules.yaml\')); rules=data.get(\'rules\',[]); print(f\'Rules: {len(rules)} total, {sum(1 for r in rules if r.get(\"enabled\",True))} enabled\')"').toString();
+            } catch (e) {
+              yamlOutput = 'Error validating YAML';
+            }
+
+            try {
+              jsonOutput = execSync('python -c "import json; data=json.load(open(\'.claude/references/acronym-database.json\')); total=sum(len(v) for k,v in data.items() if isinstance(v,dict) and k!=\'_metadata\'); print(f\'Acronyms: {total} total\')"').toString();
+            } catch (e) {
+              jsonOutput = 'Error validating JSON';
+            }
+
+            const body = `## Rules Validation Results
+
+            | File | Status |
+            |------|--------|
+            | \`editorial_rules.yaml\` | ✓ Valid - ${yamlOutput.trim()} |
+            | \`acronym-database.json\` | ✓ Valid - ${jsonOutput.trim()} |
+
+            <details>
+            <summary>How to test these changes locally</summary>
+
+            \`\`\`bash
+            # Pull this PR
+            git fetch origin pull/${{ github.event.pull_request.number }}/head:pr-${{ github.event.pull_request.number }}
+            git checkout pr-${{ github.event.pull_request.number }}
+
+            # Test with a sample document
+            cd tools
+            python course_editor.py ../test-courses/AUTOCOR-Sec01_orig.docx
+            \`\`\`
+
+            </details>
+            `;
+
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: body
+            });

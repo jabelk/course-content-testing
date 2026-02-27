@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "course-content-testing"
+version = "1.0.0"
+description = "AI-powered editorial review tools for LWC course content"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Cisco Learning", email = "jabelk@cisco.com"}
+]
+keywords = ["editorial", "docx", "validation", "cisco", "mcp"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "python-docx>=0.8.11",
+    "PyYAML>=6.0",
+    "lxml>=4.9.0",
+]
+
+[project.optional-dependencies]
+mcp = [
+    "fastmcp>=0.1.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+all = [
+    "course-content-testing[mcp,dev]",
+]
+
+[project.scripts]
+course-editor = "tools.course_editor:main"
+mcp-editorial = "tools.mcp_editorial_server:main"
+
+[project.urls]
+Homepage = "https://github.com/CiscoLearning/course-content-testing"
+Documentation = "https://github.com/CiscoLearning/course-content-testing#readme"
+Repository = "https://github.com/CiscoLearning/course-content-testing.git"
+Issues = "https://github.com/CiscoLearning/course-content-testing/issues"
+Changelog = "https://github.com/CiscoLearning/course-content-testing/blob/main/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["tools*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["tools"]
+omit = ["tests/*", "*/__pycache__/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+]

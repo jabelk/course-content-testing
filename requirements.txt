@@ -1,0 +1,17 @@
+# Course Content Testing - Python Dependencies
+# Install: pip install -r requirements.txt
+
+# Core dependencies
+python-docx>=0.8.11      # DOCX file manipulation
+PyYAML>=6.0              # YAML rule configuration
+lxml>=4.9.0              # XML processing for track changes
+
+# MCP Server (optional - for Cursor/Claude Code integration)
+fastmcp>=0.1.0           # Model Context Protocol server framework
+
+# Development dependencies (optional)
+pytest>=7.0.0            # Testing framework
+pytest-cov>=4.0.0        # Coverage reporting
+
+# System requirement (not pip installable):
+# - pandoc: brew install pandoc (macOS) or apt install pandoc (Linux)

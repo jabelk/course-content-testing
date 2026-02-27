@@ -57,34 +57,23 @@ ACRONYM_DB_FILE = os.path.join(script_dir, '..', '.claude', 'references', 'acron
 
 mcp = FastMCP("Editorial Server")
 
-# Cache for loaded resources
-_acronym_db: Optional[Dict] = None
-_rules: Optional[List] = None
+# Hot reload support - auto-reloads rules/acronyms when files change
+from hot_reload import RulesReloader
+_reloader = RulesReloader(
+    rules_path=RULES_FILE,
+    acronym_path=ACRONYM_DB_FILE,
+    check_interval=5.0  # Check for changes every 5 seconds
+)
 
 
 def get_acronym_db() -> Dict:
-    """Load and cache acronym database."""
-    global _acronym_db
-    if _acronym_db is None:
-        db_path = os.path.abspath(ACRONYM_DB_FILE)
-        if os.path.exists(db_path):
-            with open(db_path, 'r', encoding='utf-8') as f:
-                _acronym_db = json.load(f)
-        else:
-            _acronym_db = {}
-    return _acronym_db
+    """Load acronym database with hot reload support."""
+    return _reloader.get_acronyms()
 
 
 def get_rules() -> List:
-    """Load and cache editorial rules."""
-    global _rules
-    if _rules is None:
-        if os.path.exists(RULES_FILE):
-            from editorial_validation import load_rules
-            _rules = load_rules(RULES_FILE)
-        else:
-            _rules = []
-    return _rules
+    """Load editorial rules with hot reload support."""
+    return _reloader.get_rules()
 
 
 # =============================================================================
@@ -399,12 +388,13 @@ def get_server_info() -> Dict[str, Any]:
     """
     db = get_acronym_db()
     rules = get_rules()
+    status = _reloader.get_status()
 
     return {
         "name": "Editorial Server",
         "version": "1.0.0",
         "description": "MCP server for Cisco editorial validation",
-        "tools": ["analyze_document", "apply_fixes", "lookup_acronym", "list_rules", "get_server_info"],
+        "tools": ["analyze_document", "apply_fixes", "lookup_acronym", "list_rules", "reload_rules", "get_server_info"],
         "configuration": {
             "rules_file": RULES_FILE,
             "acronym_db_file": os.path.abspath(ACRONYM_DB_FILE),
@@ -412,7 +402,42 @@ def get_server_info() -> Dict[str, Any]:
             "acronyms_loaded": sum(
                 len(v) for k, v in db.items()
                 if isinstance(v, dict) and k != '_metadata'
-            )
+            ),
+            "hot_reload": {
+                "enabled": True,
+                "check_interval_seconds": _reloader.check_interval,
+                "rules_last_modified": status['rules']['last_modified'],
+                "acronyms_last_modified": status['acronyms']['last_modified']
+            }
+        }
+    }
+
+
+@mcp.tool()
+def reload_rules() -> Dict[str, Any]:
+    """
+    Force reload of editorial rules and acronym database.
+
+    Use this after updating rules or acronyms to immediately
+    pick up changes without waiting for the automatic reload.
+
+    Returns:
+        Dictionary with reload status and updated counts
+    """
+    result = _reloader.reload_all()
+    status = _reloader.get_status()
+
+    return {
+        "success": result['rules'] and result['acronyms'],
+        "rules": {
+            "reloaded": result['rules'],
+            "count": status['rules']['count'],
+            "error": status['rules']['error']
+        },
+        "acronyms": {
+            "reloaded": result['acronyms'],
+            "count": status['acronyms']['count'],
+            "error": status['acronyms']['error']
         }
     }
 
