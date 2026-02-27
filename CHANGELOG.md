@@ -2,6 +2,41 @@
 
 All notable changes to the Course Content Testing tools.
 
+## [1.1.0] - 2026-02-27
+
+### Added
+
+- **Python Packaging**
+  - `requirements.txt` with all dependencies
+  - `pyproject.toml` for modern Python packaging
+  - Entry points: `course-editor`, `mcp-editorial`
+
+- **Docker Support**
+  - `Dockerfile` with pandoc and Python deps
+  - `docker-compose.yml` for easy deployment
+  - Persistent volumes for rules/acronyms updates
+  - SSE mode support for network access
+  - `docker-entrypoint.sh` with help and CLI/server modes
+
+- **GitHub Actions CI**
+  - `ci.yml`: Tests on Python 3.10/3.11/3.12
+  - Validates YAML rules and JSON acronym database
+  - Builds and tests Docker image on push to main
+  - `rules-validation.yml`: PR comments when rules/acronyms change
+
+- **Hot Reload**
+  - `hot_reload.py`: File watcher for rules and acronyms
+  - MCP server auto-reloads when config files change
+  - New `reload_rules` MCP tool for manual refresh
+  - Configurable check interval (default: 5 seconds)
+
+### Changed
+
+- MCP server now uses hot reload (no restart needed for rule updates)
+- Updated MCP server info to include hot reload status
+
+---
+
 ## [1.0.0] - 2026-02-27
 
 ### Added
@@ -58,5 +93,6 @@ All notable changes to the Course Content Testing tools.
 ## Upcoming
 
 - [ ] Web upload interface (Issue #3)
-- [ ] Auto-update rules on startup
+- [x] ~~Auto-update rules on startup~~ Done in v1.1.0 (hot reload)
 - [ ] Batch processing with parallel execution
+- [ ] Cisco internal server deployment
