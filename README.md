@@ -139,6 +139,30 @@ course-content-testing/
         └── acronym-database.json
 ```
 
+## AI Enhancement (Optional)
+
+The tool works fully with regex-only rules (no API needed). For smarter AI-powered suggestions:
+
+### Setup
+
+1. Get an Anthropic API key from https://console.anthropic.com/
+2. Set the environment variable:
+   ```bash
+   export ANTHROPIC_API_KEY="sk-ant-..."
+   ```
+3. Run without `--no-ai` flag:
+   ```bash
+   python3 course_editor.py "../test-courses/DCNAUTO-Sec 01_orig.docx"
+   ```
+
+### What AI Adds
+
+- Smarter procedural intro detection
+- Context-aware heading suggestions
+- Better acronym relevance scoring
+
+**Note**: Current PoC uses `--no-ai` for 100% deterministic results. AI adds ~5% variance but catches more issues.
+
 ## Next Steps
 
 1. **Kim reviews reports** - Provide feedback on accuracy

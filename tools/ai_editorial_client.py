@@ -5,14 +5,13 @@ Provides AI-enhanced editorial suggestions for context-dependent rules.
 Falls back gracefully when AI is unavailable, converting ai_enhanced rules to QUERY.
 
 Key Features:
-    - OAuth2 authentication with Cisco Chat-AI
+    - Anthropic Claude API integration
     - Response caching to reduce API calls
     - Confidence scoring for AI suggestions
     - Graceful degradation when AI unavailable
 """
 import os
 import json
-import base64
 import hashlib
 from typing import Optional, Dict, List, Tuple
 from dataclasses import dataclass, field
@@ -26,8 +25,8 @@ except ImportError:
 
 
 # API Configuration
-OAUTH_URL = "https://id.cisco.com/oauth2/default/v1/token"
-LLM_URL = "https://chat-ai.cisco.com/openai/deployments/gpt-4o-mini/chat/completions"
+ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
+ANTHROPIC_MODEL = "claude-3-haiku-20240307"  # Fast and cost-effective
 
 # Cache settings
 CACHE_TTL_HOURS = 24
@@ -61,11 +60,7 @@ class AIEditorialClient:
 
     def __init__(self):
         """Initialize the AI client with optional credentials."""
-        self.client_id = os.environ.get("CLIENT_ID")
-        self.client_secret = os.environ.get("CLIENT_SECRET")
-        self.app_key = os.environ.get("APP_KEY")
-        self._access_token: Optional[str] = None
-        self._token_expiry: Optional[datetime] = None
+        self.api_key = os.environ.get("ANTHROPIC_API_KEY")
         self._cache: Dict[str, CacheEntry] = {}
 
     @property
@@ -73,7 +68,7 @@ class AIEditorialClient:
         """Check if AI client is available and configured."""
         if not REQUESTS_AVAILABLE:
             return False
-        if not all([self.client_id, self.client_secret, self.app_key]):
+        if not self.api_key:
             return False
         return True
 
@@ -110,72 +105,32 @@ class AIEditorialClient:
             content_hash=content_hash
         )
 
-    def _get_access_token(self) -> Optional[str]:
-        """Get or refresh OAuth access token."""
-        if not self.is_available:
-            return None
-
-        # Return cached token if still valid
-        if self._access_token and self._token_expiry:
-            if datetime.now() < self._token_expiry:
-                return self._access_token
-
-        try:
-            payload = "grant_type=client_credentials"
-            auth_value = base64.b64encode(
-                f'{self.client_id}:{self.client_secret}'.encode('utf-8')
-            ).decode('utf-8')
-
-            headers = {
-                "Accept": "*/*",
-                "Content-Type": "application/x-www-form-urlencoded",
-                "Authorization": f"Basic {auth_value}"
-            }
-
-            response = requests.post(OAUTH_URL, headers=headers, data=payload, timeout=30)
-            response.raise_for_status()
-
-            token_data = response.json()
-            self._access_token = token_data.get('access_token')
-            # Token typically expires in 1 hour, refresh a bit early
-            self._token_expiry = datetime.now() + timedelta(minutes=55)
-
-            return self._access_token
-
-        except Exception as e:
-            print(f"Warning: Could not get AI access token: {e}")
-            return None
-
     def _make_request(self, prompt: str, content: str) -> Optional[str]:
-        """Make a request to the AI API."""
-        token = self._get_access_token()
-        if not token:
+        """Make a request to the Anthropic API."""
+        if not self.is_available:
             return None
 
         try:
             headers = {
                 "Content-Type": "application/json",
-                "Authorization": f"Bearer {token}",
-                "appkey": self.app_key
+                "x-api-key": self.api_key,
+                "anthropic-version": "2023-06-01"
             }
 
             payload = {
+                "model": ANTHROPIC_MODEL,
+                "max_tokens": 500,
                 "messages": [
-                    {
-                        "role": "system",
-                        "content": "You are an editorial assistant for Cisco technical tutorials. Provide concise, specific suggestions for improving content quality."
-                    },
                     {
                         "role": "user",
                         "content": f"{prompt}\n\nContent to analyze:\n{content}"
                     }
                 ],
-                "temperature": 0.3,
-                "max_tokens": 500
+                "system": "You are an editorial assistant for Cisco technical tutorials. Provide concise, specific suggestions for improving content quality."
             }
 
             response = requests.post(
-                LLM_URL,
+                ANTHROPIC_API_URL,
                 headers=headers,
                 json=payload,
                 timeout=60
@@ -183,7 +138,11 @@ class AIEditorialClient:
             response.raise_for_status()
 
             data = response.json()
-            return data.get('choices', [{}])[0].get('message', {}).get('content', '')
+            # Anthropic returns content as a list of content blocks
+            content_blocks = data.get('content', [])
+            if content_blocks and content_blocks[0].get('type') == 'text':
+                return content_blocks[0].get('text', '')
+            return None
 
         except Exception as e:
             print(f"Warning: AI request failed: {e}")
