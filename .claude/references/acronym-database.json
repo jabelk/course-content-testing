@@ -1,12 +1,13 @@
 {
   "_metadata": {
     "description": "Acronym database for AI editorial agent",
-    "last_updated": "2026-02-21",
-    "version": "1.1.0",
+    "last_updated": "2026-02-27",
+    "version": "2.0.0",
     "sources": {
       "official": "Cisco Technical Content Style Guide (stylegd.pdf, August 2022)",
       "observed": "Editor comments from masperli and jlauterb-edit",
-      "emerging": "New acronyms flagged during review - require verification"
+      "emerging": "New acronyms flagged during review - require verification",
+      "gap_analysis": "Feature 014 gap analysis from 7 test courses (2026-02-27)"
     },
     "update_process": [
       "1. New/unfamiliar acronyms are flagged as QUERY in PR comments",
@@ -196,6 +197,65 @@
       "well_known": false,
       "expand_first_use": true,
       "notes": "Lowercase expansion, ACI-specific"
+    },
+    "SD-WAN": {
+      "expansion": "Software-Defined Wide Area Network",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Cisco SD-WAN (formerly Viptela)"
+    },
+    "WAN": {
+      "expansion": "Wide Area Network",
+      "well_known": true,
+      "expand_first_use": true
+    },
+    "OMP": {
+      "expansion": "Overlay Management Protocol",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "SD-WAN control plane protocol"
+    },
+    "vManage": {
+      "expansion": "vManage",
+      "well_known": false,
+      "expand_first_use": false,
+      "notes": "SD-WAN management platform - not an acronym"
+    },
+    "vSmart": {
+      "expansion": "vSmart",
+      "well_known": false,
+      "expand_first_use": false,
+      "notes": "SD-WAN controller - not an acronym"
+    },
+    "vBond": {
+      "expansion": "vBond",
+      "well_known": false,
+      "expand_first_use": false,
+      "notes": "SD-WAN orchestrator - not an acronym"
+    },
+    "vEdge": {
+      "expansion": "vEdge",
+      "well_known": false,
+      "expand_first_use": false,
+      "notes": "SD-WAN edge router - not an acronym"
+    },
+    "cEdge": {
+      "expansion": "cEdge",
+      "well_known": false,
+      "expand_first_use": false,
+      "notes": "Cisco IOS-XE SD-WAN edge - not an acronym"
+    },
+    "TLOC": {
+      "expansion": "Transport Location",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "SD-WAN transport locator"
+    },
+    "BFD": {
+      "expansion": "Bidirectional Forwarding Detection",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Fast failure detection protocol"
     }
   },
   "security": {
@@ -298,6 +358,322 @@
       "notes": "Typically not expanded - query if unsure"
     }
   },
+  "data_center": {
+    "_notes": "Data center networking acronyms (VXLAN, fabric, Nexus)",
+    "VXLAN": {
+      "expansion": "Virtual Extensible LAN",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Layer 2 overlay technology"
+    },
+    "VTEP": {
+      "expansion": "VXLAN Tunnel Endpoint",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Device that encapsulates/decapsulates VXLAN traffic"
+    },
+    "EVPN": {
+      "expansion": "Ethernet VPN",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Control plane for VXLAN"
+    },
+    "VNI": {
+      "expansion": "VXLAN Network Identifier",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "24-bit segment ID for VXLAN"
+    },
+    "NVE": {
+      "expansion": "Network Virtual Edge",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "VXLAN interface on Nexus switches"
+    },
+    "POAP": {
+      "expansion": "Power-On Auto Provisioning",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Nexus zero-touch provisioning feature"
+    },
+    "APIC": {
+      "expansion": "Application Policy Infrastructure Controller",
+      "full_name": "Cisco Application Policy Infrastructure Controller",
+      "first_use": "Cisco Application Policy Infrastructure Controller (APIC)",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "ACI controller"
+    },
+    "VPC": {
+      "expansion": "virtual port channel",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Nexus multi-chassis EtherChannel; lowercase expansion"
+    },
+    "FEX": {
+      "expansion": "Fabric Extender",
+      "full_name": "Cisco Nexus Fabric Extender",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Remote line cards for Nexus"
+    }
+  },
+  "security_802.1x": {
+    "_notes": "Network access control and 802.1X authentication acronyms",
+    "EAP": {
+      "expansion": "Extensible Authentication Protocol",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Authentication framework for 802.1X"
+    },
+    "PEAP": {
+      "expansion": "Protected Extensible Authentication Protocol",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "EAP method using TLS tunnel"
+    },
+    "EAP-TLS": {
+      "expansion": "EAP-Transport Layer Security",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Certificate-based EAP method"
+    },
+    "EAP-FAST": {
+      "expansion": "EAP-Flexible Authentication via Secure Tunneling",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Cisco-developed EAP method"
+    },
+    "MAB": {
+      "expansion": "MAC Authentication Bypass",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "For non-supplicant devices"
+    },
+    "CoA": {
+      "expansion": "Change of Authorization",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "RADIUS extension for dynamic policy changes"
+    },
+    "dACL": {
+      "expansion": "downloadable ACL",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "ISE-pushed access control list; lowercase 'd'"
+    },
+    "NAC": {
+      "expansion": "Network Access Control",
+      "well_known": false,
+      "expand_first_use": true
+    },
+    "NAD": {
+      "expansion": "Network Access Device",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Switch or WLC enforcing 802.1X"
+    },
+    "IBNS": {
+      "expansion": "Identity-Based Networking Services",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Cisco 802.1X solution"
+    },
+    "SGT": {
+      "expansion": "Security Group Tag",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "TrustSec scalable group tag"
+    },
+    "TrustSec": {
+      "expansion": "Cisco TrustSec",
+      "well_known": false,
+      "expand_first_use": false,
+      "notes": "Not an acronym - product name"
+    }
+  },
+  "interface_cli": {
+    "_notes": "Interface statistics and CLI-specific abbreviations",
+    "MTU": {
+      "expansion": "Maximum Transmission Unit",
+      "well_known": true,
+      "expand_first_use": true,
+      "notes": "Standard interface parameter"
+    },
+    "BW": {
+      "expansion": "bandwidth",
+      "well_known": true,
+      "expand_first_use": false,
+      "skip_in_cli": true,
+      "notes": "CLI abbreviation - don't flag in show interface output"
+    },
+    "DLY": {
+      "expansion": "delay",
+      "well_known": true,
+      "expand_first_use": false,
+      "skip_in_cli": true,
+      "notes": "CLI abbreviation - don't flag in show interface output"
+    },
+    "TXLOAD": {
+      "expansion": "transmit load",
+      "well_known": true,
+      "expand_first_use": false,
+      "skip_in_cli": true,
+      "notes": "CLI abbreviation"
+    },
+    "RXLOAD": {
+      "expansion": "receive load",
+      "well_known": true,
+      "expand_first_use": false,
+      "skip_in_cli": true,
+      "notes": "CLI abbreviation"
+    },
+    "CML": {
+      "expansion": "Cisco Modeling Labs",
+      "full_name": "Cisco Modeling Labs",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Network simulation platform"
+    },
+    "VIRL": {
+      "expansion": "Virtual Internet Routing Lab",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Predecessor to CML"
+    },
+    "ZTP": {
+      "expansion": "Zero Touch Provisioning",
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Automatic device configuration"
+    },
+    "PID": {
+      "expansion": "Product Identifier",
+      "alternate_expansions": ["Process ID"],
+      "well_known": false,
+      "expand_first_use": true,
+      "notes": "Context-dependent - usually Product ID in Cisco context"
+    },
+    "UTC": {
+      "expansion": "Coordinated Universal Time",
+      "well_known": true,
+      "expand_first_use": false,
+      "skip_expansion": true,
+      "notes": "Well-known time standard"
+    },
+    "MAC": {
+      "expansion": "Media Access Control",
+      "well_known": true,
+      "expand_first_use": true,
+      "notes": "MAC address"
+    },
+    "ARPA": {
+      "expansion": "Address Resolution Protocol Address",
+      "well_known": true,
+      "expand_first_use": false,
+      "skip_in_cli": true,
+      "notes": "CLI encapsulation type - don't flag in interface output"
+    }
+  },
+  "skip_patterns": {
+    "_notes": "Patterns that look like acronyms but should not be flagged",
+    "_description": "Course codes, ticket IDs, and other identifiers",
+    "DCNAUTO": {
+      "type": "course_code",
+      "skip": true,
+      "notes": "Data Center Automation course code"
+    },
+    "AUTOCOR": {
+      "type": "course_code",
+      "skip": true,
+      "notes": "Automation and Orchestration course code"
+    },
+    "ENCOR": {
+      "type": "course_code",
+      "skip": true,
+      "notes": "Enterprise Core course code"
+    },
+    "ENARSI": {
+      "type": "course_code",
+      "skip": true,
+      "notes": "Enterprise Advanced Routing course code"
+    },
+    "ENSLD": {
+      "type": "course_code",
+      "skip": true,
+      "notes": "Enterprise Network Design course code"
+    },
+    "DCCOR": {
+      "type": "course_code",
+      "skip": true,
+      "notes": "Data Center Core course code"
+    },
+    "SCOR": {
+      "type": "course_code",
+      "skip": true,
+      "notes": "Security Core course code"
+    },
+    "CLCOR": {
+      "type": "course_code",
+      "skip": true,
+      "notes": "Collaboration Core course code"
+    },
+    "DEVCOR": {
+      "type": "course_code",
+      "skip": true,
+      "notes": "DevNet Core course code"
+    },
+    "SPCOR": {
+      "type": "course_code",
+      "skip": true,
+      "notes": "Service Provider Core course code"
+    },
+    "LOGIN": {
+      "type": "cli_keyword",
+      "skip": true,
+      "notes": "CLI keyword, not an acronym"
+    },
+    "OPEN": {
+      "type": "cli_keyword",
+      "skip": true,
+      "notes": "CLI keyword, not an acronym"
+    },
+    "CONSOLE": {
+      "type": "cli_keyword",
+      "skip": true,
+      "notes": "CLI keyword, not an acronym"
+    },
+    "SERVER": {
+      "type": "cli_keyword",
+      "skip": true,
+      "notes": "CLI keyword, not an acronym"
+    },
+    "INFRA": {
+      "type": "cli_keyword",
+      "skip": true,
+      "notes": "Short for infrastructure - CLI context"
+    },
+    "CONFIG": {
+      "type": "cli_keyword",
+      "skip": true,
+      "notes": "Short for configuration - CLI context"
+    },
+    "ADMIN": {
+      "type": "cli_keyword",
+      "skip": true,
+      "notes": "Short for administrator - CLI context"
+    },
+    "EXEC": {
+      "type": "cli_keyword",
+      "skip": true,
+      "notes": "CLI mode keyword"
+    },
+    "PRIV": {
+      "type": "cli_keyword",
+      "skip": true,
+      "notes": "CLI mode keyword"
+    }
+  },
   "emerging_unverified": {
     "_notes": "Acronyms encountered in reviews that need human verification before promotion",
     "OCSF": {
@@ -321,10 +697,11 @@
   },
   "style_guide_reconciliation": {
     "_notes": "Track differences between 2022 style guide and current practice",
-    "last_reconciled": "2026-02-21",
+    "last_reconciled": "2026-02-27",
     "known_updates": [
       "FMC/FTD deprecated per 2025 Cisco branding update",
-      "Azure AD → Microsoft Entra ID (2023 rebrand)"
+      "Azure AD → Microsoft Entra ID (2023 rebrand)",
+      "Added data_center, security_802.1x, interface_cli, skip_patterns categories (Feature 015)"
     ],
     "pending_review": []
   }
