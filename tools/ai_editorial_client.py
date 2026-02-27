@@ -26,7 +26,7 @@ except ImportError:
 
 # API Configuration
 ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
-ANTHROPIC_MODEL = "claude-3-haiku-20240307"  # Fast and cost-effective
+ANTHROPIC_MODEL = "claude-sonnet-4-20250514"  # High quality for editorial review
 
 # Cache settings
 CACHE_TTL_HOURS = 24
