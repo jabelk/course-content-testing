@@ -40,6 +40,13 @@ See [Issues](https://github.com/CiscoLearning/course-content-testing/issues) for
 | Processing Time | Minutes | **< 1 second per course** |
 | Categorization | Uncategorized | **4 clear categories** |
 
+### Recent Improvements (2026-02-27)
+
+- **16 Chicago Manual rules** - Serial comma, number spelling, compound modifiers
+- **Expanded acronym database** - 135+ entries (up from 58)
+- **Skip patterns** - Course codes, HTTP methods, CLI keywords now ignored
+- **False positive reduction** - AUTOCOR course: 128 → 122 issues (6 fewer)
+
 ## How Reports Are Organized
 
 Each report categorizes issues into **Kim's 4 categories**:
@@ -47,7 +54,7 @@ Each report categorizes issues into **Kim's 4 categories**:
 1. **Cisco Style Guide** - Headings, terminology, GUI formatting
 2. **Acronyms** - First-use expansion, unknown acronyms
 3. **Technical Terms** - Product naming, code style
-4. **Chicago Manual** - Punctuation, structure, grammar
+4. **Chicago Manual** - Punctuation, structure, grammar (16 rules: serial comma, number spelling, compound modifiers)
 
 ### Fix Types
 
@@ -176,7 +183,7 @@ The tool works fully with regex-only rules (no API needed). For smarter AI-power
 ## Next Steps
 
 1. **Kim reviews reports** - Provide feedback on accuracy
-2. **Expand acronym database** - Add missing acronyms
+2. ~~**Expand acronym database**~~ ✅ DONE - 135 entries with skip patterns
 3. **Add DOCX track changes** - Output edits directly in Word format
 4. **Integrate with workflow** - Confluence/SharePoint upload
 
