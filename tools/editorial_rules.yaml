@@ -1,0 +1,671 @@
+# Editorial Rules Configuration
+# Version: 1.0.0
+#
+# This file defines the editorial validation rules for Cisco U. tutorials.
+# Rules can be added, modified, or disabled without changing code.
+#
+# Rule Structure:
+#   id: Unique identifier (UPPERCASE_WITH_UNDERSCORES)
+#   name: Human-readable name
+#   category: heading|terminology|acronym|punctuation|structure|gui_format|code_style|product_naming
+#   severity: high|medium|low
+#   fix_type: SAFE|REVIEW|QUERY
+#     - SAFE: Deterministic fix, auto-apply without review
+#     - REVIEW: Apply fix but flag for human verification
+#     - QUERY: Don't fix, ask author for clarification
+#   pattern: Regex pattern for detection (required for pattern_type: regex)
+#   pattern_type: regex|stateful|context|ai_enhanced
+#   message: Issue description (use {match} placeholder for matched text)
+#   suggestion_template: Fix suggestion (use {original}, {suggestion} placeholders)
+#   enabled: true|false (default: true)
+#   priority: 1-100, lower = higher priority (default: 50)
+#   context_skip: List of contexts to skip [code_block, inline_code, url, file_path]
+#
+# To add a new rule:
+#   1. Add entry following the structure above
+#   2. Test with: python editorial_validation.py <tutorial-folder> --verbose
+#   3. Set enabled: true when ready for production
+
+version: "1.0.0"
+
+metadata:
+  last_updated: "2026-02-23"
+  author: "Editorial Team"
+  description: "Cisco U. Tutorial editorial rules - targeting 85% coverage of human editor changes"
+
+rules:
+  # =============================================================================
+  # TERMINOLOGY RULES (SAFE) - Deterministic replacements
+  # =============================================================================
+
+  - id: TERM_CLICK_ON
+    name: "Click On Usage"
+    category: terminology
+    severity: medium
+    fix_type: SAFE
+    pattern: "\\bclick on\\b"
+    pattern_type: regex
+    message: "Use 'click' instead of 'click on'"
+    suggestion_template: "Change 'click on' to 'click'"
+    enabled: true
+    priority: 10
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_IN_ORDER_TO
+    name: "In Order To Simplification"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bin order to\\b"
+    pattern_type: regex
+    message: "Simplify 'in order to' to 'to'"
+    suggestion_template: "Change 'in order to' to 'to'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_UTILIZE
+    name: "Utilize to Use"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\butilize[sd]?\\b"
+    pattern_type: regex
+    message: "Use 'use' instead of 'utilize'"
+    suggestion_template: "Change 'utilize' to 'use'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_ALLOWS_YOU_TO
+    name: "Allows You To"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\ballows you to\\b"
+    pattern_type: regex
+    message: "Consider 'lets you' instead of 'allows you to'"
+    suggestion_template: "Change 'allows you to' to 'lets you'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_MAKE_SURE
+    name: "Make Sure to Ensure"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\b[Mm]ake sure\\b"
+    pattern_type: regex
+    message: "Use 'ensure' or 'verify' instead of 'make sure'"
+    suggestion_template: "Change 'make sure' to 'ensure'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  # --- Additional terminology rules from Cisco Style Guide ---
+
+  - id: TERM_BLACKLIST
+    name: "Bias-Free: Blacklist"
+    category: terminology
+    severity: high
+    fix_type: SAFE
+    pattern: "\\bblacklist(?:ed|ing|s)?\\b"
+    pattern_type: regex
+    message: "Use 'blocked list' instead of 'blacklist' (bias-free language)"
+    suggestion_template: "Change 'blacklist' to 'blocked list'"
+    enabled: true
+    priority: 5
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_WHITELIST
+    name: "Bias-Free: Whitelist"
+    category: terminology
+    severity: high
+    fix_type: SAFE
+    pattern: "\\bwhitelist(?:ed|ing|s)?\\b"
+    pattern_type: regex
+    message: "Use 'allowed list' instead of 'whitelist' (bias-free language)"
+    suggestion_template: "Change 'whitelist' to 'allowed list'"
+    enabled: true
+    priority: 5
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_MASTER_SLAVE
+    name: "Bias-Free: Master/Slave"
+    category: terminology
+    severity: high
+    fix_type: REVIEW
+    pattern: "\\bmaster\\b|\\bslave\\b"
+    pattern_type: regex
+    message: "Use 'primary/secondary' or 'active/standby' instead of 'master/slave' (bias-free language)"
+    suggestion_template: "Consider using 'primary/secondary' or 'active/standby' instead"
+    enabled: true
+    priority: 5
+    context_skip: [code_block, inline_code, file_path]
+
+  - id: TERM_EG
+    name: "Abbreviation: e.g."
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\be\\.g\\.\\s"
+    pattern_type: regex
+    message: "Use 'for example' instead of 'e.g.'"
+    suggestion_template: "Change 'e.g.' to 'for example'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_IE
+    name: "Abbreviation: i.e."
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bi\\.e\\.\\s"
+    pattern_type: regex
+    message: "Use 'that is' or 'in other words' instead of 'i.e.'"
+    suggestion_template: "Change 'i.e.' to 'that is'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_ETC
+    name: "Abbreviation: etc."
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\betc\\.(?!\\w)"
+    pattern_type: regex
+    message: "Use 'and so on' instead of 'etc.'"
+    suggestion_template: "Change 'etc.' to 'and so on'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_PRIOR_TO
+    name: "Formality: Prior To"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bprior to\\b"
+    pattern_type: regex
+    message: "Use 'before' instead of 'prior to'"
+    suggestion_template: "Change 'prior to' to 'before'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_LEVERAGE
+    name: "Jargon: Leverage"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bleverage[ds]?\\b"
+    pattern_type: regex
+    message: "Use 'use' instead of 'leverage'"
+    suggestion_template: "Change 'leverage' to 'use'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_INITIATE
+    name: "Formality: Initiate"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\binitiate[ds]?\\b"
+    pattern_type: regex
+    message: "Use 'start' or 'begin' instead of 'initiate'"
+    suggestion_template: "Change 'initiate' to 'start'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_DATACENTER
+    name: "Spelling: Datacenter"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bdatacenter\\b"
+    pattern_type: regex
+    message: "Use 'data center' (two words) instead of 'datacenter'"
+    suggestion_template: "Change 'datacenter' to 'data center'"
+    enabled: true
+    priority: 10
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_HOTSPOT
+    name: "Spelling: Hot Spot"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bhot spot\\b"
+    pattern_type: regex
+    message: "Use 'hotspot' (one word) instead of 'hot spot'"
+    suggestion_template: "Change 'hot spot' to 'hotspot'"
+    enabled: true
+    priority: 10
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_GRAYED_OUT
+    name: "Terminology: Grayed Out"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bgrayed out\\b"
+    pattern_type: regex
+    message: "Use 'dimmed' or 'disabled' instead of 'grayed out'"
+    suggestion_template: "Change 'grayed out' to 'dimmed' or 'disabled'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_COMPRISED_OF
+    name: "Grammar: Comprised Of"
+    category: terminology
+    severity: medium
+    fix_type: REVIEW
+    pattern: "\\bis comprised of\\b"
+    pattern_type: regex
+    message: "Use 'comprises' or 'consists of' instead of 'is comprised of'"
+    suggestion_template: "Change 'is comprised of' to 'comprises' or 'consists of'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_LEFT_HAND
+    name: "Wordiness: Left-Hand"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bleft-hand\\b"
+    pattern_type: regex
+    message: "Use 'left' instead of 'left-hand'"
+    suggestion_template: "Change 'left-hand' to 'left'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_RIGHT_HAND
+    name: "Wordiness: Right-Hand"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bright-hand\\b"
+    pattern_type: regex
+    message: "Use 'right' instead of 'right-hand'"
+    suggestion_template: "Change 'right-hand' to 'right'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_BOOT_UP
+    name: "Informal: Boot Up"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bboot up\\b"
+    pattern_type: regex
+    message: "Use 'start' or 'boot' instead of 'boot up'"
+    suggestion_template: "Change 'boot up' to 'start'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_CISCO_SYSTEMS
+    name: "Branding: Cisco Systems"
+    category: terminology
+    severity: medium
+    fix_type: SAFE
+    pattern: "\\bCisco Systems\\b"
+    pattern_type: regex
+    message: "Use 'Cisco' instead of 'Cisco Systems'"
+    suggestion_template: "Change 'Cisco Systems' to 'Cisco'"
+    enabled: true
+    priority: 10
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_ABORT
+    name: "Terminology: Abort"
+    category: terminology
+    severity: low
+    fix_type: REVIEW
+    pattern: "\\babort(?:ed|ing|s)?\\b"
+    pattern_type: regex
+    message: "Consider using 'cancel' or 'terminate' instead of 'abort'"
+    suggestion_template: "Consider changing 'abort' to 'cancel' or 'terminate'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_DESIRE
+    name: "Formality: Desire/Desired"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bdesire[sd]?\\b"
+    pattern_type: regex
+    message: "Use 'want' or 'wanted' instead of 'desire/desired'"
+    suggestion_template: "Change 'desire/desired' to 'want/wanted'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  # =============================================================================
+  # PUNCTUATION RULES (SAFE) - Deterministic fixes
+  # =============================================================================
+
+  - id: PUNCT_EM_DASH_SPACE
+    name: "Em Dash Spacing"
+    category: punctuation
+    severity: low
+    fix_type: SAFE
+    pattern: "\\s+—\\s+|\\s+—|—\\s+"
+    pattern_type: regex
+    message: "Em dash should not have spaces around it"
+    suggestion_template: "Remove spaces around em dash"
+    enabled: true
+    priority: 10
+    context_skip: [code_block, inline_code]
+
+  - id: PUNCT_DOUBLE_EXCLAMATION
+    name: "Double Exclamation"
+    category: punctuation
+    severity: low
+    fix_type: SAFE
+    pattern: "!{2,}"
+    pattern_type: regex
+    message: "Use single exclamation point"
+    suggestion_template: "Replace multiple exclamation points with one"
+    enabled: true
+    priority: 10
+    context_skip: [code_block, inline_code]
+
+  - id: PUNCT_EXCLAMATION_IN_PROSE
+    name: "Excessive Exclamation in Prose"
+    category: punctuation
+    severity: low
+    fix_type: REVIEW
+    pattern: "(?<![!?])!(?![!?\"])"
+    pattern_type: regex
+    message: "Consider removing exclamation point from technical content"
+    suggestion_template: "Consider using a period instead of exclamation point"
+    enabled: true
+    priority: 30
+    context_skip: [code_block, inline_code]
+
+  - id: PUNCT_DOUBLE_SPACE
+    name: "Double Space After Period"
+    category: punctuation
+    severity: low
+    fix_type: SAFE
+    pattern: "\\.  +"
+    pattern_type: regex
+    message: "Use single space after period"
+    suggestion_template: "Replace double space with single space"
+    enabled: true
+    priority: 10
+    context_skip: [code_block]
+
+  - id: PUNCT_DOUBLE_HYPHEN
+    name: "Double Hyphen for Dash"
+    category: punctuation
+    severity: low
+    fix_type: SAFE
+    pattern: "(?<!-)--(?!-)"
+    pattern_type: regex
+    message: "Use em dash (—) instead of double hyphen (--)"
+    suggestion_template: "Replace '--' with em dash '—'"
+    enabled: true
+    priority: 10
+    context_skip: [code_block, inline_code]
+
+  - id: PUNCT_TRAILING_SPACE
+    name: "Trailing Whitespace"
+    category: punctuation
+    severity: low
+    fix_type: SAFE
+    pattern: "[ \\t]+$"
+    pattern_type: regex
+    message: "Remove trailing whitespace"
+    suggestion_template: "Remove trailing spaces/tabs"
+    enabled: true
+    priority: 5
+    context_skip: []
+
+  - id: PUNCT_MULTIPLE_QUESTION
+    name: "Multiple Question Marks"
+    category: punctuation
+    severity: low
+    fix_type: SAFE
+    pattern: "\\?{2,}"
+    pattern_type: regex
+    message: "Use single question mark"
+    suggestion_template: "Replace multiple question marks with one"
+    enabled: true
+    priority: 10
+    context_skip: [code_block, inline_code]
+
+  - id: PUNCT_COMMA_SPACE
+    name: "Missing Space After Comma"
+    category: punctuation
+    severity: low
+    fix_type: SAFE
+    pattern: ",(?=[A-Za-z])"
+    pattern_type: regex
+    message: "Add space after comma"
+    suggestion_template: "Add space after comma"
+    enabled: true
+    priority: 10
+    context_skip: [code_block, inline_code, url, file_path]
+
+  - id: PUNCT_COLON_SPACE
+    name: "Missing Space After Colon"
+    category: punctuation
+    severity: low
+    fix_type: SAFE
+    pattern: ":(?=[A-Za-z])"
+    pattern_type: regex
+    message: "Add space after colon"
+    suggestion_template: "Add space after colon"
+    enabled: true
+    priority: 10
+    context_skip: [code_block, inline_code, url, file_path]
+
+  # =============================================================================
+  # HEADING RULES (REVIEW) - Requires verification
+  # =============================================================================
+
+  - id: HEADING_GERUND
+    name: "Gerund Heading"
+    category: heading
+    severity: medium
+    fix_type: REVIEW
+    pattern: "^##\\s+[A-Z]?\\w*ing\\b"
+    pattern_type: regex
+    message: "Heading uses gerund form (-ing). Consider imperative form."
+    suggestion_template: "Consider changing '{original}' to imperative form (e.g., 'Configure' instead of 'Configuring')"
+    enabled: true
+    priority: 30
+    context_skip: [code_block]
+
+  - id: HEADING_HOW_TO
+    name: "How To Heading"
+    category: heading
+    severity: medium
+    fix_type: REVIEW
+    pattern: "^##\\s+How [Tt]o\\b"
+    pattern_type: regex
+    message: "Consider removing 'How to' from heading - use imperative form"
+    suggestion_template: "Remove 'How to' and use imperative form (e.g., 'Configure VLANs' instead of 'How to Configure VLANs')"
+    enabled: true
+    priority: 30
+    context_skip: [code_block]
+
+  - id: HEADING_STEP_PREFIX
+    name: "Step Prefix in Heading"
+    category: heading
+    severity: medium
+    fix_type: REVIEW
+    pattern: "^##\\s+Step\\s+\\d+"
+    pattern_type: regex
+    message: "Avoid 'Step N' prefix in headings - use descriptive action"
+    suggestion_template: "Remove 'Step N' prefix and use descriptive heading"
+    enabled: true
+    priority: 35
+    context_skip: [code_block]
+
+  # =============================================================================
+  # PRODUCT NAMING RULES (REVIEW) - Cisco-specific
+  # =============================================================================
+
+  - id: PROD_CISCO_POSSESSIVE
+    name: "Cisco Possessive"
+    category: product_naming
+    severity: high
+    fix_type: REVIEW
+    pattern: "\\bCisco\\s+\\w+'s\\b"
+    pattern_type: regex
+    message: "Avoid possessive form with Cisco products"
+    suggestion_template: "Change '{original}' to 'the {product}' form (e.g., 'the Cisco Hypershield' instead of 'Cisco Hypershield's')"
+    enabled: true
+    priority: 25
+    context_skip: [code_block, inline_code]
+
+  - id: PROD_BOX_SERVER
+    name: "Box to Server/Appliance"
+    category: product_naming
+    severity: medium
+    fix_type: REVIEW
+    pattern: "\\bISE\\s+box\\b|\\bDNA\\s+box\\b|\\bCisco\\s+\\w+\\s+box\\b"
+    pattern_type: regex
+    message: "Use 'server' or 'appliance' instead of 'box'"
+    suggestion_template: "Change 'box' to 'server' or 'appliance'"
+    enabled: true
+    priority: 25
+    context_skip: [code_block, inline_code]
+
+  - id: PROD_FMC_DEPRECATED
+    name: "FMC Full Name Required"
+    category: product_naming
+    severity: medium
+    fix_type: REVIEW
+    pattern: "\\bFMC\\b(?!\\s*\\()"
+    pattern_type: regex
+    message: "Use full product name 'Cisco Secure Firewall Management Center' (FMC is deprecated branding)"
+    suggestion_template: "Use 'Cisco Secure Firewall Management Center' or 'the management center'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: PROD_FTD_DEPRECATED
+    name: "FTD Full Name Required"
+    category: product_naming
+    severity: medium
+    fix_type: REVIEW
+    pattern: "\\bFTD\\b(?!\\s*\\()"
+    pattern_type: regex
+    message: "Use full product name 'Cisco Secure Firewall Threat Defense' (FTD is deprecated branding)"
+    suggestion_template: "Use 'Cisco Secure Firewall Threat Defense' or 'the threat defense'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: PROD_DNA_CENTER_DEPRECATED
+    name: "DNA Center Deprecated"
+    category: product_naming
+    severity: high
+    fix_type: REVIEW
+    pattern: "\\bDNA Center\\b|\\bDNAC\\b"
+    pattern_type: regex
+    message: "DNA Center is now 'Cisco Catalyst Center' - update product name"
+    suggestion_template: "Change to 'Cisco Catalyst Center'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: PROD_WEBEX_TEAMS
+    name: "Webex Teams Deprecated"
+    category: product_naming
+    severity: medium
+    fix_type: REVIEW
+    pattern: "\\bWebex Teams\\b"
+    pattern_type: regex
+    message: "Webex Teams is now simply 'Webex' - update product name"
+    suggestion_template: "Change to 'Webex'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  # =============================================================================
+  # GUI FORMAT RULES (SAFE/REVIEW) - UI element formatting
+  # =============================================================================
+
+  - id: GUI_BOLD_CLICK
+    name: "Bold GUI Element After Click"
+    category: gui_format
+    severity: medium
+    fix_type: REVIEW
+    pattern: "\\b[Cc]lick\\s+(?!\\*\\*)[A-Z][a-z]+"
+    pattern_type: regex
+    message: "GUI elements after 'click' should be bold"
+    suggestion_template: "Add bold formatting to the button/menu name (e.g., 'click **Save**')"
+    enabled: true
+    priority: 35
+    context_skip: [code_block, inline_code]
+
+  # =============================================================================
+  # ACRONYM RULES (STATEFUL) - Require state tracking
+  # =============================================================================
+
+  - id: ACRONYM_FIRST_USE
+    name: "Acronym First Use Expansion"
+    category: acronym
+    severity: high
+    fix_type: REVIEW
+    pattern_type: stateful
+    message: "Acronym '{match}' not expanded on first use"
+    suggestion_template: "Add expansion: '{suggestion} ({original})'"
+    enabled: true
+    priority: 40
+
+  - id: ACRONYM_UNKNOWN
+    name: "Unknown Acronym"
+    category: acronym
+    severity: medium
+    fix_type: QUERY
+    pattern_type: stateful
+    message: "Unknown acronym '{match}' - please provide expansion or confirm intentional"
+    suggestion_template: "Please clarify the meaning of '{original}'"
+    enabled: true
+    priority: 45
+
+  - id: ACRONYM_DEPRECATED
+    name: "Deprecated Acronym"
+    category: acronym
+    severity: high
+    fix_type: REVIEW
+    pattern_type: stateful
+    message: "Acronym '{match}' is deprecated - use '{replacement}' instead"
+    suggestion_template: "Replace '{original}' with '{suggestion}'"
+    enabled: true
+    priority: 35
+
+  # =============================================================================
+  # AI-ENHANCED RULES - Context-aware with graceful degradation
+  # =============================================================================
+
+  - id: AI_PROCEDURAL_INTRO
+    name: "Procedural Introduction"
+    category: structure
+    severity: medium
+    fix_type: REVIEW
+    pattern_type: ai_enhanced
+    # Pattern matches numbered lists to trigger AI analysis
+    pattern: "^\\s*1\\.\\s"
+    message: "Numbered list may need a procedural introduction (e.g., 'To configure the service:')"
+    suggestion_template: "Consider adding 'To [action]:' before the numbered steps"
+    enabled: true
+    priority: 50
+    context_skip: [code_block]

@@ -1,0 +1,156 @@
+# Course Content Testing
+
+AI-powered editorial review for LWC course content. Adapts the tutorial editorial pipeline to process DOCX course modules with **consistent, repeatable results**.
+
+## For Kim: Quick Links
+
+### Generated Reports (Ready for Review)
+
+| Course | Report | Issues |
+|--------|--------|--------|
+| SD-WAN Evolution and Core Concepts | [View Report](reports/01_SD-WAN%20Evolution%20and%20Core%20Concepts_orig-report.md) | 255 |
+| SD-WAN Components and Roles | [View Report](reports/02_SD-WAN%20Components%20and%20Roles_orig-report.md) | 376 |
+| 802.1X EAP Authentication | [View Report](reports/802.1X%20EAP%20Authentication_Sec%2001_orig-report.md) | 184 |
+| 802.1X on Cisco Wireless LAN Controllers | [View Report](reports/802.1X%20on%20Cisco%20Wireless%20LAN%20Controllers_Sec%2001_orig-report.md) | 281 |
+| AUTOCOR | [View Report](reports/AUTOCOR-Sec01_orig-report.md) | 81 |
+| DCNAUTO | [View Report](reports/DCNAUTO-Sec%2001_orig-report.md) | 220 |
+| Network Access for Non-Supplicant Devices | [View Report](reports/Network%20Access%20for%20Non-Supplicant%20Devices_Sec%2001_orig-report.md) | 179 |
+
+### Key Documentation
+
+- [Quickstart Guide](docs/quickstart.md) - How to run the tools
+- [Gap Analysis](docs/gap-analysis.md) - What's missing (acronyms, rules)
+- [Implementation Learnings](docs/learnings.md) - Architecture and decisions
+
+## Key Results
+
+| Metric | Circuit | This Tool |
+|--------|---------|-----------|
+| Consistency | 50%+ variance | **0% variance** |
+| Processing Time | Minutes | **< 1 second per course** |
+| Categorization | Uncategorized | **4 clear categories** |
+
+## How Reports Are Organized
+
+Each report categorizes issues into **Kim's 4 categories**:
+
+1. **Cisco Style Guide** - Headings, terminology, GUI formatting
+2. **Acronyms** - First-use expansion, unknown acronyms
+3. **Technical Terms** - Product naming, code style
+4. **Chicago Manual** - Punctuation, structure, grammar
+
+### Fix Types
+
+| Type | Meaning | Action |
+|------|---------|--------|
+| 🟢 SAFE | High confidence fix | Can auto-apply |
+| 🟡 REVIEW | Needs verification | Review before applying |
+| 🔴 QUERY | Author decision needed | Don't auto-fix |
+
+## Feedback Needed
+
+After reviewing the reports, please provide feedback on:
+
+1. **Accuracy**: Are the SAFE suggestions correct?
+2. **False Positives**: Any incorrectly flagged items?
+3. **Missing Rules**: What issues weren't caught?
+4. **Report Format**: Easy to navigate?
+5. **Categories**: Do the 4 categories make sense?
+
+## Architecture
+
+```
+DOCX Course Module
+       ↓
+   [pandoc]
+       ↓
+   Markdown
+       ↓
+[Editorial Validation]  ←── editorial_rules.yaml
+       ↓                 ←── acronym-database.json
+ ValidationResult
+       ↓
+[Report Generator]
+       ↓
+ Markdown Report
+```
+
+## Tools
+
+| Tool | Purpose |
+|------|---------|
+| `course_editor.py` | Main CLI - process DOCX files |
+| `test_consistency.py` | Verify results are repeatable |
+| `run_poc.sh` | Batch process all test courses |
+| `course_report_generator.py` | Generate categorized reports |
+| `docx_converter.py` | DOCX to Markdown via pandoc |
+
+## Running Locally
+
+### Prerequisites
+
+```bash
+# Install pandoc
+brew install pandoc  # macOS
+
+# Python 3.10+
+python3 --version
+```
+
+### Process a Course
+
+```bash
+cd tools
+
+# Generate report
+python3 course_editor.py "../test-courses/DCNAUTO-Sec 01_orig.docx" --output report.md
+
+# Test consistency
+python3 test_consistency.py "../test-courses/DCNAUTO-Sec 01_orig.docx"
+```
+
+### Process All Courses
+
+```bash
+cd tools
+./run_poc.sh
+```
+
+## Repository Structure
+
+```
+course-content-testing/
+├── README.md              # This file
+├── tools/                 # Python tools
+│   ├── course_editor.py   # Main CLI
+│   ├── editorial_*.py     # Validation engine
+│   ├── editorial_rules.yaml  # Rule definitions
+│   └── run_poc.sh         # Batch script
+├── reports/               # Generated reports
+│   └── *.md               # One per test course
+├── test-courses/          # Kim's test DOCX files
+│   └── *.docx
+├── docs/                  # Documentation
+│   ├── quickstart.md
+│   ├── gap-analysis.md
+│   └── learnings.md
+└── .claude/
+    └── references/
+        └── acronym-database.json
+```
+
+## Next Steps
+
+1. **Kim reviews reports** - Provide feedback on accuracy
+2. **Expand acronym database** - Add missing acronyms
+3. **Add DOCX track changes** - Output edits directly in Word format
+4. **Integrate with workflow** - Confluence/SharePoint upload
+
+## Related Resources
+
+- [Feature Spec](https://github.com/CiscoLearning/tutorial-platform-specs/tree/main/specs/014-course-ai-editing) - Full specification
+- [Tutorial Testing Tools](https://github.com/CiscoLearning/tutorial-testing) - Original tutorial pipeline
+
+---
+
+*Built by Jason with Claude Code assistance*
