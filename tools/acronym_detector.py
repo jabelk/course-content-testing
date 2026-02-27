@@ -245,6 +245,32 @@ class AcronymDetector:
         db_entry = self.database.get(acronym)
 
         if db_entry:
+            # Check if this is a skip pattern (HTTP methods, course codes, etc.)
+            if db_entry.get('skip', False):
+                if verbose:
+                    print(f"  Acronym {acronym} is in skip patterns - ignoring")
+                self.state[acronym] = AcronymState(
+                    acronym=acronym,
+                    first_seen_file=file_path,
+                    first_seen_line=line_num,
+                    is_expanded=True,  # Mark as "expanded" to skip future occurrences
+                    source='skip_pattern'
+                )
+                return None
+
+            # Check if expansion should be skipped (well-known terms)
+            if db_entry.get('skip_expansion', False) or db_entry.get('skip_in_cli', False):
+                if verbose:
+                    print(f"  Acronym {acronym} has skip_expansion/skip_in_cli - ignoring")
+                self.state[acronym] = AcronymState(
+                    acronym=acronym,
+                    first_seen_file=file_path,
+                    first_seen_line=line_num,
+                    is_expanded=True,
+                    source='skip_expansion'
+                )
+                return None
+
             # Known acronym - check if deprecated
             if db_entry.get('deprecated', False):
                 return self._create_deprecated_issue(
