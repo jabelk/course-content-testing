@@ -52,7 +52,7 @@ Creating focused checklists (editorial-accuracy, report-quality, consistency) be
 
 ## Challenges Encountered
 
-### 1. Acronym Database Coverage
+### 1. Acronym Database Coverage ✅ RESOLVED (Feature 015-016)
 
 **Problem**: Course content uses many acronyms not in tutorial acronym database.
 
@@ -61,7 +61,16 @@ Creating focused checklists (editorial-accuracy, report-quality, consistency) be
 - Security: EAP, MAB, 802.1X, RADIUS
 - Course codes: DCNAUTO, AUTOCOR (not acronyms, just identifiers)
 
-**Solution**: Flagged unknown acronyms as QUERY for author review. Documented in gap-analysis.md for future expansion.
+**Solution (Feature 015)**: Expanded database from 58 to 135+ entries:
+- Added `data_center` category (VXLAN, EVPN, VTEP, etc.)
+- Added `security_802.1x` category (EAP, MAB, CoA, etc.)
+- Added `interface_cli` category (MTU, BW, DLY, etc.)
+- Added `skip_patterns` category (course codes, HTTP methods, CLI keywords)
+
+**Additional Fix (Feature 016)**: Fixed `acronym_detector.py` to actually use skip patterns:
+- Items with `skip: true` are now properly ignored
+- Items with `skip_expansion: true` or `skip_in_cli: true` are skipped
+- Reduced AUTOCOR false positives from 15 to 9 (40% reduction)
 
 **Lesson**: Domain-specific content requires domain-specific rules. Plan for iterative rule expansion.
 
@@ -99,6 +108,28 @@ Creating focused checklists (editorial-accuracy, report-quality, consistency) be
 **Solution**: Created mapping table in `course_models.py` with special cases.
 
 **Lesson**: Real-world categorization is messier than spec categories. Build in flexibility.
+
+### 5. Chicago Manual Rules ✅ RESOLVED (Feature 016)
+
+**Problem**: Cisco Style Guide says "For grammar and punctuation not covered by this guide, refer to the Chicago Manual of Style." No CMS rules existed in the system.
+
+**Solution**: Added 16 CMS rules to `editorial_rules.yaml`:
+- Serial comma detection (`CMS_SERIAL_COMMA`)
+- Number spelling 1-9 (`CMS_NUMBER_SPELL_OUT`)
+- 8 compound modifier hyphenation rules (well-known, real-time, high-level, etc.)
+- That vs. which (`CMS_THAT_WHICH`)
+- Ampersand in prose (`CMS_AMPERSAND_IN_PROSE`)
+- Introductory phrase commas (`CMS_COMMA_AFTER_INTRO`)
+- Split infinitive detection (`CMS_SPLIT_INFINITIVE`)
+- Percent symbol usage (`CMS_PERCENT_SYMBOL`)
+
+**E2E Test Results (AUTOCOR course)**:
+- Total issues: 122 (down from 128 with skip pattern fix)
+- Chicago Manual category: 91 issues detected
+- Compound modifiers detected: `built in`, `out of the box`
+- Number spelling flagged: 37+ instances
+
+**Lesson**: Chicago Manual rules are high-frequency catches. The 16 rules added immediately contributed 91 detections in one course.
 
 ## Performance Results
 
@@ -144,10 +175,10 @@ Kim requested DOCX track changes, but we chose markdown for PoC:
 
 ### High Priority
 
-1. **Expand Acronym Database**
-   - Add 50+ networking/security/data center acronyms
-   - Add course code ignore patterns
-   - Estimated effort: 2-4 hours
+1. ~~**Expand Acronym Database**~~ ✅ DONE (Feature 015-016)
+   - Added 77 new entries (58 → 135)
+   - Added 4 new categories: data_center, security_802.1x, interface_cli, skip_patterns
+   - Fixed skip pattern handling in acronym_detector.py
 
 2. **DOCX Track Changes Output**
    - Use python-docx to apply changes with track changes
