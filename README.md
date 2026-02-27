@@ -23,6 +23,7 @@ AI-powered editorial review for LWC course content. Adapts the tutorial editoria
 - [Why This Works](docs/approach-comparison.md) - Why deterministic rules beat RAG/Circuit
 - [Gap Analysis](docs/gap-analysis.md) - What's missing (acronyms, rules)
 - [Implementation Learnings](docs/learnings.md) - Architecture and decisions
+- [Architecture Decision](docs/architecture-decision.md) - Hybrid architecture (Git-centralized, processing-distributed)
 
 ### Backlog
 
@@ -150,6 +151,8 @@ python3 course_editor.py "../test-courses/DCNAUTO-Sec 01_orig.docx" --docx-outpu
 ## MCP Server (For Cursor/Claude Code)
 
 The MCP Editorial Server allows IDE integration via Model Context Protocol.
+
+> **Cisco Employees**: Request Cursor at https://appstore.cisco.com/details/cursor
 
 ### Setup
 
