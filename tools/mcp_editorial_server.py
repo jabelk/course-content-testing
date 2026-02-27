@@ -50,6 +50,9 @@ except ImportError:
 
 RULES_FILE = os.path.join(script_dir, 'editorial_rules.yaml')
 ACRONYM_DB_FILE = os.path.join(script_dir, '..', '.claude', 'references', 'acronym-database.json')
+RULE_EXPLANATIONS_FILE = os.path.join(script_dir, 'rule_explanations.yaml')
+ONBOARDING_CONFIG_FILE = os.path.join(script_dir, 'onboarding_config.yaml')
+SESSION_FILE = os.path.join(script_dir, '.editorial_sessions.json')
 
 # =============================================================================
 # Initialize MCP Server
@@ -74,6 +77,118 @@ def get_acronym_db() -> Dict:
 def get_rules() -> List:
     """Load editorial rules with hot reload support."""
     return _reloader.get_rules()
+
+
+def load_rule_explanations() -> Dict:
+    """Load rule explanations from YAML file."""
+    if os.path.exists(RULE_EXPLANATIONS_FILE):
+        try:
+            import yaml
+            with open(RULE_EXPLANATIONS_FILE, 'r') as f:
+                data = yaml.safe_load(f)
+                return data.get('rules', {})
+        except Exception as e:
+            print(f"Warning: Could not load rule explanations: {e}", file=sys.stderr)
+    return {}
+
+
+def load_onboarding_config() -> Dict:
+    """Load onboarding configuration from YAML file."""
+    defaults = {
+        'welcome': {'auto_show': True, 'opt_out_env_var': 'EDITORIAL_NO_WELCOME'},
+        'help': {'show_tips': True, 'max_tips': 3, 'show_suggestions': True},
+        'explanations': {'show_similar': True, 'max_similar': 5},
+        'workflow': {'auto_suggest_next': True, 'great_threshold': 8, 'needs_attention_threshold': 5}
+    }
+    if os.path.exists(ONBOARDING_CONFIG_FILE):
+        try:
+            import yaml
+            with open(ONBOARDING_CONFIG_FILE, 'r') as f:
+                data = yaml.safe_load(f)
+                # Merge with defaults
+                for key in defaults:
+                    if key in data:
+                        defaults[key].update(data[key])
+                return defaults
+        except Exception as e:
+            print(f"Warning: Could not load onboarding config: {e}", file=sys.stderr)
+    return defaults
+
+
+def check_auto_welcome() -> bool:
+    """Check if auto-welcome should be shown (first connection)."""
+    config = load_onboarding_config()
+
+    # Check opt-out environment variable
+    opt_out_var = config['welcome'].get('opt_out_env_var', 'EDITORIAL_NO_WELCOME')
+    if os.environ.get(opt_out_var):
+        return False
+
+    # Check if auto_show is enabled
+    if not config['welcome'].get('auto_show', True):
+        return False
+
+    # Check session file for previous visits
+    if os.path.exists(SESSION_FILE):
+        try:
+            with open(SESSION_FILE, 'r') as f:
+                sessions = json.load(f)
+                # If this session has been seen, don't show again
+                # For simplicity, we track by day
+                import datetime
+                today = datetime.datetime.now().strftime('%Y-%m-%d')
+                if today in sessions.get('seen_dates', []):
+                    return False
+        except Exception:
+            pass
+
+    return True
+
+
+def mark_welcome_shown():
+    """Mark that welcome has been shown for this session."""
+    try:
+        import datetime
+        today = datetime.datetime.now().strftime('%Y-%m-%d')
+        sessions = {'seen_dates': []}
+
+        if os.path.exists(SESSION_FILE):
+            try:
+                with open(SESSION_FILE, 'r') as f:
+                    sessions = json.load(f)
+            except Exception:
+                pass
+
+        if 'seen_dates' not in sessions:
+            sessions['seen_dates'] = []
+
+        if today not in sessions['seen_dates']:
+            sessions['seen_dates'].append(today)
+            # Keep only last 30 days
+            sessions['seen_dates'] = sessions['seen_dates'][-30:]
+
+        with open(SESSION_FILE, 'w') as f:
+            json.dump(sessions, f)
+    except Exception:
+        pass  # Non-critical, fail silently
+
+
+# Cache for rule explanations
+_rule_explanations_cache = None
+_rule_explanations_mtime = 0
+
+
+def get_rule_explanations() -> Dict:
+    """Get rule explanations with caching."""
+    global _rule_explanations_cache, _rule_explanations_mtime
+
+    if os.path.exists(RULE_EXPLANATIONS_FILE):
+        mtime = os.path.getmtime(RULE_EXPLANATIONS_FILE)
+        if _rule_explanations_cache is None or mtime > _rule_explanations_mtime:
+            _rule_explanations_cache = load_rule_explanations()
+            _rule_explanations_mtime = mtime
+
+    return _rule_explanations_cache or {}
 
 
 # =============================================================================
@@ -394,7 +509,15 @@ def get_server_info() -> Dict[str, Any]:
         "name": "Editorial Server",
         "version": "1.0.0",
         "description": "MCP server for Cisco editorial validation",
-        "tools": ["analyze_document", "apply_fixes", "lookup_acronym", "list_rules", "reload_rules", "get_server_info"],
+        "tools": [
+            "analyze_document", "apply_fixes", "lookup_acronym", "list_rules",
+            "reload_rules", "get_server_info",
+            "get_started", "explain_issue", "suggest_workflow", "check_acronym_batch"
+        ],
+        "onboarding": {
+            "auto_welcome": check_auto_welcome(),
+            "tip": "New here? Try 'get_started' for a walkthrough!"
+        },
         "configuration": {
             "rules_file": RULES_FILE,
             "acronym_db_file": os.path.abspath(ACRONYM_DB_FILE),
@@ -515,131 +638,39 @@ def explain_issue(rule_id: str) -> Dict[str, Any]:
     the rule, see examples, and learn the style guide reference.
 
     Args:
-        rule_id: The rule ID to explain (e.g., 'TERM_DATACENTER', 'CMS_SERIAL_COMMA')
+        rule_id: The rule ID to explain (e.g., 'TERM_DATACENTER', 'GRAMMAR_SERIAL_COMMA')
 
     Returns:
         Detailed explanation with examples and references
     """
-    # Rule explanations with context
-    explanations = {
-        # Terminology rules
-        "TERM_DATACENTER": {
-            "rule": "Use 'data center' (two words)",
-            "why": "Cisco Style Guide specifies 'data center' as two words, not 'datacenter' or 'data-center'.",
-            "category": "Cisco Style Guide",
-            "confidence": "SAFE (95%+)",
-            "example": {
-                "before": "Our datacenter hosts 500 servers.",
-                "after": "Our data center hosts 500 servers."
-            },
-            "reference": "Cisco Technical Content Style Guide, Section: Terminology"
-        },
-        "TERM_MAKE_SURE": {
-            "rule": "Use 'ensure' instead of 'make sure'",
-            "why": "'Ensure' is more formal and preferred in technical documentation.",
-            "category": "Cisco Style Guide",
-            "confidence": "SAFE (95%+)",
-            "example": {
-                "before": "Make sure the cable is connected.",
-                "after": "Ensure the cable is connected."
-            },
-            "reference": "Cisco Technical Content Style Guide"
-        },
-        # Chicago Manual rules
-        "GRAMMAR_SERIAL_COMMA": {
-            "rule": "Use serial comma (Oxford comma) in lists",
-            "why": "The serial comma before 'and' in a list prevents ambiguity.",
-            "category": "Grammar & Punctuation",
-            "confidence": "REVIEW (85%)",
-            "example": {
-                "before": "Configure routing, switching and security.",
-                "after": "Configure routing, switching, and security."
-            },
-            "reference": "Grammar & Punctuation, 17th ed., Section 6.19"
-        },
-        "GRAMMAR_NUMBER_SPELL_OUT": {
-            "rule": "Spell out numbers one through nine",
-            "why": "In prose, small numbers are typically spelled out for readability.",
-            "category": "Grammar & Punctuation",
-            "confidence": "REVIEW (80%)",
-            "example": {
-                "before": "Configure 3 interfaces.",
-                "after": "Configure three interfaces."
-            },
-            "note": "Exception: Keep numerals in technical contexts like 'port 3' or 'VLAN 3'",
-            "reference": "Grammar & Punctuation, 17th ed., Section 9.3"
-        },
-        # Punctuation rules
-        "PUNCT_EM_DASH_SPACE": {
-            "rule": "No spaces around em dashes",
-            "why": "Em dashes (—) should connect directly to the words they separate.",
-            "category": "Grammar & Punctuation",
-            "confidence": "SAFE (95%+)",
-            "example": {
-                "before": "The router — which is new — failed.",
-                "after": "The router—which is new—failed."
-            },
-            "reference": "Grammar & Punctuation, 17th ed., Section 6.85"
-        },
-        "PUNCT_DOUBLE_SPACE": {
-            "rule": "Use single space after periods",
-            "why": "Modern typography uses single spacing. Double spaces are a typewriter-era convention.",
-            "category": "Typography",
-            "confidence": "SAFE (99%)",
-            "example": {
-                "before": "End of sentence.  Start of next.",
-                "after": "End of sentence. Start of next."
-            },
-            "reference": "Grammar & Punctuation, 17th ed., Section 6.7"
-        },
-        # Compound modifiers
-        "GRAMMAR_COMPOUND_WELL_KNOWN": {
-            "rule": "Hyphenate 'well-known' before a noun",
-            "why": "Compound modifiers before a noun are hyphenated for clarity.",
-            "category": "Grammar & Punctuation",
-            "confidence": "SAFE (90%)",
-            "example": {
-                "before": "This is a well known issue.",
-                "after": "This is a well-known issue."
-            },
-            "note": "Don't hyphenate after the noun: 'The issue is well known.'",
-            "reference": "Grammar & Punctuation, 17th ed., Section 7.81"
-        },
-        # Acronyms
-        "ACRONYM_UNKNOWN": {
-            "rule": "Unknown acronym needs expansion",
-            "why": "Readers may not know this acronym. Consider spelling it out on first use.",
-            "category": "Acronym Usage",
-            "confidence": "QUERY (50%)",
-            "example": {
-                "before": "Configure the XYZ protocol.",
-                "after": "Configure the Extended Yellowtail Zone (XYZ) protocol."
-            },
-            "what_to_do": [
-                "If it's a common acronym, we may need to add it to our database",
-                "If it's course-specific, spell it out on first use",
-                "If it's a product name or code, it might be fine as-is"
-            ],
-            "reference": "Cisco Style Guide: Acronym Policy"
-        }
-    }
+    # Load explanations from YAML file
+    explanations = get_rule_explanations()
+    config = load_onboarding_config()
 
     rule_upper = rule_id.upper()
 
     if rule_upper in explanations:
-        explanation = explanations[rule_upper]
+        explanation = dict(explanations[rule_upper])  # Copy to avoid modifying cache
         explanation["rule_id"] = rule_upper
         explanation["found"] = True
         return explanation
     else:
-        # Try to find partial match
-        matches = [r for r in explanations.keys() if rule_upper in r or r in rule_upper]
+        # Try to find partial/similar matches
+        similar = []
+        if config['explanations'].get('show_similar', True):
+            max_similar = config['explanations'].get('max_similar', 5)
+            for r in explanations.keys():
+                if rule_upper in r or r in rule_upper:
+                    similar.append(r)
+                elif any(part in r for part in rule_upper.split('_')):
+                    similar.append(r)
+            similar = similar[:max_similar]
 
         return {
             "found": False,
             "rule_id": rule_id,
             "message": f"No detailed explanation available for '{rule_id}'.",
-            "similar_rules": matches[:5] if matches else [],
+            "similar_rules": similar,
             "tip": "Try 'list_rules' to see all available rules with their categories.",
             "help": "If you need this rule explained, let us know and we'll add documentation."
         }

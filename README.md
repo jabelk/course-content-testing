@@ -183,13 +183,33 @@ pip install fastmcp python-docx pyyaml
 | `lookup_acronym` | Query the acronym database |
 | `list_rules` | List all editorial rules by category |
 | `get_server_info` | Server version and configuration |
+| `reload_rules` | Force reload rules without restart |
+
+### Onboarding Tools (New!)
+
+| Tool | Description |
+|------|-------------|
+| `get_started` | Welcome guide for new users - explains SAFE/REVIEW/QUERY |
+| `explain_issue` | Detailed explanation of any rule with examples |
+| `suggest_workflow` | Personalized next steps based on your document |
+| `check_acronym_batch` | Check multiple acronyms at once |
 
 ### Example Usage (in Cursor/Claude Code)
 
 ```
-> Run analyze_document on /path/to/course.docx
-> Look up the acronym VXLAN
+> Get started                              # New user? Start here!
+> Analyze the document at /path/to/course.docx
+> Explain issue TERM_DATACENTER            # Why was this flagged?
+> Suggest workflow                         # What should I do next?
+> Check these acronyms: VXLAN, BGP, XYZ    # Batch lookup
 > Apply SAFE fixes to the document
+```
+
+### Disable Auto-Welcome
+
+Experienced users can skip the welcome message:
+```bash
+export EDITORIAL_NO_WELCOME=1
 ```
 
 ## Repository Structure

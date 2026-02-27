@@ -1,0 +1,63 @@
+# Onboarding Configuration
+# Settings for the MCP Editorial Server onboarding experience.
+
+_metadata:
+  version: "1.0.0"
+  last_updated: "2026-02-27"
+
+# Auto-welcome settings
+welcome:
+  # Automatically show get_started message on first connection
+  auto_show: true
+
+  # Path to file tracking which sessions have seen welcome
+  # (relative to server directory)
+  session_file: ".editorial_sessions.json"
+
+  # Users can opt out via environment variable
+  # Set EDITORIAL_NO_WELCOME=1 to disable
+  opt_out_env_var: "EDITORIAL_NO_WELCOME"
+
+# Help text customization
+help:
+  # Include tips in responses
+  show_tips: true
+
+  # Maximum number of tips to show at once
+  max_tips: 3
+
+  # Include "try this now" suggestions
+  show_suggestions: true
+
+# Explanation settings
+explanations:
+  # Path to rule explanations YAML
+  rules_file: "rule_explanations.yaml"
+
+  # Show similar rules when exact match not found
+  show_similar: true
+
+  # Maximum similar rules to suggest
+  max_similar: 5
+
+# Workflow settings
+workflow:
+  # Show next step suggestions after analysis
+  auto_suggest_next: true
+
+  # Threshold for "great shape" message (score out of 10)
+  great_threshold: 8
+
+  # Threshold for "needs attention" message
+  needs_attention_threshold: 5
+
+# Future: Access control (not implemented yet)
+# access_control:
+#   enabled: false
+#   allowed_paths: []
+#   blocked_paths: []
+
+# Future: Telemetry (not implemented yet)
+# telemetry:
+#   enabled: false
+#   anonymous_only: true

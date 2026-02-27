@@ -104,7 +104,34 @@ Wait for it to finish (you'll see some text scrolling by).
 4. Save the file (`Cmd+S` or `Ctrl+S`)
 5. Restart Cursor
 
-## Step 7: Using the Editorial Tools
+## Step 7: Your First Session (Onboarding)
+
+### Getting Started
+
+When you first connect, ask:
+```
+Get started
+```
+
+You'll see a friendly welcome that explains:
+- What the tool does
+- What SAFE, REVIEW, and QUERY mean
+- How to use it step by step
+
+### Understanding Fix Types
+
+| Type | What It Means | What To Do |
+|------|---------------|------------|
+| **SAFE** | 95%+ confident - almost certainly correct | Usually accept without review |
+| **REVIEW** | 70-95% confident - likely correct | Check the context first |
+| **QUERY** | <70% confident - needs your judgment | You decide - it's a question |
+
+### Try This First
+
+1. Type: `Get started` to see the welcome guide
+2. Then: `Suggest workflow` for personalized recommendations
+
+## Step 8: Using the Editorial Tools
 
 ### Analyze a Document
 
@@ -114,9 +141,22 @@ Wait for it to finish (you'll see some text scrolling by).
    ```
 
 2. The AI will return a report showing:
-   - Quality score
-   - Issues found (categorized)
-   - Suggested fixes
+   - Quality score (1-10, higher is better)
+   - Issues found (categorized by SAFE/REVIEW/QUERY)
+   - Suggested fixes with explanations
+
+### Understand a Rule
+
+Not sure why something was flagged? Ask:
+```
+Explain issue TERM_DATACENTER
+```
+
+You'll get:
+- Plain-language explanation
+- Before/after example
+- Style guide reference
+- Why it matters
 
 ### Look Up an Acronym
 
@@ -129,6 +169,23 @@ You'll get:
 - What it stands for
 - If it's deprecated
 - How to use it correctly
+
+### Check Multiple Acronyms at Once
+
+```
+Check these acronyms: VXLAN, BGP, EVPN, XYZ
+```
+
+Get a summary of which are known, unknown, or deprecated.
+
+### Get Workflow Suggestions
+
+After analyzing a document:
+```
+Suggest workflow for /path/to/your-course.docx
+```
+
+Get personalized recommendations based on your quality score.
 
 ### Apply Fixes
 
@@ -143,11 +200,24 @@ This creates a new file with track changes enabled.
 
 | What You Want | What to Type |
 |---------------|--------------|
+| **Get started** | "Get started" |
 | Analyze a document | "Analyze the document at [path]" |
+| **Explain a rule** | "Explain issue [RULE_ID]" |
+| **Get workflow help** | "Suggest workflow" |
 | Look up acronym | "Look up the acronym [ABC]" |
+| **Check multiple acronyms** | "Check these acronyms: ABC, DEF, GHI" |
 | Apply safe fixes | "Apply SAFE fixes to [path]" |
 | List all rules | "List all editorial rules" |
 | Check server status | "Get server info" |
+
+### Disable Auto-Welcome
+
+If you're experienced and don't want the welcome message:
+
+Set environment variable before starting Cursor:
+```bash
+export EDITORIAL_NO_WELCOME=1
+```
 
 ## Troubleshooting
 

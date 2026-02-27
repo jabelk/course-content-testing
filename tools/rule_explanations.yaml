@@ -1,0 +1,698 @@
+# Rule Explanations for Onboarding
+# This file contains user-friendly explanations for all editorial rules.
+# Used by the explain_issue MCP tool.
+
+_metadata:
+  version: "1.0.0"
+  last_updated: "2026-02-27"
+  description: "Human-readable explanations for editorial rules"
+
+rules:
+  # =============================================================================
+  # TERMINOLOGY RULES (TERM_*)
+  # =============================================================================
+
+  TERM_CLICK_ON:
+    rule: "Use 'click' instead of 'click on'"
+    why: "Cisco Style Guide prefers the shorter, more direct 'click' for GUI actions."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "Click on the Save button."
+      after: "Click the Save button."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_IN_ORDER_TO:
+    rule: "Use 'to' instead of 'in order to'"
+    why: "'To' is more concise. 'In order to' adds unnecessary words."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "In order to configure the router, access the CLI."
+      after: "To configure the router, access the CLI."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_UTILIZE:
+    rule: "Use 'use' instead of 'utilize'"
+    why: "'Use' is simpler and clearer. 'Utilize' is unnecessarily formal."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "Utilize the command-line interface."
+      after: "Use the command-line interface."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_ALLOWS_YOU_TO:
+    rule: "Use 'lets you' instead of 'allows you to'"
+    why: "'Lets you' is more conversational and direct."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (90%)"
+    example:
+      before: "This feature allows you to configure VLANs."
+      after: "This feature lets you configure VLANs."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_MAKE_SURE:
+    rule: "Use 'ensure' instead of 'make sure'"
+    why: "'Ensure' is more formal and preferred in technical documentation."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "Make sure the cable is connected."
+      after: "Ensure the cable is connected."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_BLACKLIST:
+    rule: "Use 'blocklist' instead of 'blacklist'"
+    why: "Cisco inclusive language guidance recommends technology-neutral terminology."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "Add the IP to the blacklist."
+      after: "Add the IP to the blocklist."
+    reference: "Cisco Inclusive Language Guidelines"
+
+  TERM_WHITELIST:
+    rule: "Use 'allowlist' instead of 'whitelist'"
+    why: "Cisco inclusive language guidance recommends technology-neutral terminology."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "Add the IP to the whitelist."
+      after: "Add the IP to the allowlist."
+    reference: "Cisco Inclusive Language Guidelines"
+
+  TERM_MASTER_SLAVE:
+    rule: "Use 'primary/secondary' or 'leader/follower' instead of 'master/slave'"
+    why: "Cisco inclusive language guidance recommends neutral terminology."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "Configure the master and slave devices."
+      after: "Configure the primary and secondary devices."
+    reference: "Cisco Inclusive Language Guidelines"
+
+  TERM_EG:
+    rule: "Use 'for example' or 'such as' instead of 'e.g.'"
+    why: "Spelled-out forms are clearer, especially for non-native English readers."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (90%)"
+    example:
+      before: "Use a protocol (e.g., HTTP or HTTPS)."
+      after: "Use a protocol (for example, HTTP or HTTPS)."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_IE:
+    rule: "Use 'that is' instead of 'i.e.'"
+    why: "Spelled-out forms are clearer, especially for non-native English readers."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (90%)"
+    example:
+      before: "Use the default port (i.e., port 443)."
+      after: "Use the default port (that is, port 443)."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_ETC:
+    rule: "Use 'and so on' or rephrase instead of 'etc.'"
+    why: "'Etc.' can be vague. Being specific or using 'and so on' is clearer."
+    category: "Cisco Style Guide"
+    confidence: "REVIEW (80%)"
+    example:
+      before: "Configure VLANs, ports, etc."
+      after: "Configure VLANs, ports, and other settings."
+    note: "Consider whether listing all items explicitly would be better."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_PRIOR_TO:
+    rule: "Use 'before' instead of 'prior to'"
+    why: "'Before' is simpler and more direct."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "Prior to configuring the router..."
+      after: "Before configuring the router..."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_LEVERAGE:
+    rule: "Use 'use' instead of 'leverage'"
+    why: "'Leverage' is business jargon. 'Use' is clearer."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "Leverage the API to automate tasks."
+      after: "Use the API to automate tasks."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_INITIATE:
+    rule: "Use 'start' or 'begin' instead of 'initiate'"
+    why: "'Start' or 'begin' is simpler and more direct."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (90%)"
+    example:
+      before: "Initiate the connection process."
+      after: "Start the connection process."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_DATACENTER:
+    rule: "Use 'data center' (two words)"
+    why: "Cisco Style Guide specifies 'data center' as two words, not 'datacenter' or 'data-center'."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "Our datacenter hosts 500 servers."
+      after: "Our data center hosts 500 servers."
+    reference: "Cisco Technical Content Style Guide, Section: Terminology"
+
+  TERM_HOTSPOT:
+    rule: "Use 'hot spot' (two words)"
+    why: "Cisco Style Guide specifies 'hot spot' as two words."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "Connect to the WiFi hotspot."
+      after: "Connect to the WiFi hot spot."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_GRAYED_OUT:
+    rule: "Use 'unavailable' instead of 'grayed out'"
+    why: "'Unavailable' is more accessible and doesn't assume visual perception."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (90%)"
+    example:
+      before: "The button is grayed out."
+      after: "The button is unavailable."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_COMPRISED_OF:
+    rule: "Use 'comprises' or 'consists of' instead of 'comprised of'"
+    why: "'Comprised of' is grammatically disputed. 'Comprises' or 'consists of' is clearer."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (90%)"
+    example:
+      before: "The system is comprised of three modules."
+      after: "The system comprises three modules."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_LEFT_HAND:
+    rule: "Use 'left' instead of 'left-hand'"
+    why: "'Left' alone is sufficient for directions."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (90%)"
+    example:
+      before: "In the left-hand panel..."
+      after: "In the left panel..."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_RIGHT_HAND:
+    rule: "Use 'right' instead of 'right-hand'"
+    why: "'Right' alone is sufficient for directions."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (90%)"
+    example:
+      before: "In the right-hand panel..."
+      after: "In the right panel..."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_BOOT_UP:
+    rule: "Use 'boot' instead of 'boot up'"
+    why: "'Boot' alone is sufficient and more concise."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (90%)"
+    example:
+      before: "Wait for the device to boot up."
+      after: "Wait for the device to boot."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_CISCO_SYSTEMS:
+    rule: "Use 'Cisco' instead of 'Cisco Systems'"
+    why: "The company name is officially 'Cisco' not 'Cisco Systems'."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "Cisco Systems provides networking solutions."
+      after: "Cisco provides networking solutions."
+    reference: "Cisco Branding Guidelines"
+
+  TERM_ABORT:
+    rule: "Use 'cancel' or 'stop' instead of 'abort'"
+    why: "'Abort' has negative connotations. 'Cancel' or 'stop' is more neutral."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (90%)"
+    example:
+      before: "Abort the installation process."
+      after: "Cancel the installation process."
+    reference: "Cisco Technical Content Style Guide"
+
+  TERM_DESIRE:
+    rule: "Use 'want' instead of 'desire'"
+    why: "'Want' is more conversational and direct."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (90%)"
+    example:
+      before: "If you desire more control..."
+      after: "If you want more control..."
+    reference: "Cisco Technical Content Style Guide"
+
+  # =============================================================================
+  # PUNCTUATION RULES (PUNCT_*)
+  # =============================================================================
+
+  PUNCT_EM_DASH_SPACE:
+    rule: "No spaces around em dashes"
+    why: "Em dashes (—) should connect directly to the words they separate."
+    category: "Grammar & Punctuation"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "The router — which is new — failed."
+      after: "The router—which is new—failed."
+    reference: "Grammar & Punctuation Rules"
+
+  PUNCT_DOUBLE_EXCLAMATION:
+    rule: "Use single exclamation point"
+    why: "Multiple exclamation points are unprofessional in technical writing."
+    category: "Grammar & Punctuation"
+    confidence: "SAFE (99%)"
+    example:
+      before: "Configuration complete!!"
+      after: "Configuration complete!"
+    reference: "Grammar & Punctuation Rules"
+
+  PUNCT_EXCLAMATION_IN_PROSE:
+    rule: "Avoid exclamation points in technical prose"
+    why: "Exclamation points should be rare in technical documentation. They can seem unprofessional."
+    category: "Grammar & Punctuation"
+    confidence: "REVIEW (70%)"
+    example:
+      before: "This feature is amazing!"
+      after: "This feature is powerful."
+    note: "Exception: Congratulations steps or alerts may use them."
+    reference: "Cisco Technical Content Style Guide"
+
+  PUNCT_DOUBLE_SPACE:
+    rule: "Use single space after periods"
+    why: "Modern typography uses single spacing. Double spaces are a typewriter-era convention."
+    category: "Typography"
+    confidence: "SAFE (99%)"
+    example:
+      before: "End of sentence.  Start of next."
+      after: "End of sentence. Start of next."
+    reference: "Grammar & Punctuation Rules"
+
+  PUNCT_DOUBLE_HYPHEN:
+    rule: "Use em dash instead of double hyphen"
+    why: "In modern typography, -- should be converted to — (em dash)."
+    category: "Typography"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "The device--a Catalyst 9000--is ready."
+      after: "The device—a Catalyst 9000—is ready."
+    reference: "Grammar & Punctuation Rules"
+
+  PUNCT_TRAILING_SPACE:
+    rule: "Remove trailing whitespace"
+    why: "Trailing spaces at end of lines cause diff noise and formatting issues."
+    category: "Formatting"
+    confidence: "SAFE (99%)"
+    example:
+      before: "End of line.   "
+      after: "End of line."
+    reference: "Best Practices"
+
+  PUNCT_MULTIPLE_QUESTION:
+    rule: "Use single question mark"
+    why: "Multiple question marks are unprofessional in technical writing."
+    category: "Grammar & Punctuation"
+    confidence: "SAFE (99%)"
+    example:
+      before: "Why did this fail???"
+      after: "Why did this fail?"
+    reference: "Grammar & Punctuation Rules"
+
+  PUNCT_COMMA_SPACE:
+    rule: "Space after comma, not before"
+    why: "Standard punctuation rules require space after comma, not before."
+    category: "Typography"
+    confidence: "SAFE (99%)"
+    example:
+      before: "Configure routing , switching , and security."
+      after: "Configure routing, switching, and security."
+    reference: "Grammar & Punctuation Rules"
+
+  PUNCT_COLON_SPACE:
+    rule: "Space after colon, not before"
+    why: "Standard punctuation rules require space after colon, not before."
+    category: "Typography"
+    confidence: "SAFE (99%)"
+    example:
+      before: "Configuration : complete"
+      after: "Configuration: complete"
+    reference: "Grammar & Punctuation Rules"
+
+  # =============================================================================
+  # HEADING RULES (HEADING_*)
+  # =============================================================================
+
+  HEADING_GERUND:
+    rule: "Use imperative form instead of gerund in headings"
+    why: "Imperative headings ('Configure X') are more action-oriented than gerunds ('Configuring X')."
+    category: "Cisco Style Guide"
+    confidence: "REVIEW (85%)"
+    example:
+      before: "## Configuring the Router"
+      after: "## Configure the Router"
+    note: "Some gerund headings may be intentional for section titles."
+    reference: "Cisco Technical Content Style Guide"
+
+  HEADING_HOW_TO:
+    rule: "Remove 'How to' from headings"
+    why: "Imperative headings are clearer. 'How to Configure' becomes 'Configure'."
+    category: "Cisco Style Guide"
+    confidence: "REVIEW (85%)"
+    example:
+      before: "## How to Configure VLANs"
+      after: "## Configure VLANs"
+    reference: "Cisco Technical Content Style Guide"
+
+  HEADING_STEP_PREFIX:
+    rule: "Remove 'Step X:' prefix from headings"
+    why: "Step numbers should come from the structure, not the heading text."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (90%)"
+    example:
+      before: "## Step 3: Configure the Interface"
+      after: "## Configure the Interface"
+    reference: "Cisco Technical Content Style Guide"
+
+  # =============================================================================
+  # PRODUCT NAMING RULES (PROD_*)
+  # =============================================================================
+
+  PROD_CISCO_POSSESSIVE:
+    rule: "Avoid possessive form of Cisco product names"
+    why: "Use 'the Cisco [Product]' instead of 'Cisco [Product]'s' for trademark compliance."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "Cisco ISE's configuration panel..."
+      after: "The Cisco ISE configuration panel..."
+    reference: "Cisco Trademark Guidelines"
+
+  PROD_BOX_SERVER:
+    rule: "Use 'server' or 'device' instead of 'box'"
+    why: "'Box' is informal. Use specific terms like 'server' or 'device'."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (90%)"
+    example:
+      before: "Deploy the application to each box."
+      after: "Deploy the application to each server."
+    reference: "Cisco Technical Content Style Guide"
+
+  PROD_FMC_DEPRECATED:
+    rule: "FMC is deprecated - use full product name"
+    why: "Cisco Secure Firewall Management Center is the current product name. FMC is deprecated."
+    category: "Cisco Style Guide"
+    confidence: "REVIEW (80%)"
+    example:
+      before: "Configure the FMC to..."
+      after: "Configure Cisco Secure Firewall Management Center to..."
+    note: "Use the acronym only after spelling out the full name on first use."
+    reference: "Cisco Product Naming Guide (2024)"
+
+  PROD_FTD_DEPRECATED:
+    rule: "FTD is deprecated - use full product name"
+    why: "Cisco Secure Firewall Threat Defense is the current product name. FTD is deprecated."
+    category: "Cisco Style Guide"
+    confidence: "REVIEW (80%)"
+    example:
+      before: "Deploy the FTD..."
+      after: "Deploy Cisco Secure Firewall Threat Defense..."
+    note: "Use the acronym only after spelling out the full name on first use."
+    reference: "Cisco Product Naming Guide (2024)"
+
+  PROD_DNA_CENTER_DEPRECATED:
+    rule: "DNA Center is deprecated - use Catalyst Center"
+    why: "Cisco Catalyst Center is the new name for the former DNA Center."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "Access DNA Center to..."
+      after: "Access Cisco Catalyst Center to..."
+    reference: "Cisco Product Naming Guide (2024)"
+
+  PROD_WEBEX_TEAMS:
+    rule: "Webex Teams is deprecated - use Webex App"
+    why: "Webex App is the current product name, replacing Webex Teams."
+    category: "Cisco Style Guide"
+    confidence: "SAFE (95%+)"
+    example:
+      before: "Send a message in Webex Teams."
+      after: "Send a message in Webex App."
+    reference: "Cisco Product Naming Guide"
+
+  # =============================================================================
+  # GUI FORMATTING RULES (GUI_*)
+  # =============================================================================
+
+  GUI_BOLD_CLICK:
+    rule: "Bold GUI elements with direct imperatives"
+    why: "When giving GUI instructions, bold the element name with a direct imperative."
+    category: "Cisco Style Guide"
+    confidence: "REVIEW (75%)"
+    example:
+      before: "Click Save to continue."
+      after: "Click **Save** to continue."
+    note: "Don't bold when merely referencing (not instructing)."
+    reference: "Cisco Technical Content Style Guide"
+
+  # =============================================================================
+  # ACRONYM RULES (ACRONYM_*)
+  # =============================================================================
+
+  ACRONYM_FIRST_USE:
+    rule: "Spell out acronyms on first use"
+    why: "First use of an acronym should include the full expansion for clarity."
+    category: "Acronym Usage"
+    confidence: "REVIEW (85%)"
+    example:
+      before: "Configure the VRF on the router."
+      after: "Configure the Virtual Routing and Forwarding (VRF) instance on the router."
+    note: "Well-established acronyms like HTTP, DNS, IP may not need expansion."
+    reference: "Cisco Style Guide: Acronym Policy"
+
+  ACRONYM_UNKNOWN:
+    rule: "Unknown acronym needs expansion"
+    why: "Readers may not know this acronym. Consider spelling it out on first use."
+    category: "Acronym Usage"
+    confidence: "QUERY (50%)"
+    example:
+      before: "Configure the XYZ protocol."
+      after: "Configure the Extended Yellowtail Zone (XYZ) protocol."
+    what_to_do:
+      - "If it's a common acronym, we may need to add it to our database"
+      - "If it's course-specific, spell it out on first use"
+      - "If it's a product name or code, it might be fine as-is"
+    reference: "Cisco Style Guide: Acronym Policy"
+
+  ACRONYM_DEPRECATED:
+    rule: "Acronym is deprecated - use full name"
+    why: "This acronym refers to a deprecated product name. Use the current full name."
+    category: "Acronym Usage"
+    confidence: "REVIEW (80%)"
+    example:
+      before: "Configure FMC..."
+      after: "Configure Cisco Secure Firewall Management Center..."
+    reference: "Cisco Product Naming Guide"
+
+  # =============================================================================
+  # AI-ENHANCED RULES (AI_*)
+  # =============================================================================
+
+  AI_PROCEDURAL_INTRO:
+    rule: "Add procedural introduction before numbered steps"
+    why: "Numbered procedures should be introduced with 'To [action]:' for clarity."
+    category: "Cisco Style Guide"
+    confidence: "REVIEW (75%)"
+    example:
+      before: |
+        Configure the interface:
+        1. Enter configuration mode
+        2. Set the IP address
+      after: |
+        To configure the interface:
+        1. Enter configuration mode
+        2. Set the IP address
+    note: "This rule uses AI to detect if an introduction is needed."
+    reference: "Cisco Technical Content Style Guide"
+
+  # =============================================================================
+  # GRAMMAR RULES (GRAMMAR_*)
+  # =============================================================================
+
+  GRAMMAR_SERIAL_COMMA:
+    rule: "Use serial comma (Oxford comma) in lists"
+    why: "The serial comma before 'and' in a list prevents ambiguity."
+    category: "Grammar & Punctuation"
+    confidence: "REVIEW (85%)"
+    example:
+      before: "Configure routing, switching and security."
+      after: "Configure routing, switching, and security."
+    reference: "Standard Grammar Rules"
+
+  GRAMMAR_NUMBER_SPELL_OUT:
+    rule: "Spell out numbers one through nine"
+    why: "In prose, small numbers are typically spelled out for readability."
+    category: "Grammar & Punctuation"
+    confidence: "REVIEW (80%)"
+    example:
+      before: "Configure 3 interfaces."
+      after: "Configure three interfaces."
+    note: "Exception: Keep numerals in technical contexts like 'port 3' or 'VLAN 3'."
+    reference: "Standard Grammar Rules"
+
+  GRAMMAR_PERCENT_SYMBOL:
+    rule: "Use '%' with numerals, 'percent' with spelled-out numbers"
+    why: "Match the symbol to the number format for consistency."
+    category: "Grammar & Punctuation"
+    confidence: "REVIEW (80%)"
+    example:
+      before: "Utilization is at fifty %."
+      after: "Utilization is at fifty percent."
+    reference: "Standard Grammar Rules"
+
+  GRAMMAR_THAT_WHICH:
+    rule: "Use 'that' for restrictive clauses, 'which' for nonrestrictive"
+    why: "'That' defines; 'which' adds extra information (with commas)."
+    category: "Grammar & Punctuation"
+    confidence: "REVIEW (70%)"
+    example:
+      before: "The router which has a red label is configured."
+      after: "The router that has a red label is configured."
+    note: "This can be complex. If removing the clause changes meaning, use 'that'."
+    reference: "Standard Grammar Rules"
+
+  GRAMMAR_COMPOUND_WELL_KNOWN:
+    rule: "Hyphenate 'well-known' before a noun"
+    why: "Compound modifiers before a noun are hyphenated for clarity."
+    category: "Grammar & Punctuation"
+    confidence: "SAFE (90%)"
+    example:
+      before: "This is a well known issue."
+      after: "This is a well-known issue."
+    note: "Don't hyphenate after the noun: 'The issue is well known.'"
+    reference: "Standard Grammar Rules"
+
+  GRAMMAR_COMPOUND_REAL_TIME:
+    rule: "Hyphenate 'real-time' when used as an adjective"
+    why: "Compound modifiers before a noun are hyphenated for clarity."
+    category: "Grammar & Punctuation"
+    confidence: "SAFE (90%)"
+    example:
+      before: "View real time data on the dashboard."
+      after: "View real-time data on the dashboard."
+    note: "As a noun, 'real time' is two words: 'Process data in real time.'"
+    reference: "Standard Grammar Rules"
+
+  GRAMMAR_COMPOUND_HIGH_LEVEL:
+    rule: "Hyphenate 'high-level' when used as an adjective"
+    why: "Compound modifiers before a noun are hyphenated for clarity."
+    category: "Grammar & Punctuation"
+    confidence: "SAFE (90%)"
+    example:
+      before: "This is a high level overview."
+      after: "This is a high-level overview."
+    reference: "Standard Grammar Rules"
+
+  GRAMMAR_COMPOUND_LOW_LEVEL:
+    rule: "Hyphenate 'low-level' when used as an adjective"
+    why: "Compound modifiers before a noun are hyphenated for clarity."
+    category: "Grammar & Punctuation"
+    confidence: "SAFE (90%)"
+    example:
+      before: "This is a low level detail."
+      after: "This is a low-level detail."
+    reference: "Standard Grammar Rules"
+
+  GRAMMAR_COMPOUND_END_TO_END:
+    rule: "Hyphenate 'end-to-end' when used as an adjective"
+    why: "Compound modifiers before a noun are hyphenated for clarity."
+    category: "Grammar & Punctuation"
+    confidence: "SAFE (90%)"
+    example:
+      before: "Configure end to end encryption."
+      after: "Configure end-to-end encryption."
+    reference: "Standard Grammar Rules"
+
+  GRAMMAR_COMPOUND_BUILT_IN:
+    rule: "Hyphenate 'built-in' when used as an adjective"
+    why: "Compound modifiers before a noun are hyphenated for clarity."
+    category: "Grammar & Punctuation"
+    confidence: "SAFE (90%)"
+    example:
+      before: "Use the built in tools."
+      after: "Use the built-in tools."
+    reference: "Standard Grammar Rules"
+
+  GRAMMAR_COMPOUND_UP_TO_DATE:
+    rule: "Hyphenate 'up-to-date' when used as an adjective"
+    why: "Compound modifiers before a noun are hyphenated for clarity."
+    category: "Grammar & Punctuation"
+    confidence: "SAFE (90%)"
+    example:
+      before: "Keep your software up to date."
+      after: "Keep your software up-to-date."
+    note: "After 'is': 'The software is up to date' (no hyphen)."
+    reference: "Standard Grammar Rules"
+
+  GRAMMAR_COMPOUND_OUT_OF_THE_BOX:
+    rule: "Hyphenate 'out-of-the-box' when used as an adjective"
+    why: "Compound modifiers before a noun are hyphenated for clarity."
+    category: "Grammar & Punctuation"
+    confidence: "SAFE (90%)"
+    example:
+      before: "This is an out of the box solution."
+      after: "This is an out-of-the-box solution."
+    note: "As an adverb: 'Works out of the box' (no hyphens)."
+    reference: "Standard Grammar Rules"
+
+  GRAMMAR_AMPERSAND_IN_PROSE:
+    rule: "Use 'and' instead of '&' in prose"
+    why: "Ampersands are informal. Use 'and' in running text."
+    category: "Grammar & Punctuation"
+    confidence: "SAFE (90%)"
+    example:
+      before: "Configure routing & switching."
+      after: "Configure routing and switching."
+    note: "Exception: Product names like 'AT&T' keep the ampersand."
+    reference: "Standard Grammar Rules"
+
+  GRAMMAR_STARTING_WITH_AND:
+    rule: "Avoid starting sentences with 'And' or 'But'"
+    why: "While grammatically acceptable, starting with conjunctions can seem informal."
+    category: "Grammar & Punctuation"
+    confidence: "REVIEW (60%)"
+    example:
+      before: "And this completes the configuration."
+      after: "This completes the configuration."
+    note: "Sometimes 'And' or 'But' provides emphasis. Use your judgment."
+    reference: "Standard Grammar Rules"
+
+  GRAMMAR_SPLIT_INFINITIVE:
+    rule: "Avoid split infinitives when possible"
+    why: "While not always wrong, unsplit infinitives often read more smoothly."
+    category: "Grammar & Punctuation"
+    confidence: "REVIEW (50%)"
+    example:
+      before: "You need to quickly configure the interface."
+      after: "You need to configure the interface quickly."
+    note: "Sometimes splitting is clearer: 'to boldly go' vs 'to go boldly'."
+    reference: "Standard Grammar Rules"
+
+  GRAMMAR_COMMA_AFTER_INTRO:
+    rule: "Use comma after introductory phrases"
+    why: "Introductory phrases of four or more words should be followed by a comma."
+    category: "Grammar & Punctuation"
+    confidence: "REVIEW (75%)"
+    example:
+      before: "After completing the configuration verify the settings."
+      after: "After completing the configuration, verify the settings."
+    reference: "Standard Grammar Rules"
