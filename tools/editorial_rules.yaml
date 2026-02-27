@@ -669,3 +669,218 @@ rules:
     enabled: true
     priority: 50
     context_skip: [code_block]
+
+  # =============================================================================
+  # CHICAGO MANUAL OF STYLE RULES - General grammar and punctuation
+  # Per Cisco Style Guide: "For items not covered, refer to Chicago Manual"
+  # =============================================================================
+
+  - id: CMS_SERIAL_COMMA
+    name: "Serial Comma (Oxford Comma)"
+    category: chicago_manual
+    severity: medium
+    fix_type: REVIEW
+    pattern: "\\b\\w+,\\s+\\w+\\s+and\\s+\\w+"
+    pattern_type: regex
+    message: "Consider adding serial comma before 'and' in list of three or more items"
+    suggestion_template: "Add comma before 'and' (e.g., 'A, B, and C')"
+    enabled: true
+    priority: 35
+    context_skip: [code_block, inline_code]
+
+  - id: CMS_NUMBER_SPELL_OUT
+    name: "Spell Out Numbers 1-9"
+    category: chicago_manual
+    severity: low
+    fix_type: REVIEW
+    # Match standalone digits 1-9 in prose context (not in version numbers, IPs, etc.)
+    pattern: "(?<![\\d.v:/-])\\b[1-9]\\b(?![\\d.:])"
+    pattern_type: regex
+    message: "Consider spelling out numbers one through nine in prose"
+    suggestion_template: "Spell out the number (e.g., '3 items' → 'three items')"
+    enabled: true
+    priority: 40
+    context_skip: [code_block, inline_code, url, file_path]
+
+  - id: CMS_PERCENT_SYMBOL
+    name: "Percent Symbol Usage"
+    category: chicago_manual
+    severity: low
+    fix_type: REVIEW
+    pattern: "\\b\\d+\\s+percent\\b"
+    pattern_type: regex
+    message: "Use '%' symbol instead of spelling out 'percent' after a number"
+    suggestion_template: "Change 'X percent' to 'X%'"
+    enabled: true
+    priority: 35
+    context_skip: [code_block, inline_code]
+
+  - id: CMS_THAT_WHICH
+    name: "That vs. Which"
+    category: chicago_manual
+    severity: low
+    fix_type: REVIEW
+    # "which" without preceding comma often should be "that"
+    pattern: "(?<!,)\\s+which\\s+"
+    pattern_type: regex
+    message: "Consider using 'that' for restrictive clauses (no comma before 'which')"
+    suggestion_template: "If this is a restrictive clause, use 'that' instead of 'which'"
+    enabled: true
+    priority: 45
+    context_skip: [code_block, inline_code]
+
+  - id: CMS_COMPOUND_WELL_KNOWN
+    name: "Compound: Well-Known"
+    category: chicago_manual
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bwell known\\b"
+    pattern_type: regex
+    message: "Hyphenate 'well-known' when used as a compound modifier"
+    suggestion_template: "Change 'well known' to 'well-known'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: CMS_COMPOUND_REAL_TIME
+    name: "Compound: Real-Time"
+    category: chicago_manual
+    severity: low
+    fix_type: SAFE
+    pattern: "\\breal time\\b(?!\\s+data|\\s+system|\\s+protocol)"
+    pattern_type: regex
+    message: "Hyphenate 'real-time' when used as a compound modifier"
+    suggestion_template: "Change 'real time' to 'real-time'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: CMS_COMPOUND_HIGH_LEVEL
+    name: "Compound: High-Level"
+    category: chicago_manual
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bhigh level\\b"
+    pattern_type: regex
+    message: "Hyphenate 'high-level' when used as a compound modifier"
+    suggestion_template: "Change 'high level' to 'high-level'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: CMS_COMPOUND_LOW_LEVEL
+    name: "Compound: Low-Level"
+    category: chicago_manual
+    severity: low
+    fix_type: SAFE
+    pattern: "\\blow level\\b"
+    pattern_type: regex
+    message: "Hyphenate 'low-level' when used as a compound modifier"
+    suggestion_template: "Change 'low level' to 'low-level'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: CMS_COMPOUND_END_TO_END
+    name: "Compound: End-to-End"
+    category: chicago_manual
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bend to end\\b"
+    pattern_type: regex
+    message: "Hyphenate 'end-to-end' when used as a compound modifier"
+    suggestion_template: "Change 'end to end' to 'end-to-end'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: CMS_COMPOUND_BUILT_IN
+    name: "Compound: Built-In"
+    category: chicago_manual
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bbuilt in\\b"
+    pattern_type: regex
+    message: "Hyphenate 'built-in' when used as a compound modifier"
+    suggestion_template: "Change 'built in' to 'built-in'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: CMS_COMPOUND_UP_TO_DATE
+    name: "Compound: Up-to-Date"
+    category: chicago_manual
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bup to date\\b"
+    pattern_type: regex
+    message: "Hyphenate 'up-to-date' when used as a compound modifier before a noun"
+    suggestion_template: "Change 'up to date' to 'up-to-date'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: CMS_COMPOUND_OUT_OF_THE_BOX
+    name: "Compound: Out-of-the-Box"
+    category: chicago_manual
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bout of the box\\b"
+    pattern_type: regex
+    message: "Hyphenate 'out-of-the-box' when used as a compound modifier"
+    suggestion_template: "Change 'out of the box' to 'out-of-the-box'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: CMS_AMPERSAND_IN_PROSE
+    name: "Ampersand in Prose"
+    category: chicago_manual
+    severity: low
+    fix_type: REVIEW
+    pattern: "\\s&\\s"
+    pattern_type: regex
+    message: "Use 'and' instead of '&' in prose text"
+    suggestion_template: "Change '&' to 'and'"
+    enabled: true
+    priority: 25
+    context_skip: [code_block, inline_code, url]
+
+  - id: CMS_STARTING_WITH_AND
+    name: "Sentence Starting with And/But"
+    category: chicago_manual
+    severity: low
+    fix_type: REVIEW
+    pattern: "^\\s*(?:And|But)\\s+"
+    pattern_type: regex
+    message: "Starting a sentence with 'And' or 'But' is informal - consider revising"
+    suggestion_template: "Consider rewriting to avoid starting with 'And' or 'But'"
+    enabled: true
+    priority: 45
+    context_skip: [code_block, inline_code]
+
+  - id: CMS_SPLIT_INFINITIVE
+    name: "Split Infinitive"
+    category: chicago_manual
+    severity: low
+    fix_type: REVIEW
+    pattern: "\\bto\\s+\\w+ly\\s+\\w+"
+    pattern_type: regex
+    message: "Consider avoiding split infinitives when possible"
+    suggestion_template: "Consider moving the adverb (e.g., 'to quickly configure' → 'to configure quickly')"
+    enabled: true
+    priority: 50
+    context_skip: [code_block, inline_code]
+
+  - id: CMS_COMMA_AFTER_INTRO
+    name: "Comma After Introductory Phrase"
+    category: chicago_manual
+    severity: low
+    fix_type: REVIEW
+    pattern: "^(However|Therefore|Furthermore|Additionally|Moreover|Consequently|Meanwhile|Otherwise)\\s+[A-Z]"
+    pattern_type: regex
+    message: "Add comma after introductory word"
+    suggestion_template: "Add comma after '{match}' (e.g., 'However, the system...')"
+    enabled: true
+    priority: 30
+    context_skip: [code_block, inline_code]

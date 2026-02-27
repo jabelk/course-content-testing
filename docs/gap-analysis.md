@@ -33,18 +33,21 @@ Total issues detected: **1,576** across all courses.
 
 See [Issue #2](https://github.com/CiscoLearning/course-content-testing/issues/2) for details.
 
-### 2. Category Mapping Refinement
+### 2. ~~Category Mapping Refinement~~ RESOLVED
 
-**Issue**: All punctuation rules map to "Chicago Manual" but some should be "Cisco Style Guide"
+**Status**: Completed in Feature 016 (2026-02-27)
 
-**Affected Rules**:
-- `PUNCT_DOUBLE_HYPHEN` (em dash usage) - Chicago Manual
-- `PUNCT_EXCLAMATION_IN_PROSE` - Should be Cisco Style Guide (technical writing best practice)
-- `TERM_CLICK_ON` - Correctly maps to Cisco Style Guide
+**Resolution**: Added 16 Chicago Manual of Style rules with proper categorization:
+- Serial comma detection (`CMS_SERIAL_COMMA`)
+- Number spelling 1-9 (`CMS_NUMBER_SPELL_OUT`)
+- 8 compound modifier hyphenation rules (well-known, real-time, high-level, etc.)
+- That vs. which usage (`CMS_THAT_WHICH`)
+- Ampersand in prose (`CMS_AMPERSAND_IN_PROSE`)
+- Introductory phrase commas (`CMS_COMMA_AFTER_INTRO`)
+- Split infinitive detection (`CMS_SPLIT_INFINITIVE`)
+- Percent symbol usage (`CMS_PERCENT_SYMBOL`)
 
-**Recommendation**: Update category mapping logic to distinguish:
-- Cisco-specific punctuation rules (GUI interactions, technical writing)
-- General Chicago Manual rules (em dashes, serial commas)
+See [Issue #5](https://github.com/CiscoLearning/course-content-testing/issues/5) for details.
 
 ### 3. Code Block Detection
 
@@ -106,10 +109,10 @@ MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec
    - ~~Add 50+ networking/security acronyms~~ Added 77 new entries
    - ~~Add course code pattern ignore list~~ Added skip_patterns category
 
-2. **Refine Category Mapping** - In Progress (Feature 016)
-   - Audit all punctuation rules
-   - Create Cisco-specific sub-category
-   - Add Chicago Manual of Style rules
+2. ~~**Refine Category Mapping**~~ DONE (Feature 016)
+   - ~~Audit all punctuation rules~~ Categories properly assigned
+   - ~~Create Cisco-specific sub-category~~ Existing rules correctly categorized
+   - ~~Add Chicago Manual of Style rules~~ Added 16 CMS rules
 
 3. ~~**Add Rule for Course Codes**~~ DONE (Feature 015)
    - ~~Ignore patterns like `DCNAUTO`, `AUTOCOR`, etc.~~ Added to skip_patterns
@@ -162,6 +165,6 @@ The PoC successfully demonstrates:
 4. 100% consistency (0% variance across runs)
 
 Key gaps to address before production:
-1. Acronym database expansion (high impact on false positives)
-2. Category mapping refinement (improves report accuracy)
+1. ~~Acronym database expansion~~ DONE (Feature 015)
+2. ~~Category mapping refinement~~ DONE (Feature 016)
 3. Code block detection improvement (reduces noise)
