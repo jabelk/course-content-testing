@@ -26,7 +26,7 @@ except ImportError:
 
 # API Configuration
 ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
-ANTHROPIC_MODEL = "claude-sonnet-4-20250514"  # High quality for editorial review
+ANTHROPIC_MODEL = "claude-opus-4-5-20251101"  # Opus 4.5 - highest quality
 
 # Cache settings
 CACHE_TTL_HOURS = 24
