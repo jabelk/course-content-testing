@@ -305,6 +305,11 @@ def main():
         action='store_true',
         help='Show progress indicator for large documents'
     )
+    parser.add_argument(
+        '--docx-output',
+        action='store_true',
+        help='Generate DOCX with track changes instead of markdown report'
+    )
 
     args = parser.parse_args()
 
@@ -327,15 +332,54 @@ def main():
         return 1
 
     # Generate output
-    if args.json:
+    if args.docx_output:
+        # Generate DOCX with track changes
+        from docx_track_changes import generate_track_changes_docx
+
+        # Determine output path
+        if args.output:
+            docx_output_path = args.output
+        else:
+            base = os.path.splitext(args.docx_path)[0]
+            docx_output_path = f"{base}_edited.docx"
+
+        # Convert ValidationResult to dict format expected by track changes generator
+        validation_dict = {
+            'issues': [
+                {
+                    'original': issue.original_text,
+                    'suggestion': issue.suggested_fix,
+                    'line': issue.line_number,
+                    'rule_id': issue.rule_id,
+                    'category': getattr(issue, 'category', 'general'),
+                    'fix_type': issue.fix_type.name if hasattr(issue.fix_type, 'name') else str(issue.fix_type),
+                    'message': issue.message
+                }
+                for issue in result.issues
+            ]
+        }
+
+        stats = generate_track_changes_docx(
+            args.docx_path,
+            docx_output_path,
+            validation_dict,
+            author="Editorial AI"
+        )
+
+        print(f"\nDOCX with track changes written to: {docx_output_path}")
+        print(f"  Changes applied: {stats['changes_applied']}")
+        print(f"  Comments added: {stats['comments_added']}")
+        output = None  # No text output for DOCX mode
+
+    elif args.json:
         output = format_json_output(result, course_module)
     else:
         # Generate full markdown report using report generator
         from course_report_generator import generate_report
         output = generate_report(result, course_module.name, course_module)
 
-    # Write output
-    if args.output:
+    # Write output (only for non-DOCX modes)
+    if output and args.output:
         with open(args.output, 'w', encoding='utf-8') as f:
             f.write(output)
         print(f"Report written to: {args.output}")
