@@ -19,8 +19,18 @@ AI-powered editorial review for LWC course content. Adapts the tutorial editoria
 ### Key Documentation
 
 - [Quickstart Guide](docs/quickstart.md) - How to run the tools
+- [Setup Guide](docs/setup-guide.md) - Set up on your own system
+- [Why This Works](docs/approach-comparison.md) - Why deterministic rules beat RAG/Circuit
 - [Gap Analysis](docs/gap-analysis.md) - What's missing (acronyms, rules)
 - [Implementation Learnings](docs/learnings.md) - Architecture and decisions
+
+### Backlog
+
+See [Issues](https://github.com/CiscoLearning/course-content-testing/issues) for planned improvements:
+- DOCX track changes output
+- Expanded acronym database
+- Web upload interface
+- MCP server for Cursor integration
 
 ## Key Results
 
