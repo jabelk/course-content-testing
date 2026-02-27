@@ -4,27 +4,27 @@
 
 | Property | Value |
 |----------|-------|
-| Word Count | 15,309 |
+| Word Count | 15,326 |
 | Sections | 1 |
 | Estimated Duration | 1h42m |
-| Processing Time | 53.6s |
+| Processing Time | 1.3s |
 
 ## Summary
 
-**Total Issues**: 242
+**Total Issues**: 308
 
 | Fix Type | Count | Description |
 |----------|-------|-------------|
-| SAFE | 94 | Auto-fixable with high confidence |
-| REVIEW | 70 | Applied but needs human verification |
-| QUERY | 78 | Questions for author - not auto-fixed |
+| SAFE | 91 | Auto-fixable with high confidence |
+| REVIEW | 126 | Applied but needs human verification |
+| QUERY | 91 | Questions for author - not auto-fixed |
 
 ### Issues by Category
 
 | Category | Count |
 |----------|-------|
-| Chicago Manual | 138 |
-| Acronyms | 84 |
+| Chicago Manual | 205 |
+| Acronyms | 83 |
 | Cisco Style Guide | 20 |
 
 ## Changes by Category
@@ -59,15 +59,17 @@
 | 41 | `master` | `Consider using 'primary/sec...` | Use 'primary/secondary' or 'active/st... |
 | 41 | `slave` | `Consider using 'primary/sec...` | Use 'primary/secondary' or 'active/st... |
 
-### Acronyms (84 issues)
+### Acronyms (83 issues)
 
 **Needs Review (REVIEW)**:
 
 | Line | Original | Suggested | Rationale |
 |------|----------|-----------|-----------|
-| 26 | `URL` | `Uniform Resource Locator (URL)` | Acronym 'URL' not expanded on first use |
+| 3 | `WAN` | `Wide Area Network (WAN)` | Acronym 'WAN' not expanded on first use |
 | 111 | `MPLS` | `Multiprotocol Label Switchi...` | Acronym 'MPLS' not expanded on first use |
+| 323 | `IT` | `Information Technology (IT)` | Acronym 'IT' not expanded on first use |
 | 489 | `NAT` | `Network Address Translation...` | Acronym 'NAT' not expanded on first use |
+| 766 | `TLOC` | `Transport Location (TLOC)` | Acronym 'TLOC' not expanded on first use |
 | 927 | `VLANs` | `virtual LAN (VLAN)` | Acronym 'VLAN' not expanded on first use |
 | 927 | `ACLs` | `access control list (ACL)` | Acronym 'ACL' not expanded on first use |
 | 1008 | `TLS` | `Transport Layer Security (TLS)` | Acronym 'TLS' not expanded on first use |
@@ -75,43 +77,45 @@
 **Questions for Author (QUERY)**:
 
 - **Line 3**: Unknown acronym 'SD' - please provide expansion or confirm intentional
-- **Line 3**: Unknown acronym 'WAN' - please provide expansion or confirm intentional
 - **Line 21**: Unknown acronym 'BV' - please provide expansion or confirm intentional
 - **Line 22**: Unknown acronym 'CA' - please provide expansion or confirm intentional
 - **Line 28**: Unknown acronym 'DISCLAIMER' - please provide expansion or confirm intentional
 - **Line 28**: Unknown acronym 'WARRANTY' - please provide expansion or confirm intentional
 - **Line 28**: Unknown acronym 'THIS' - please provide expansion or confirm intentional
 - **Line 28**: Unknown acronym 'CONTENT' - please provide expansion or confirm intentional
-- *...and 70 more questions*
+- **Line 28**: Unknown acronym 'IS' - please provide expansion or confirm intentional
+- *...and 67 more questions*
 
-### Chicago Manual (138 issues)
+### Chicago Manual (205 issues)
 
 **Auto-fixable (SAFE)**:
 
 | Line | Original | Suggested | Rationale |
 |------|----------|-----------|-----------|
-| 24 | `                           ...` | `` | Remove trailing whitespace |
 | 24 | `.                          ...` | `. ` | Use single space after period |
-| 26 | `                           ...` | `` | Remove trailing whitespace |
-| 28 | `                           ...` | `` | Remove trailing whitespace |
-| 28 | `.                          ...` | `. ` | Use single space after period |
+| 28 | `.       ` | `. ` | Use single space after period |
 | 47 | `.  ` | `. ` | Use single space after period |
 | 49 | `.  ` | `. ` | Use single space after period |
 | 73 | `--` | `—` | Use em dash (—) instead of double hyp... |
-| 99 | `   ` | `` | Remove trailing whitespace |
-| 100 | `   ` | `` | Remove trailing whitespace |
-| 101 | `   ` | `` | Remove trailing whitespace |
-| 126 | `   ` | `` | Remove trailing whitespace |
-| 127 | `   ` | `` | Remove trailing whitespace |
-| 128 | `   ` | `` | Remove trailing whitespace |
+| 99 | ` ` | `` | Remove trailing whitespace |
+| 100 | ` ` | `` | Remove trailing whitespace |
+| 101 | ` ` | `` | Remove trailing whitespace |
+| 126 | ` ` | `` | Remove trailing whitespace |
+| 127 | ` ` | `` | Remove trailing whitespace |
+| 128 | ` ` | `` | Remove trailing whitespace |
 | 567 | `--` | `—` | Use em dash (—) instead of double hyp... |
-| ... | *61 more* | | |
+| 585 | `--` | `—` | Use em dash (—) instead of double hyp... |
+| 810 | ` ` | `` | Remove trailing whitespace |
+| 811 | ` ` | `` | Remove trailing whitespace |
+| ... | *58 more* | | |
 
 **Needs Review (REVIEW)**:
 
 | Line | Original | Suggested | Rationale |
 |------|----------|-----------|-----------|
 | 17 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
+| 59 | `1` | `Spell out the number (e.g.,...` | spelling out numbers one through nine... |
+| 61 | `3` | `Spell out the number (e.g.,...` | spelling out numbers one through nine... |
 | 91 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
 | 107 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
 | 115 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
@@ -119,21 +123,31 @@
 | 139 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
 | 155 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
 | 171 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
-| 187 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
-| 203 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
-| ... | *52 more* | | |
+| ... | *106 more* | | |
+
+**Questions for Author (QUERY)**:
+
+- **Line 46**: Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 1405**: Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 1412**: Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 1416**: Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 1422**: Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 1426**: Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 1430**: Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 1436**: Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- *...and 8 more questions*
 
 ## Detailed Changes
 
 *All issues sorted by line number for easy review:*
 
 <details>
-<summary>Click to expand all 242 issues</summary>
+<summary>Click to expand all 308 issues</summary>
 
 | Line | Type | Rule | Message |
 |------|------|------|---------|
 | 3 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'SD' - please provide expansion... |
-| 3 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'WAN' - please provide expansio... |
+| 3 | 🟡 | ACRONYM_FIRST_USE | Acronym 'WAN' not expanded on first use |
 | 13 | 🟢 | TERM_CISCO_SYSTEMS | Use 'Cisco' instead of 'Cisco Systems' |
 | 15 | 🟢 | TERM_CISCO_SYSTEMS | Use 'Cisco' instead of 'Cisco Systems' |
 | 17 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
@@ -142,11 +156,7 @@
 | 21 | 🟢 | TERM_CISCO_SYSTEMS | Use 'Cisco' instead of 'Cisco Systems' |
 | 21 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'BV' - please provide expansion... |
 | 22 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'CA' - please provide expansion... |
-| 24 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 24 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 26 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
-| 26 | 🟡 | ACRONYM_FIRST_USE | Acronym 'URL' not expanded on first use |
-| 28 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 28 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 28 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'DISCLAIMER' - please provide e... |
 | 28 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'WARRANTY' - please provide exp... |
@@ -207,8 +217,11 @@
 | 41 | 🟢 | TERM_WHITELIST | Use 'allowed list' instead of 'whitelist' (bias... |
 | 41 | 🟡 | TERM_MASTER_SLAVE | Use 'primary/secondary' or 'active/standby' ins... |
 | 41 | 🟡 | TERM_MASTER_SLAVE | Use 'primary/secondary' or 'active/standby' ins... |
+| 46 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 47 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 49 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 59 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
+| 61 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 73 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
 | 91 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 99 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
@@ -226,14 +239,21 @@
 | 157 | 🟢 | TERM_LEVERAGE | Use 'use' instead of 'leverage' |
 | 157 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'CFO' - please provide expansio... |
 | 171 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 183 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 187 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 191 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 203 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 219 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 219 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'DATA' - please provide expansi... |
 | 221 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'CRM' - please provide expansio... |
+| 225 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 235 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 237 | 🟡 | CMS_SERIAL_COMMA | Consider adding serial comma before 'and' in li... |
+| 245 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
+| 247 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 264 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 266 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'CEO' - please provide expansio... |
+| 271 | 🟡 | CMS_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
 | 274 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 292 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 302 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
@@ -241,7 +261,9 @@
 | 304 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'LTE' - please provide expansio... |
 | 307 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 321 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
-| 323 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'IT' - please provide expansion... |
+| 323 | 🟡 | ACRONYM_FIRST_USE | Acronym 'IT' not expanded on first use |
+| 331 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
+| 331 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 335 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 343 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'DIA' - please provide expansio... |
 | 349 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
@@ -249,7 +271,10 @@
 | 363 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 363 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'HQ' - please provide expansion... |
 | 377 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 383 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
+| 395 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 397 | 🟢 | TERM_LEVERAGE | Use 'use' instead of 'leverage' |
+| 401 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 450 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 452 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'CIO' - please provide expansio... |
 | 457 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'ROI' - please provide expansio... |
@@ -258,10 +283,13 @@
 | 489 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 489 | 🟡 | ACRONYM_FIRST_USE | Acronym 'NAT' not expanded on first use |
 | 493 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'VPN' - please provide expansio... |
+| 501 | 🟡 | CMS_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
 | 505 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 517 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 529 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 541 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 544 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
+| 546 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 548 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'GPS' - please provide expansio... |
 | 565 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 567 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
@@ -277,44 +305,80 @@
 | 655 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 693 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 697 | 🟢 | TERM_LEVERAGE | Use 'use' instead of 'leverage' |
+| 708 | 🟡 | CMS_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
+| 729 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 739 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 752 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
+| 754 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
+| 756 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 758 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 760 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
+| 762 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
+| 764 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 766 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
-| 766 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'TLOC' - please provide expansi... |
+| 766 | 🟡 | ACRONYM_FIRST_USE | Acronym 'TLOC' not expanded on first use |
+| 768 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
+| 770 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
+| 772 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 774 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 776 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
+| 778 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
+| 780 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 782 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 785 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 804 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 810 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 811 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 821 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 821 | 🟡 | CMS_SERIAL_COMMA | Consider adding serial comma before 'and' in li... |
+| 827 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
+| 827 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 839 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 847 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 853 | 🟢 | TERM_ALLOWS_YOU_TO | Consider 'lets you' instead of 'allows you to' |
+| 879 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
+| 903 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 925 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 927 | 🟡 | ACRONYM_FIRST_USE | Acronym 'VLAN' not expanded on first use |
 | 927 | 🟡 | ACRONYM_FIRST_USE | Acronym 'ACL' not expanded on first use |
+| 929 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 931 | 🟢 | TERM_ALLOWS_YOU_TO | Consider 'lets you' instead of 'allows you to' |
+| 931 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
+| 937 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 944 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 953 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 961 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 967 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 968 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 969 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
+| 980 | 🟡 | CMS_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
 | 1008 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 1008 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'DTLS' - please provide expansi... |
 | 1008 | 🟡 | ACRONYM_FIRST_USE | Acronym 'TLS' not expanded on first use |
+| 1016 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 1032 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 1032 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
+| 1034 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 1038 | 🟢 | TERM_ALLOWS_YOU_TO | Consider 'lets you' instead of 'allows you to' |
+| 1051 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 1085 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 1104 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 1111 | 🟡 | CMS_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
 | 1114 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 1124 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
+| 1129 | 🟡 | CMS_AMPERSAND_IN_PROSE | Use 'and' instead of '&' in prose text |
 | 1132 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 1138 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1139 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1149 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 1151 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
+| 1153 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 1155 | 🟢 | TERM_ALLOWS_YOU_TO | Consider 'lets you' instead of 'allows you to' |
+| 1174 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
+| 1174 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 1204 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 1266 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 1268 | 🟡 | CMS_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 1276 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 1290 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
 | 1294 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
@@ -322,43 +386,59 @@
 | 1305 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1306 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1307 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
+| 1309 | 🟡 | CMS_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 1317 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1318 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1319 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1320 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1332 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'NOT' - please provide expansio... |
 | 1382 | 🟢 | TERM_LEVERAGE | Use 'use' instead of 'leverage' |
+| 1405 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1406 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1406 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1407 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1407 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1409 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'CD' - please provide expansion... |
+| 1412 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1413 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1413 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1416 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1417 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1417 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1422 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1423 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1423 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1426 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1427 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1427 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1430 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1431 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1431 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1436 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1437 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1437 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1440 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1441 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1441 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1446 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1447 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1447 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1450 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1451 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1451 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1454 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1455 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1455 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1460 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1461 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1461 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1464 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1465 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1465 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1468 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1469 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1469 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1474 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1475 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 1475 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1476 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
@@ -379,7 +459,7 @@
 
 ---
 
-*Generated by Course AI Editor on 2026-02-27 17:38*
+*Generated by Course AI Editor on 2026-02-27 11:20*
 
 **Fix Type Legend**:
 - 🟢 **SAFE**: High-confidence fix, can be auto-applied

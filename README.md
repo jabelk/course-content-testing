@@ -8,13 +8,13 @@ AI-powered editorial review for LWC course content. Adapts the tutorial editoria
 
 | Course | Report | Issues |
 |--------|--------|--------|
-| SD-WAN Evolution and Core Concepts | [View Report](reports/01_SD-WAN%20Evolution%20and%20Core%20Concepts_orig-report.md) | 255 |
-| SD-WAN Components and Roles | [View Report](reports/02_SD-WAN%20Components%20and%20Roles_orig-report.md) | 376 |
-| 802.1X EAP Authentication | [View Report](reports/802.1X%20EAP%20Authentication_Sec%2001_orig-report.md) | 184 |
-| 802.1X on Cisco Wireless LAN Controllers | [View Report](reports/802.1X%20on%20Cisco%20Wireless%20LAN%20Controllers_Sec%2001_orig-report.md) | 281 |
-| AUTOCOR | [View Report](reports/AUTOCOR-Sec01_orig-report.md) | 81 |
-| DCNAUTO | [View Report](reports/DCNAUTO-Sec%2001_orig-report.md) | 220 |
-| Network Access for Non-Supplicant Devices | [View Report](reports/Network%20Access%20for%20Non-Supplicant%20Devices_Sec%2001_orig-report.md) | 179 |
+| SD-WAN Evolution and Core Concepts | [View Report](reports/01_SD-WAN%20Evolution%20and%20Core%20Concepts_orig-report.md) | 308 |
+| SD-WAN Components and Roles | [View Report](reports/02_SD-WAN%20Components%20and%20Roles_orig-report.md) | 446 |
+| 802.1X EAP Authentication | [View Report](reports/802.1X%20EAP%20Authentication_Sec%2001_orig-report.md) | 294 |
+| 802.1X on Cisco Wireless LAN Controllers | [View Report](reports/802.1X%20on%20Cisco%20Wireless%20LAN%20Controllers_Sec%2001_orig-report.md) | 390 |
+| AUTOCOR | [View Report](reports/AUTOCOR-Sec01_orig-report.md) | 122 |
+| DCNAUTO | [View Report](reports/DCNAUTO-Sec%2001_orig-report.md) | 299 |
+| Network Access for Non-Supplicant Devices | [View Report](reports/Network%20Access%20for%20Non-Supplicant%20Devices_Sec%2001_orig-report.md) | 258 |
 
 ### Key Documentation
 

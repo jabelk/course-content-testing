@@ -7,17 +7,17 @@
 ## Summary
 
 Processed 7 test DOCX course modules through the editorial validation pipeline.
-Total issues detected: **1,576** across all courses.
+Total issues detected: **2,117** across all courses (with 16 new Chicago Manual rules).
 
 | Course | Issues | Quality Score |
 |--------|--------|---------------|
-| SD-WAN Evolution and Core Concepts | 255 | 1.0/10 |
-| SD-WAN Components and Roles | 376 | 1.0/10 |
-| 802.1X EAP Authentication | 184 | 1.0/10 |
-| 802.1X on Cisco Wireless LAN Controllers | 281 | 1.0/10 |
-| AUTOCOR | 81 | 1.0/10 |
-| DCNAUTO | 220 | 1.0/10 |
-| Network Access for Non-Supplicant Devices | 179 | 1.0/10 |
+| SD-WAN Evolution and Core Concepts | 308 | 1.0/10 |
+| SD-WAN Components and Roles | 446 | 1.0/10 |
+| 802.1X EAP Authentication | 294 | 1.0/10 |
+| 802.1X on Cisco Wireless LAN Controllers | 390 | 1.0/10 |
+| AUTOCOR | 122 | 1.0/10 |
+| DCNAUTO | 299 | 1.0/10 |
+| Network Access for Non-Supplicant Devices | 258 | 1.0/10 |
 
 ## Identified Gaps
 
