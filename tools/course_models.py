@@ -19,15 +19,15 @@ from datetime import datetime
 CATEGORY_MAPPING = {
     'heading': 'Cisco Style Guide',
     'terminology': 'Cisco Style Guide',
-    'punctuation': 'Chicago Manual',  # May also be Cisco Style Guide for specific rules
-    'structure': 'Chicago Manual',
+    'punctuation': 'Grammar & Punctuation',  # May also be Cisco Style Guide for specific rules
+    'structure': 'Grammar & Punctuation',
     'gui_format': 'Cisco Style Guide',
     'code_style': 'Technical Terms',
     'product_naming': 'Technical Terms',
     'acronym': 'Acronyms',
 }
 
-# Punctuation rules that belong to Cisco Style Guide instead of Chicago Manual
+# Punctuation rules that belong to Cisco Style Guide instead of Grammar & Punctuation
 CISCO_PUNCTUATION_RULES = [
     'PUNCTUATION_CLICK_ON',  # "click on" vs "click"
     'PUNCTUATION_GUI_COLON',  # Colons after GUI elements
@@ -43,7 +43,7 @@ def map_category(existing_category: str, rule_id: str = '') -> str:
         rule_id: Optional rule ID for context-specific mapping
 
     Returns:
-        One of: 'Cisco Style Guide', 'Acronyms', 'Technical Terms', 'Chicago Manual'
+        One of: 'Cisco Style Guide', 'Acronyms', 'Technical Terms', 'Grammar & Punctuation'
     """
     category_lower = existing_category.lower()
 
@@ -51,7 +51,7 @@ def map_category(existing_category: str, rule_id: str = '') -> str:
     if category_lower == 'punctuation' and rule_id in CISCO_PUNCTUATION_RULES:
         return 'Cisco Style Guide'
 
-    return CATEGORY_MAPPING.get(category_lower, 'Chicago Manual')
+    return CATEGORY_MAPPING.get(category_lower, 'Grammar & Punctuation')
 
 
 @dataclass
@@ -306,7 +306,7 @@ class ChangeReport:
             'Cisco Style Guide': [],
             'Acronyms': [],
             'Technical Terms': [],
-            'Chicago Manual': []
+            'Grammar & Punctuation': []
         }
 
         for issue in result.issues:

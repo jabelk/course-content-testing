@@ -8,7 +8,7 @@ Categories:
 - Cisco Style Guide: Headings, terminology, GUI formatting, Cisco-specific punctuation
 - Acronyms: First-use expansion, redundant expansion, product acronyms
 - Technical Terms: Product naming, code style
-- Chicago Manual: Structure, general punctuation, grammar
+- Grammar & Punctuation: Structure, general punctuation, grammar
 
 Fix Types:
 - SAFE: Auto-fixable, high confidence
@@ -79,7 +79,7 @@ def group_issues_by_kim_category(issues: List[EditorialIssue]) -> Dict[str, List
         'Cisco Style Guide': [],
         'Acronyms': [],
         'Technical Terms': [],
-        'Chicago Manual': []
+        'Grammar & Punctuation': []
     }
 
     for issue in issues:
@@ -212,7 +212,7 @@ def generate_category_sections(result: ValidationResult) -> List[str]:
 
     by_category = group_issues_by_kim_category(result.issues)
 
-    for category in ['Cisco Style Guide', 'Acronyms', 'Technical Terms', 'Chicago Manual']:
+    for category in ['Cisco Style Guide', 'Acronyms', 'Technical Terms', 'Grammar & Punctuation']:
         issues = by_category[category]
         if not issues:
             continue

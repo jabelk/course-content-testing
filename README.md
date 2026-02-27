@@ -44,7 +44,7 @@ See [Issues](https://github.com/CiscoLearning/course-content-testing/issues) for
 
 ### Recent Improvements (2026-02-27)
 
-- **16 Chicago Manual rules** - Serial comma, number spelling, compound modifiers
+- **16 grammar rules** - Serial comma, number spelling, compound modifiers
 - **Expanded acronym database** - 135+ entries (up from 58)
 - **Skip patterns** - Course codes, HTTP methods, CLI keywords now ignored
 - **False positive reduction** - AUTOCOR course: 128 → 122 issues (6 fewer)
@@ -56,7 +56,7 @@ Each report categorizes issues into **Kim's 4 categories**:
 1. **Cisco Style Guide** - Headings, terminology, GUI formatting
 2. **Acronyms** - First-use expansion, unknown acronyms
 3. **Technical Terms** - Product naming, code style
-4. **Chicago Manual** - Punctuation, structure, grammar (16 rules: serial comma, number spelling, compound modifiers)
+4. **Grammar & Punctuation** - Structure, punctuation, grammar (16 rules: serial comma, number spelling, compound modifiers)
 
 ### Fix Types
 

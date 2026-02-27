@@ -63,7 +63,7 @@ All notable changes to the Course Content Testing tools.
   - Cisco products, networking, security, 802.1X, data center
   - Skip patterns for course codes and CLI keywords
 
-- **Chicago Manual Rules** (16 rules)
+- **Grammar & Punctuation Rules** (16 rules)
   - Serial comma detection
   - Number spelling (1-9 in prose)
   - 8 compound modifier hyphenation rules

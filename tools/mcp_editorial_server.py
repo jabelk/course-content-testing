@@ -86,7 +86,7 @@ def analyze_document(path: str, include_ai: bool = False) -> Dict[str, Any]:
     Analyze a document and return editorial suggestions.
 
     Validates a DOCX file against editorial rules (Cisco Style Guide,
-    Chicago Manual of Style) and returns categorized issues.
+    Grammar & Punctuation) and returns categorized issues.
 
     Args:
         path: Path to DOCX file to analyze
@@ -439,6 +439,385 @@ def reload_rules() -> Dict[str, Any]:
             "count": status['acronyms']['count'],
             "error": status['acronyms']['error']
         }
+    }
+
+
+# =============================================================================
+# Onboarding & Trust-Building Tools
+# =============================================================================
+
+@mcp.tool()
+def get_started() -> Dict[str, Any]:
+    """
+    Get started with the Editorial AI tools.
+
+    New to this tool? Start here! This guide walks you through
+    what the tool does and how to use it step by step.
+
+    Returns:
+        Welcome message with step-by-step instructions
+    """
+    return {
+        "welcome": "Welcome to the Editorial AI Assistant!",
+        "what_this_does": (
+            "This tool helps you review course documents for editorial issues - "
+            "things like style guide violations, acronym usage, punctuation, and grammar. "
+            "It's based on the same rules our human editors use."
+        ),
+        "how_it_works": [
+            "1. You give it a Word document (.docx file)",
+            "2. It scans for issues using 47+ editorial rules",
+            "3. It categorizes each issue by confidence level",
+            "4. You review the suggestions and decide what to change"
+        ],
+        "fix_types_explained": {
+            "SAFE": {
+                "meaning": "High confidence - these are almost certainly correct",
+                "confidence": "95%+",
+                "action": "You can usually accept these without review",
+                "examples": ["'datacenter' → 'data center'", "'make sure' → 'ensure'"]
+            },
+            "REVIEW": {
+                "meaning": "Medium confidence - likely correct but please verify",
+                "confidence": "70-95%",
+                "action": "Look at the context before accepting",
+                "examples": ["Hyphenation suggestions", "Number formatting"]
+            },
+            "QUERY": {
+                "meaning": "Needs your judgment - the tool isn't sure",
+                "confidence": "<70%",
+                "action": "You decide - these are questions, not corrections",
+                "examples": ["Unknown acronyms", "Ambiguous phrasing"]
+            }
+        },
+        "quick_start": [
+            "Step 1: Say 'analyze my document at /path/to/file.docx'",
+            "Step 2: Review the quality score and issue summary",
+            "Step 3: Ask 'explain issue TERM_DATACENTER' for any confusing rule",
+            "Step 4: Say 'apply SAFE fixes to /path/to/file.docx' to auto-fix high-confidence items"
+        ],
+        "tips": [
+            "Start with a short document to get familiar",
+            "The quality score is 1-10 (higher is better)",
+            "You can always ask 'what does [rule_id] mean?' for any rule",
+            "Your original file is never modified - we create a backup"
+        ],
+        "try_this_now": "Say: 'analyze the document at [your file path]'"
+    }
+
+
+@mcp.tool()
+def explain_issue(rule_id: str) -> Dict[str, Any]:
+    """
+    Explain what a specific rule means and why it matters.
+
+    Confused about why something was flagged? Use this to understand
+    the rule, see examples, and learn the style guide reference.
+
+    Args:
+        rule_id: The rule ID to explain (e.g., 'TERM_DATACENTER', 'CMS_SERIAL_COMMA')
+
+    Returns:
+        Detailed explanation with examples and references
+    """
+    # Rule explanations with context
+    explanations = {
+        # Terminology rules
+        "TERM_DATACENTER": {
+            "rule": "Use 'data center' (two words)",
+            "why": "Cisco Style Guide specifies 'data center' as two words, not 'datacenter' or 'data-center'.",
+            "category": "Cisco Style Guide",
+            "confidence": "SAFE (95%+)",
+            "example": {
+                "before": "Our datacenter hosts 500 servers.",
+                "after": "Our data center hosts 500 servers."
+            },
+            "reference": "Cisco Technical Content Style Guide, Section: Terminology"
+        },
+        "TERM_MAKE_SURE": {
+            "rule": "Use 'ensure' instead of 'make sure'",
+            "why": "'Ensure' is more formal and preferred in technical documentation.",
+            "category": "Cisco Style Guide",
+            "confidence": "SAFE (95%+)",
+            "example": {
+                "before": "Make sure the cable is connected.",
+                "after": "Ensure the cable is connected."
+            },
+            "reference": "Cisco Technical Content Style Guide"
+        },
+        # Chicago Manual rules
+        "GRAMMAR_SERIAL_COMMA": {
+            "rule": "Use serial comma (Oxford comma) in lists",
+            "why": "The serial comma before 'and' in a list prevents ambiguity.",
+            "category": "Grammar & Punctuation",
+            "confidence": "REVIEW (85%)",
+            "example": {
+                "before": "Configure routing, switching and security.",
+                "after": "Configure routing, switching, and security."
+            },
+            "reference": "Grammar & Punctuation, 17th ed., Section 6.19"
+        },
+        "GRAMMAR_NUMBER_SPELL_OUT": {
+            "rule": "Spell out numbers one through nine",
+            "why": "In prose, small numbers are typically spelled out for readability.",
+            "category": "Grammar & Punctuation",
+            "confidence": "REVIEW (80%)",
+            "example": {
+                "before": "Configure 3 interfaces.",
+                "after": "Configure three interfaces."
+            },
+            "note": "Exception: Keep numerals in technical contexts like 'port 3' or 'VLAN 3'",
+            "reference": "Grammar & Punctuation, 17th ed., Section 9.3"
+        },
+        # Punctuation rules
+        "PUNCT_EM_DASH_SPACE": {
+            "rule": "No spaces around em dashes",
+            "why": "Em dashes (—) should connect directly to the words they separate.",
+            "category": "Grammar & Punctuation",
+            "confidence": "SAFE (95%+)",
+            "example": {
+                "before": "The router — which is new — failed.",
+                "after": "The router—which is new—failed."
+            },
+            "reference": "Grammar & Punctuation, 17th ed., Section 6.85"
+        },
+        "PUNCT_DOUBLE_SPACE": {
+            "rule": "Use single space after periods",
+            "why": "Modern typography uses single spacing. Double spaces are a typewriter-era convention.",
+            "category": "Typography",
+            "confidence": "SAFE (99%)",
+            "example": {
+                "before": "End of sentence.  Start of next.",
+                "after": "End of sentence. Start of next."
+            },
+            "reference": "Grammar & Punctuation, 17th ed., Section 6.7"
+        },
+        # Compound modifiers
+        "GRAMMAR_COMPOUND_WELL_KNOWN": {
+            "rule": "Hyphenate 'well-known' before a noun",
+            "why": "Compound modifiers before a noun are hyphenated for clarity.",
+            "category": "Grammar & Punctuation",
+            "confidence": "SAFE (90%)",
+            "example": {
+                "before": "This is a well known issue.",
+                "after": "This is a well-known issue."
+            },
+            "note": "Don't hyphenate after the noun: 'The issue is well known.'",
+            "reference": "Grammar & Punctuation, 17th ed., Section 7.81"
+        },
+        # Acronyms
+        "ACRONYM_UNKNOWN": {
+            "rule": "Unknown acronym needs expansion",
+            "why": "Readers may not know this acronym. Consider spelling it out on first use.",
+            "category": "Acronym Usage",
+            "confidence": "QUERY (50%)",
+            "example": {
+                "before": "Configure the XYZ protocol.",
+                "after": "Configure the Extended Yellowtail Zone (XYZ) protocol."
+            },
+            "what_to_do": [
+                "If it's a common acronym, we may need to add it to our database",
+                "If it's course-specific, spell it out on first use",
+                "If it's a product name or code, it might be fine as-is"
+            ],
+            "reference": "Cisco Style Guide: Acronym Policy"
+        }
+    }
+
+    rule_upper = rule_id.upper()
+
+    if rule_upper in explanations:
+        explanation = explanations[rule_upper]
+        explanation["rule_id"] = rule_upper
+        explanation["found"] = True
+        return explanation
+    else:
+        # Try to find partial match
+        matches = [r for r in explanations.keys() if rule_upper in r or r in rule_upper]
+
+        return {
+            "found": False,
+            "rule_id": rule_id,
+            "message": f"No detailed explanation available for '{rule_id}'.",
+            "similar_rules": matches[:5] if matches else [],
+            "tip": "Try 'list_rules' to see all available rules with their categories.",
+            "help": "If you need this rule explained, let us know and we'll add documentation."
+        }
+
+
+@mcp.tool()
+def suggest_workflow(document_path: Optional[str] = None) -> Dict[str, Any]:
+    """
+    Get a personalized workflow suggestion based on your document.
+
+    Not sure what to do next? This tool analyzes your situation
+    and recommends the best next steps.
+
+    Args:
+        document_path: Optional path to document (for context-aware suggestions)
+
+    Returns:
+        Recommended workflow with explanations
+    """
+    if document_path and os.path.exists(document_path):
+        # Analyze the document first
+        result = analyze_document(document_path, include_ai=False)
+
+        if "error" in result:
+            return {
+                "status": "error",
+                "message": result["error"],
+                "suggestion": "Check the file path and try again."
+            }
+
+        score = result.get("quality_score", 5)
+        summary = result.get("summary", {})
+        safe_count = summary.get("safe_count", 0)
+        review_count = summary.get("review_count", 0)
+        query_count = summary.get("query_count", 0)
+
+        # Personalized recommendation based on results
+        if score >= 8:
+            recommendation = {
+                "assessment": "Your document is in great shape!",
+                "quality_score": score,
+                "recommended_steps": [
+                    "1. Review the few issues found (if any)",
+                    "2. Apply SAFE fixes if you agree with them",
+                    "3. Your document is nearly ready for publication"
+                ]
+            }
+        elif score >= 5:
+            recommendation = {
+                "assessment": "Your document needs some attention but is solid.",
+                "quality_score": score,
+                "recommended_steps": [
+                    f"1. Apply the {safe_count} SAFE fixes (high confidence)",
+                    f"2. Review the {review_count} REVIEW items carefully",
+                    f"3. Address the {query_count} QUERY items (your judgment needed)",
+                    "4. Re-run analysis to see your improved score"
+                ]
+            }
+        else:
+            recommendation = {
+                "assessment": "Your document has several areas to improve.",
+                "quality_score": score,
+                "recommended_steps": [
+                    f"1. Start with SAFE fixes ({safe_count} items) - these are quick wins",
+                    "2. Use 'explain_issue [rule_id]' for any confusing rules",
+                    f"3. Work through REVIEW items ({review_count}) one section at a time",
+                    f"4. Handle QUERY items ({query_count}) last - these need your expertise",
+                    "5. Re-run analysis after each batch of fixes to track progress"
+                ],
+                "tip": "Don't try to fix everything at once. Focus on one category at a time."
+            }
+
+        recommendation["summary"] = summary
+        recommendation["next_command"] = f"apply_fixes('{document_path}', fix_types=['SAFE'])" if safe_count > 0 else "Review complete - no SAFE fixes needed"
+        return recommendation
+
+    else:
+        # General workflow without a specific document
+        return {
+            "welcome": "Here's the recommended editorial review workflow:",
+            "workflow": [
+                {
+                    "step": 1,
+                    "action": "Analyze your document",
+                    "command": "analyze_document('/path/to/your/file.docx')",
+                    "what_happens": "Scans for issues and gives you a quality score"
+                },
+                {
+                    "step": 2,
+                    "action": "Review the summary",
+                    "what_to_look_for": [
+                        "Quality score (1-10, higher is better)",
+                        "Count of SAFE vs REVIEW vs QUERY issues"
+                    ]
+                },
+                {
+                    "step": 3,
+                    "action": "Apply SAFE fixes",
+                    "command": "apply_fixes('/path/to/your/file.docx')",
+                    "what_happens": "Creates a new file with tracked changes for high-confidence fixes"
+                },
+                {
+                    "step": 4,
+                    "action": "Review in Word",
+                    "what_to_do": "Open the _edited.docx file and use Track Changes to accept/reject"
+                },
+                {
+                    "step": 5,
+                    "action": "Handle REVIEW and QUERY items",
+                    "tip": "Use 'explain_issue [rule_id]' if you're unsure about any suggestion"
+                }
+            ],
+            "tips": [
+                "Your original file is never modified - we always create a backup",
+                "Start with a small document to get comfortable",
+                "The tool learns from our human editors' patterns"
+            ]
+        }
+
+
+@mcp.tool()
+def check_acronym_batch(acronyms: List[str]) -> Dict[str, Any]:
+    """
+    Check multiple acronyms at once.
+
+    Reviewing a document with many acronyms? Check them all at once
+    to see which ones are known and which need attention.
+
+    Args:
+        acronyms: List of acronyms to check (e.g., ["VXLAN", "BGP", "XYZ"])
+
+    Returns:
+        Status of each acronym with usage guidance
+    """
+    results = {
+        "known": [],
+        "unknown": [],
+        "deprecated": [],
+        "skip": []
+    }
+
+    for acronym in acronyms:
+        info = lookup_acronym(acronym)
+
+        if not info.get("found"):
+            results["unknown"].append({
+                "acronym": acronym,
+                "action": "Consider spelling out on first use"
+            })
+        elif info.get("category") == "skip_patterns":
+            results["skip"].append({
+                "acronym": acronym,
+                "reason": info.get("notes", "Skip pattern - no expansion needed")
+            })
+        elif info.get("deprecated"):
+            results["deprecated"].append({
+                "acronym": acronym,
+                "expansion": info.get("expansion"),
+                "note": info.get("notes"),
+                "action": "Use the full product name instead"
+            })
+        else:
+            results["known"].append({
+                "acronym": acronym,
+                "expansion": info.get("expansion"),
+                "first_use": info.get("first_use", info.get("expansion"))
+            })
+
+    return {
+        "total_checked": len(acronyms),
+        "summary": {
+            "known": len(results["known"]),
+            "unknown": len(results["unknown"]),
+            "deprecated": len(results["deprecated"]),
+            "skip": len(results["skip"])
+        },
+        "results": results,
+        "tip": "For unknown acronyms, either spell them out or request they be added to the database."
     }
 
 

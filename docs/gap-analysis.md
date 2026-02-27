@@ -7,7 +7,7 @@
 ## Summary
 
 Processed 7 test DOCX course modules through the editorial validation pipeline.
-Total issues detected: **2,117** across all courses (with 16 new Chicago Manual rules).
+Total issues detected: **2,117** across all courses (with 16 new grammar rules).
 
 | Course | Issues | Quality Score |
 |--------|--------|---------------|
@@ -37,15 +37,15 @@ See [Issue #2](https://github.com/CiscoLearning/course-content-testing/issues/2)
 
 **Status**: Completed in Feature 016 (2026-02-27)
 
-**Resolution**: Added 16 Chicago Manual of Style rules with proper categorization:
-- Serial comma detection (`CMS_SERIAL_COMMA`)
-- Number spelling 1-9 (`CMS_NUMBER_SPELL_OUT`)
+**Resolution**: Added 16 grammar and punctuation rules with proper categorization:
+- Serial comma detection (`GRAMMAR_SERIAL_COMMA`)
+- Number spelling 1-9 (`GRAMMAR_NUMBER_SPELL_OUT`)
 - 8 compound modifier hyphenation rules (well-known, real-time, high-level, etc.)
-- That vs. which usage (`CMS_THAT_WHICH`)
-- Ampersand in prose (`CMS_AMPERSAND_IN_PROSE`)
-- Introductory phrase commas (`CMS_COMMA_AFTER_INTRO`)
-- Split infinitive detection (`CMS_SPLIT_INFINITIVE`)
-- Percent symbol usage (`CMS_PERCENT_SYMBOL`)
+- That vs. which usage (`GRAMMAR_THAT_WHICH`)
+- Ampersand in prose (`GRAMMAR_AMPERSAND_IN_PROSE`)
+- Introductory phrase commas (`GRAMMAR_COMMA_AFTER_INTRO`)
+- Split infinitive detection (`GRAMMAR_SPLIT_INFINITIVE`)
+- Percent symbol usage (`GRAMMAR_PERCENT_SYMBOL`)
 
 See [Issue #5](https://github.com/CiscoLearning/course-content-testing/issues/5) for details.
 
@@ -112,7 +112,7 @@ MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec
 2. ~~**Refine Category Mapping**~~ DONE (Feature 016)
    - ~~Audit all punctuation rules~~ Categories properly assigned
    - ~~Create Cisco-specific sub-category~~ Existing rules correctly categorized
-   - ~~Add Chicago Manual of Style rules~~ Added 16 CMS rules
+   - ~~Add grammar and punctuation rules~~ Added 16 grammar rules
 
 3. ~~**Add Rule for Course Codes**~~ DONE (Feature 015)
    - ~~Ignore patterns like `DCNAUTO`, `AUTOCOR`, etc.~~ Added to skip_patterns
@@ -145,7 +145,7 @@ From the quality checklists, these items remain as gaps:
 ### Editorial Accuracy Gaps
 - CHK002: Cisco Style Guide rules not fully enumerated
 - ~~CHK004: Acronym database coverage incomplete~~ RESOLVED (Feature 015)
-- CHK012: No conflict resolution between style guide and Chicago Manual
+- CHK012: No conflict resolution between style guide categories
 
 ### Report Quality Gaps
 - CHK028: Line numbers relative to converted markdown, not original DOCX

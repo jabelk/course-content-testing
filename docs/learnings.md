@@ -101,35 +101,35 @@ Creating focused checklists (editorial-accuracy, report-quality, consistency) be
 **Problem**: Some rules don't cleanly map to Kim's 4 categories.
 
 **Example**: `PUNCT_EXCLAMATION_IN_PROSE`
-- Chicago Manual says: use sparingly
+- Standard grammar guidance: use sparingly
 - Cisco Style Guide says: avoid in technical content
-- Mapped to Chicago Manual, but really Cisco-specific
+- Mapped to Grammar & Punctuation, but really Cisco-specific
 
 **Solution**: Created mapping table in `course_models.py` with special cases.
 
 **Lesson**: Real-world categorization is messier than spec categories. Build in flexibility.
 
-### 5. Chicago Manual Rules ✅ RESOLVED (Feature 016)
+### 5. Grammar & Punctuation Rules ✅ RESOLVED (Feature 016)
 
-**Problem**: Cisco Style Guide says "For grammar and punctuation not covered by this guide, refer to the Chicago Manual of Style." No CMS rules existed in the system.
+**Problem**: Cisco Style Guide says "For grammar and punctuation not covered by this guide, refer to standard grammar rules." No grammar rules existed in the system.
 
-**Solution**: Added 16 CMS rules to `editorial_rules.yaml`:
-- Serial comma detection (`CMS_SERIAL_COMMA`)
-- Number spelling 1-9 (`CMS_NUMBER_SPELL_OUT`)
+**Solution**: Added 16 grammar rules to `editorial_rules.yaml`:
+- Serial comma detection (`GRAMMAR_SERIAL_COMMA`)
+- Number spelling 1-9 (`GRAMMAR_NUMBER_SPELL_OUT`)
 - 8 compound modifier hyphenation rules (well-known, real-time, high-level, etc.)
-- That vs. which (`CMS_THAT_WHICH`)
-- Ampersand in prose (`CMS_AMPERSAND_IN_PROSE`)
-- Introductory phrase commas (`CMS_COMMA_AFTER_INTRO`)
-- Split infinitive detection (`CMS_SPLIT_INFINITIVE`)
-- Percent symbol usage (`CMS_PERCENT_SYMBOL`)
+- That vs. which (`GRAMMAR_THAT_WHICH`)
+- Ampersand in prose (`GRAMMAR_AMPERSAND_IN_PROSE`)
+- Introductory phrase commas (`GRAMMAR_COMMA_AFTER_INTRO`)
+- Split infinitive detection (`GRAMMAR_SPLIT_INFINITIVE`)
+- Percent symbol usage (`GRAMMAR_PERCENT_SYMBOL`)
 
 **E2E Test Results (AUTOCOR course)**:
 - Total issues: 122 (down from 128 with skip pattern fix)
-- Chicago Manual category: 91 issues detected
+- Grammar & Punctuation category: 91 issues detected
 - Compound modifiers detected: `built in`, `out of the box`
 - Number spelling flagged: 37+ instances
 
-**Lesson**: Chicago Manual rules are high-frequency catches. The 16 rules added immediately contributed 91 detections in one course.
+**Lesson**: Grammar rules are high-frequency catches. The 16 rules added immediately contributed 91 detections in one course.
 
 ## Performance Results
 

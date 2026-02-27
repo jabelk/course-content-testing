@@ -136,7 +136,7 @@ Reports organize issues into 4 categories:
 | Cisco Style Guide | Headings, terminology, GUI formatting |
 | Acronyms | First-use expansion, unknown acronyms |
 | Technical Terms | Product naming, code style |
-| Chicago Manual | Punctuation, structure, grammar |
+| Grammar & Punctuation | Punctuation, structure, grammar |
 
 ## Batch Processing
 

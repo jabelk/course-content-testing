@@ -671,13 +671,13 @@ rules:
     context_skip: [code_block]
 
   # =============================================================================
-  # CHICAGO MANUAL OF STYLE RULES - General grammar and punctuation
-  # Per Cisco Style Guide: "For items not covered, refer to Chicago Manual"
+  # GRAMMAR & PUNCTUATION RULES - Standard editorial rules
+  # General grammar and punctuation guidelines for technical content
   # =============================================================================
 
-  - id: CMS_SERIAL_COMMA
+  - id: GRAMMAR_SERIAL_COMMA
     name: "Serial Comma (Oxford Comma)"
-    category: chicago_manual
+    category: grammar
     severity: medium
     fix_type: REVIEW
     pattern: "\\b\\w+,\\s+\\w+\\s+and\\s+\\w+"
@@ -688,9 +688,9 @@ rules:
     priority: 35
     context_skip: [code_block, inline_code]
 
-  - id: CMS_NUMBER_SPELL_OUT
+  - id: GRAMMAR_NUMBER_SPELL_OUT
     name: "Spell Out Numbers 1-9"
-    category: chicago_manual
+    category: grammar
     severity: low
     fix_type: REVIEW
     # Match standalone digits 1-9 in prose context (not in version numbers, IPs, etc.)
@@ -702,9 +702,9 @@ rules:
     priority: 40
     context_skip: [code_block, inline_code, url, file_path]
 
-  - id: CMS_PERCENT_SYMBOL
+  - id: GRAMMAR_PERCENT_SYMBOL
     name: "Percent Symbol Usage"
-    category: chicago_manual
+    category: grammar
     severity: low
     fix_type: REVIEW
     pattern: "\\b\\d+\\s+percent\\b"
@@ -715,9 +715,9 @@ rules:
     priority: 35
     context_skip: [code_block, inline_code]
 
-  - id: CMS_THAT_WHICH
+  - id: GRAMMAR_THAT_WHICH
     name: "That vs. Which"
-    category: chicago_manual
+    category: grammar
     severity: low
     fix_type: REVIEW
     # "which" without preceding comma often should be "that"
@@ -729,9 +729,9 @@ rules:
     priority: 45
     context_skip: [code_block, inline_code]
 
-  - id: CMS_COMPOUND_WELL_KNOWN
+  - id: GRAMMAR_COMPOUND_WELL_KNOWN
     name: "Compound: Well-Known"
-    category: chicago_manual
+    category: grammar
     severity: low
     fix_type: SAFE
     pattern: "\\bwell known\\b"
@@ -742,9 +742,9 @@ rules:
     priority: 20
     context_skip: [code_block, inline_code]
 
-  - id: CMS_COMPOUND_REAL_TIME
+  - id: GRAMMAR_COMPOUND_REAL_TIME
     name: "Compound: Real-Time"
-    category: chicago_manual
+    category: grammar
     severity: low
     fix_type: SAFE
     pattern: "\\breal time\\b(?!\\s+data|\\s+system|\\s+protocol)"
@@ -755,9 +755,9 @@ rules:
     priority: 20
     context_skip: [code_block, inline_code]
 
-  - id: CMS_COMPOUND_HIGH_LEVEL
+  - id: GRAMMAR_COMPOUND_HIGH_LEVEL
     name: "Compound: High-Level"
-    category: chicago_manual
+    category: grammar
     severity: low
     fix_type: SAFE
     pattern: "\\bhigh level\\b"
@@ -768,9 +768,9 @@ rules:
     priority: 20
     context_skip: [code_block, inline_code]
 
-  - id: CMS_COMPOUND_LOW_LEVEL
+  - id: GRAMMAR_COMPOUND_LOW_LEVEL
     name: "Compound: Low-Level"
-    category: chicago_manual
+    category: grammar
     severity: low
     fix_type: SAFE
     pattern: "\\blow level\\b"
@@ -781,9 +781,9 @@ rules:
     priority: 20
     context_skip: [code_block, inline_code]
 
-  - id: CMS_COMPOUND_END_TO_END
+  - id: GRAMMAR_COMPOUND_END_TO_END
     name: "Compound: End-to-End"
-    category: chicago_manual
+    category: grammar
     severity: low
     fix_type: SAFE
     pattern: "\\bend to end\\b"
@@ -794,9 +794,9 @@ rules:
     priority: 20
     context_skip: [code_block, inline_code]
 
-  - id: CMS_COMPOUND_BUILT_IN
+  - id: GRAMMAR_COMPOUND_BUILT_IN
     name: "Compound: Built-In"
-    category: chicago_manual
+    category: grammar
     severity: low
     fix_type: SAFE
     pattern: "\\bbuilt in\\b"
@@ -807,9 +807,9 @@ rules:
     priority: 20
     context_skip: [code_block, inline_code]
 
-  - id: CMS_COMPOUND_UP_TO_DATE
+  - id: GRAMMAR_COMPOUND_UP_TO_DATE
     name: "Compound: Up-to-Date"
-    category: chicago_manual
+    category: grammar
     severity: low
     fix_type: SAFE
     pattern: "\\bup to date\\b"
@@ -820,9 +820,9 @@ rules:
     priority: 20
     context_skip: [code_block, inline_code]
 
-  - id: CMS_COMPOUND_OUT_OF_THE_BOX
+  - id: GRAMMAR_COMPOUND_OUT_OF_THE_BOX
     name: "Compound: Out-of-the-Box"
-    category: chicago_manual
+    category: grammar
     severity: low
     fix_type: SAFE
     pattern: "\\bout of the box\\b"
@@ -833,9 +833,9 @@ rules:
     priority: 20
     context_skip: [code_block, inline_code]
 
-  - id: CMS_AMPERSAND_IN_PROSE
+  - id: GRAMMAR_AMPERSAND_IN_PROSE
     name: "Ampersand in Prose"
-    category: chicago_manual
+    category: grammar
     severity: low
     fix_type: REVIEW
     pattern: "\\s&\\s"
@@ -846,9 +846,9 @@ rules:
     priority: 25
     context_skip: [code_block, inline_code, url]
 
-  - id: CMS_STARTING_WITH_AND
+  - id: GRAMMAR_STARTING_WITH_AND
     name: "Sentence Starting with And/But"
-    category: chicago_manual
+    category: grammar
     severity: low
     fix_type: REVIEW
     pattern: "^\\s*(?:And|But)\\s+"
@@ -859,9 +859,9 @@ rules:
     priority: 45
     context_skip: [code_block, inline_code]
 
-  - id: CMS_SPLIT_INFINITIVE
+  - id: GRAMMAR_SPLIT_INFINITIVE
     name: "Split Infinitive"
-    category: chicago_manual
+    category: grammar
     severity: low
     fix_type: REVIEW
     pattern: "\\bto\\s+\\w+ly\\s+\\w+"
@@ -872,9 +872,9 @@ rules:
     priority: 50
     context_skip: [code_block, inline_code]
 
-  - id: CMS_COMMA_AFTER_INTRO
+  - id: GRAMMAR_COMMA_AFTER_INTRO
     name: "Comma After Introductory Phrase"
-    category: chicago_manual
+    category: grammar
     severity: low
     fix_type: REVIEW
     pattern: "^(However|Therefore|Furthermore|Additionally|Moreover|Consequently|Meanwhile|Otherwise)\\s+[A-Z]"

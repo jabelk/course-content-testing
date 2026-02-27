@@ -219,5 +219,5 @@ python course_editor.py input.docx --verbose
 
 1. **Gather feedback** from Kim on report usefulness
 2. **Identify rule gaps** from test course results
-3. **Add Chicago Manual rules** as needed
+3. **Add grammar rules** as needed
 4. **Build DOCX track changes output** (follow-up phase)
