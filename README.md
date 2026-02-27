@@ -20,6 +20,7 @@ AI-powered editorial review for LWC course content. Adapts the tutorial editoria
 
 - [Quickstart Guide](docs/quickstart.md) - How to run the tools
 - [Setup Guide](docs/setup-guide.md) - Set up on your own system
+- [Cursor Setup Guide](docs/cursor-setup-guide.md) - **For MS Word users** - step-by-step Cursor/MCP setup
 - [Why This Works](docs/approach-comparison.md) - Why deterministic rules beat RAG/Circuit
 - [Gap Analysis](docs/gap-analysis.md) - What's missing (acronyms, rules)
 - [Implementation Learnings](docs/learnings.md) - Architecture and decisions
