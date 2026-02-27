@@ -27,10 +27,10 @@ AI-powered editorial review for LWC course content. Adapts the tutorial editoria
 ### Backlog
 
 See [Issues](https://github.com/CiscoLearning/course-content-testing/issues) for planned improvements:
-- DOCX track changes output
-- Expanded acronym database
+- ~~DOCX track changes output~~ ✅ Implemented
+- ~~Expanded acronym database~~ ✅ Done (135 entries)
 - Web upload interface
-- MCP server for Cursor integration
+- ~~MCP server for Cursor integration~~ ✅ Implemented
 
 ## Key Results
 
@@ -97,6 +97,9 @@ DOCX Course Module
 | Tool | Purpose |
 |------|---------|
 | `course_editor.py` | Main CLI - process DOCX files |
+| `course_editor.py --docx-output` | Generate DOCX with track changes |
+| `mcp_editorial_server.py` | MCP server for IDE integration |
+| `docx_track_changes.py` | Generate track changes documents |
 | `test_consistency.py` | Verify results are repeatable |
 | `run_poc.sh` | Batch process all test courses |
 | `course_report_generator.py` | Generate categorized reports |
@@ -133,13 +136,67 @@ cd tools
 ./run_poc.sh
 ```
 
+### Generate DOCX with Track Changes
+
+```bash
+cd tools
+
+# Generate DOCX with tracked changes instead of markdown report
+python3 course_editor.py "../test-courses/DCNAUTO-Sec 01_orig.docx" --docx-output
+
+# Output: DCNAUTO-Sec 01_orig_edited.docx
+```
+
+## MCP Server (For Cursor/Claude Code)
+
+The MCP Editorial Server allows IDE integration via Model Context Protocol.
+
+### Setup
+
+1. Install dependencies:
+```bash
+pip install fastmcp python-docx pyyaml
+```
+
+2. Add to your MCP configuration:
+```json
+{
+    "mcpServers": {
+        "editorial": {
+            "command": "python3",
+            "args": ["/path/to/course-content-testing/tools/mcp_editorial_server.py"]
+        }
+    }
+}
+```
+
+### Available Tools
+
+| Tool | Description |
+|------|-------------|
+| `analyze_document` | Analyze DOCX and return editorial suggestions |
+| `apply_fixes` | Apply SAFE fixes with track changes |
+| `lookup_acronym` | Query the acronym database |
+| `list_rules` | List all editorial rules by category |
+| `get_server_info` | Server version and configuration |
+
+### Example Usage (in Cursor/Claude Code)
+
+```
+> Run analyze_document on /path/to/course.docx
+> Look up the acronym VXLAN
+> Apply SAFE fixes to the document
+```
+
 ## Repository Structure
 
 ```
 course-content-testing/
 ├── README.md              # This file
 ├── tools/                 # Python tools
-│   ├── course_editor.py   # Main CLI
+│   ├── course_editor.py   # Main CLI (--docx-output for track changes)
+│   ├── mcp_editorial_server.py  # MCP server for IDE integration
+│   ├── docx_track_changes.py    # Track changes generator
 │   ├── editorial_*.py     # Validation engine
 │   ├── editorial_rules.yaml  # Rule definitions
 │   └── run_poc.sh         # Batch script
