@@ -21,24 +21,17 @@ Total issues detected: **1,576** across all courses.
 
 ## Identified Gaps
 
-### 1. Acronym Database Gaps
+### 1. ~~Acronym Database Gaps~~ RESOLVED
 
-**Issue**: Many course-specific acronyms flagged as "unknown"
+**Status**: Completed in Feature 015 (2026-02-27)
 
-**Examples from test courses**:
-- DCNAUTO, AUTOCOR (course codes, not actual acronyms)
-- VXLAN, VTEP (VXLAN-related terms)
-- POAP (Power-On Auto Provisioning)
-- CML (Cisco Modeling Labs)
-- MTU, BW, DLY (interface statistics)
-- EAP (Extensible Authentication Protocol)
-- MAB (MAC Authentication Bypass)
-- RADIUS, ISE (authentication protocols/products)
+**Resolution**: Expanded database from 58 to 135 entries with new categories:
+- `data_center`: VXLAN, VTEP, EVPN, VNI, APIC, VPC, FEX
+- `security_802.1x`: EAP, PEAP, MAB, CoA, dACL, NAC, NAD, SGT
+- `interface_cli`: MTU, BW, DLY, ZTP, CML, MAC, ARPA
+- `skip_patterns`: Course codes (DCNAUTO, AUTOCOR, etc.) and CLI keywords
 
-**Recommendation**: Expand acronym database with:
-1. Data center networking acronyms (VXLAN, VTEP, etc.)
-2. Security/authentication acronyms (EAP, MAB, 802.1X)
-3. Course code patterns (ignore DCNAUTO, AUTOCOR patterns)
+See [Issue #2](https://github.com/CiscoLearning/course-content-testing/issues/2) for details.
 
 ### 2. Category Mapping Refinement
 
@@ -109,17 +102,18 @@ MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec
 
 ### High Priority (Before Production)
 
-1. **Expand Acronym Database**
-   - Add 50+ networking/security acronyms
-   - Add course code pattern ignore list
+1. ~~**Expand Acronym Database**~~ DONE (Feature 015)
+   - ~~Add 50+ networking/security acronyms~~ Added 77 new entries
+   - ~~Add course code pattern ignore list~~ Added skip_patterns category
 
-2. **Refine Category Mapping**
+2. **Refine Category Mapping** - In Progress (Feature 016)
    - Audit all punctuation rules
    - Create Cisco-specific sub-category
+   - Add Chicago Manual of Style rules
 
-3. **Add Rule for Course Codes**
-   - Ignore patterns like `DCNAUTO`, `AUTOCOR`, etc.
-   - These are course identifiers, not acronyms
+3. ~~**Add Rule for Course Codes**~~ DONE (Feature 015)
+   - ~~Ignore patterns like `DCNAUTO`, `AUTOCOR`, etc.~~ Added to skip_patterns
+   - ~~These are course identifiers, not acronyms~~ Plus CLI keywords
 
 ### Medium Priority (Phase 2)
 
@@ -147,7 +141,7 @@ From the quality checklists, these items remain as gaps:
 
 ### Editorial Accuracy Gaps
 - CHK002: Cisco Style Guide rules not fully enumerated
-- CHK004: Acronym database coverage incomplete
+- ~~CHK004: Acronym database coverage incomplete~~ RESOLVED (Feature 015)
 - CHK012: No conflict resolution between style guide and Chicago Manual
 
 ### Report Quality Gaps
