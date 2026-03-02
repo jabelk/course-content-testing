@@ -17,13 +17,13 @@ on:
           - both
       use_ai:
         description: 'Enable AI-powered suggestions (requires API key)'
-        required: true
-        default: 'false'
+        required: false
+        default: false
         type: boolean
       verbose:
         description: 'Show detailed processing logs'
         required: false
-        default: 'false'
+        default: false
         type: boolean
 
 jobs:
@@ -74,10 +74,10 @@ jobs:
           # Set flags based on inputs
           AI_FLAG=""
           VERBOSE_FLAG=""
-          if [ "${{ inputs.use_ai }}" != "true" ]; then
+          if [ "${{ inputs.use_ai }}" = "false" ]; then
             AI_FLAG="--no-ai"
           fi
-          if [ "${{ inputs.verbose }}" == "true" ]; then
+          if [ "${{ inputs.verbose }}" = "true" ]; then
             VERBOSE_FLAG="--verbose --progress"
           fi
 
