@@ -1,11 +1,28 @@
 # CI Workflow - Run tests and validate on PR/push
+# Only runs when code/config files change (not DOCX uploads)
 name: CI
 
 on:
   push:
     branches: [main]
+    paths:
+      - 'tools/**'
+      - 'tests/**'
+      - '.github/workflows/**'
+      - 'requirements.txt'
+      - 'Dockerfile'
+      - 'docker-entrypoint.sh'
+      - 'pyproject.toml'
   pull_request:
     branches: [main]
+    paths:
+      - 'tools/**'
+      - 'tests/**'
+      - '.github/workflows/**'
+      - 'requirements.txt'
+      - 'Dockerfile'
+      - 'docker-entrypoint.sh'
+      - 'pyproject.toml'
 
 jobs:
   test:
