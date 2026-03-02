@@ -45,21 +45,24 @@ Or navigate manually:
 
 ## Step 2: Run the Editorial Review
 
-### 2.1 Go to Actions
+### 2.1 Go to the workflow page
 
-**Direct link**: https://github.com/CiscoLearning/course-content-testing/actions/workflows/generate-reports.yml
+**Direct link** (recommended):
+https://github.com/CiscoLearning/course-content-testing/actions/workflows/generate-reports.yml
 
 Or navigate manually:
 1. Click **"Actions"** tab (top of page)
-2. Click **"Generate Editorial Reports"** in left sidebar
+2. In the **LEFT SIDEBAR**, click **"Generate Editorial Reports"**
+   - Important: Click the workflow NAME, not a workflow run in the list!
 
 ### 2.2 Run the workflow
 
-1. Click **"Run workflow"** dropdown (right side)
-2. Set options:
+1. Look for the **"Run workflow"** button on the RIGHT side of the page
+   - It's a dropdown button, may be blue or gray
+2. Click it and set options:
    - **Which folder**: Select `uploads` (default)
-   - **AI suggestions**: Leave `false` (faster, deterministic)
-   - **Verbose logs**: Leave `false` (unless debugging)
+   - **AI suggestions**: Leave unchecked (faster, deterministic)
+   - **Verbose logs**: Leave unchecked (unless debugging)
 3. Click green **"Run workflow"** button
 
 ### 2.3 Wait for completion
@@ -161,6 +164,15 @@ Click the file to view. GitHub renders it nicely with tables and formatting.
 2. Try re-saving in Word
 3. Make sure file isn't password-protected
 
+### Can't see "Run workflow" button
+
+1. Make sure you clicked **"Generate Editorial Reports"** in the LEFT SIDEBAR
+   - Not a workflow run in the main list!
+2. Use the direct link: https://github.com/CiscoLearning/course-content-testing/actions/workflows/generate-reports.yml
+3. Try hard refresh (Ctrl+F5 or Cmd+Shift+R)
+4. Try an incognito/private browser window
+5. Check you have write access to the repo
+
 ### Can't upload files
 
 1. Make sure you're logged into GitHub
@@ -182,10 +194,13 @@ Click the file to view. GitHub renders it nicely with tables and formatting.
 UPLOAD:  github.com/CiscoLearning/course-content-testing
          → uploads/ → Add file → Upload files → Commit
 
-RUN:     Actions tab → Generate Editorial Reports → Run workflow
+RUN:     Actions tab → Click "Generate Editorial Reports" in LEFT SIDEBAR
+         → Run workflow button (right side) → Run workflow
 
 VIEW:    reports/ folder → <filename>-report.md
 ```
+
+**Direct workflow link**: https://github.com/CiscoLearning/course-content-testing/actions/workflows/generate-reports.yml
 
 ---
 
