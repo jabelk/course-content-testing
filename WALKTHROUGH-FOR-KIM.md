@@ -216,6 +216,77 @@ Check `reports/` folder for examples from the test courses:
 
 ---
 
+## How the Rules Work (Background)
+
+### Where Rules Are Defined
+
+| File | What It Contains | Link |
+|------|------------------|------|
+| `tools/editorial_rules.yaml` | All editorial rules (terminology, punctuation, style) | [View](https://github.com/CiscoLearning/course-content-testing/blob/main/tools/editorial_rules.yaml) |
+| `.claude/references/acronym-database.json` | Acronym expansions and Cisco product naming | [View](https://github.com/CiscoLearning/course-content-testing/blob/main/.claude/references/acronym-database.json) |
+| `docs/gap-analysis.md` | Known gaps and planned improvements | [View](https://github.com/CiscoLearning/course-content-testing/blob/main/docs/gap-analysis.md) |
+
+### How We Built the Rules
+
+The editorial rules come from **three sources**:
+
+1. **Cisco Technical Content Style Guide** (stylegd.pdf, August 2022)
+   - Official Cisco terminology and branding
+   - Product naming conventions
+   - Acronym expansion requirements
+
+2. **Human Editor Patterns**
+   - Analyzed 100+ PRs edited by Jill (masperli) and Jen (jlauterb-edit)
+   - Extracted recurring corrections they made
+   - Examples: "click on" → "click", imperative headings, em dash spacing
+
+3. **Gap Analysis from Your Test Courses**
+   - Processed the 7 DOCX files you provided
+   - Identified 1,576 issues across all courses
+   - Found missing acronyms (VXLAN, EAP, MAB, etc.)
+   - See [gap-analysis.md](https://github.com/CiscoLearning/course-content-testing/blob/main/docs/gap-analysis.md)
+
+### Rule Categories
+
+| Category | Examples |
+|----------|----------|
+| **Terminology** | "click on" → "click", "utilize" → "use", "in order to" → "to" |
+| **Headings** | Use imperative mood ("Configure X" not "Configuring X") |
+| **Acronyms** | Expand on first use, flag unknown acronyms |
+| **Punctuation** | Em dashes without spaces, serial commas |
+| **Product Naming** | "Cisco Secure Firewall" not "FTD" (deprecated) |
+| **GUI Formatting** | Bold for UI elements, code style for commands |
+
+### Acronym Database
+
+The acronym database contains **200+ acronyms** organized by category:
+
+- **cisco_products**: ASA, ISE, NSO, ACI, etc.
+- **networking**: VXLAN, BGP, OSPF, MPLS, etc.
+- **security**: EAP, MAB, RADIUS, 802.1X, etc.
+- **general_tech**: API, CLI, GUI, REST, etc.
+
+Each acronym includes:
+- Full expansion
+- First-use format (e.g., "Cisco Identity Services Engine (ISE)")
+- Whether it's deprecated
+- Usage notes
+
+### Providing Feedback on Rules
+
+We need your input! After reviewing reports, please tell us:
+
+1. **Missing rules** - What issues weren't caught?
+2. **False positives** - What was incorrectly flagged?
+3. **Missing acronyms** - What acronyms need to be added?
+4. **Wrong suggestions** - Any fixes that would be incorrect?
+
+**How to provide feedback**:
+- Create a [GitHub Issue](https://github.com/CiscoLearning/course-content-testing/issues/new)
+- Or email Jason directly with specific examples
+
+---
+
 ## Getting Help
 
 | Issue | Contact |
