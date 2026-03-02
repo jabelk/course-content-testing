@@ -134,6 +134,8 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "Update editorial reports - Source: ${{ inputs.source_folder }}, AI: ${{ inputs.use_ai }}, Run by: ${{ github.actor }}"
+            # Pull any changes that happened during processing, then push
+            git pull --rebase
             git push
             echo "Reports committed and pushed!"
           fi
