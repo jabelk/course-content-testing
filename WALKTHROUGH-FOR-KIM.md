@@ -69,9 +69,12 @@ Or navigate manually:
 
 ### 2.3 Wait for completion
 
-- Yellow dot = running (~1-3 minutes)
-- Green checkmark = done!
-- Red X = error (see Troubleshooting below)
+1. **Refresh the page** after clicking "Run workflow" to see it start
+2. Look for your run at the top of the list:
+   - Yellow dot = running (~1-3 minutes)
+   - Green checkmark = done!
+   - Red X = error (see Troubleshooting below)
+3. Click on the run to watch progress in real-time
 
 ---
 
