@@ -61,7 +61,7 @@ jobs:
           echo "Files in uploads/: $uploads_count"
           echo "Files in test-courses/: $test_count"
 
-          if [ "${{ inputs.source_folder }}" == "uploads" ] && [ "$uploads_count" -eq 0 ]; then
+          if [ "${{ inputs.source_folder }}" = "uploads" ] && [ "$uploads_count" -eq 0 ]; then
             echo "::warning::No DOCX files found in uploads/ folder"
           fi
 
@@ -157,3 +157,4 @@ jobs:
           echo "1. Go to **reports/** folder to view results" >> $GITHUB_STEP_SUMMARY
           echo "2. Reports show issues by category (SAFE, REVIEW, QUERY)" >> $GITHUB_STEP_SUMMARY
           echo "3. Delete processed files from uploads/ when done" >> $GITHUB_STEP_SUMMARY
+
