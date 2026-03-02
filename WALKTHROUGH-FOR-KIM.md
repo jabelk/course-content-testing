@@ -61,9 +61,11 @@ Or navigate manually:
    - It's a dropdown button, may be blue or gray
 2. Click it and set options:
    - **Which folder**: Select `uploads` (default)
-   - **AI suggestions**: Leave unchecked (faster, deterministic)
+   - **AI suggestions**: Check this box for smarter suggestions (recommended first time)
    - **Verbose logs**: Leave unchecked (unless debugging)
 3. Click green **"Run workflow"** button
+
+**Tip**: Try running with AI enabled first to see the full capabilities. If you want faster/deterministic results later, run with AI unchecked.
 
 ### 2.3 Wait for completion
 
