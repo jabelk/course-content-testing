@@ -387,7 +387,8 @@ rules:
     category: punctuation
     severity: low
     fix_type: REVIEW
-    pattern: "(?<![!?])!(?![!?\"])"
+    # Skip ![ which is markdown image syntax: ![alt](path)
+    pattern: "(?<![!?])!(?![!?\"\\[])"
     pattern_type: regex
     message: "Consider removing exclamation point from technical content"
     suggestion_template: "Consider using a period instead of exclamation point"
