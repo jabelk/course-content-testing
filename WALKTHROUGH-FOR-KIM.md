@@ -1,8 +1,10 @@
 # Course Editorial Review - Walkthrough for Kim
 
-**Last Updated**: March 2, 2026
+**Last Updated**: March 3, 2026
 
 Upload a DOCX file, click a button, get an editorial review report. No coding required!
+
+**NEW**: Inline-diff format shows the full document with changes marked `~~deleted~~` **added** so you can easily find and apply edits!
 
 ---
 
@@ -61,11 +63,15 @@ Or navigate manually:
    - It's a dropdown button, may be blue or gray
 2. Click it and set options:
    - **Which folder**: Select `uploads` (default)
+   - **Report format**: Choose your preferred format:
+     - `both` (recommended) - Get both table and inline-diff reports
+     - `inline-diff` - Full document with changes marked inline
+     - `standard` - Table format with line numbers
    - **AI suggestions**: Check this box for smarter suggestions (recommended first time)
    - **Verbose logs**: Leave unchecked (unless debugging)
 3. Click green **"Run workflow"** button
 
-**Tip**: Try running with AI enabled first to see the full capabilities. If you want faster/deterministic results later, run with AI unchecked.
+**Tip**: Use `both` to get both report types - the inline-diff shows your full document with changes marked, while the table format groups issues by category.
 
 ### 2.3 Wait for completion
 
@@ -84,19 +90,57 @@ Or navigate manually:
 
 **Direct link**: https://github.com/CiscoLearning/course-content-testing/tree/main/reports
 
-### 3.2 Find your report
+### 3.2 Find your report(s)
 
-Your report is named: `<your-filename>-report.md`
+If you selected `both`, you'll have two reports:
 
-Example: `SD-WAN_Module_1.docx` → `SD-WAN_Module_1-report.md`
+| Report Type | Filename | Best For |
+|-------------|----------|----------|
+| **Inline Diff** | `<filename>-inline-diff.md` | Finding and applying changes |
+| **Table Format** | `<filename>-report.md` | Summary view by category |
 
-### 3.3 Read the report
+Example: `SD-WAN_Module_1.docx` generates:
+- `SD-WAN_Module_1-inline-diff.md`
+- `SD-WAN_Module_1-report.md`
 
-Click the file to view. GitHub renders it nicely with tables and formatting.
+### 3.3 Using the Inline-Diff Report (Recommended)
+
+The inline-diff report shows your **entire document** with changes marked:
+
+```
+...misconfigured ~~ACL~~ **access control list (ACL)** [Explanation: Acronym
+not expanded on first use. Category: Acronyms] shown in the following figure...
+```
+
+**How to read it:**
+- `~~text~~` = text to remove (strikethrough)
+- `**text**` = text to add (bold)
+- `[Explanation: ...]` = why we flagged it
+
+**How to find text in your Word doc:**
+1. Copy the surrounding text (e.g., "misconfigured ACL shown in the following")
+2. Ctrl+F in your Word document
+3. Apply the suggested change
+
+### 3.4 Using the Table Report
+
+The table report groups issues by category with context preview:
+
+| Line | Context | Change | Rationale |
+|------|---------|--------|-----------|
+| 17 | ...when a m... `ACL` shown in... | ~~ACL~~ → **access control...** | Acronym not expanded... |
+
+The **Context** column shows text before/after so you can search for it in Word.
 
 ---
 
 ## Understanding the Report
+
+### About Line Numbers
+
+Line numbers in the table report refer to the **converted markdown file** (what the tool sees after converting your DOCX). They won't match Word line numbers exactly.
+
+**Best approach**: Use the **Context** column or the **inline-diff report** to search for the actual text in your Word document.
 
 ### Quality Score
 
@@ -120,7 +164,7 @@ Click the file to view. GitHub renders it nicely with tables and formatting.
 1. **Cisco Style Guide** - Headings, terminology, UI formatting
 2. **Acronyms** - First-use expansion, unknown acronyms
 3. **Technical Terms** - Product naming, code style
-4. **Chicago Manual** - Punctuation, grammar, structure
+4. **Grammar & Punctuation** - Punctuation, grammar, structure
 
 ---
 
@@ -200,12 +244,20 @@ UPLOAD:  github.com/CiscoLearning/course-content-testing
          → uploads/ → Add file → Upload files → Commit
 
 RUN:     Actions tab → Click "Generate Editorial Reports" in LEFT SIDEBAR
-         → Run workflow button (right side) → Run workflow
+         → Run workflow button → Select "both" format → Run workflow
 
-VIEW:    reports/ folder → <filename>-report.md
+VIEW:    reports/ folder → <filename>-inline-diff.md (recommended)
+                        → <filename>-report.md (table format)
 ```
 
 **Direct workflow link**: https://github.com/CiscoLearning/course-content-testing/actions/workflows/generate-reports.yml
+
+### Report Formats at a Glance
+
+| Format | File Suffix | Shows |
+|--------|-------------|-------|
+| Inline Diff | `-inline-diff.md` | Full document with ~~deleted~~ **added** markup |
+| Table | `-report.md` | Issues grouped by category in tables |
 
 ---
 

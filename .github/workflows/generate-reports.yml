@@ -15,6 +15,15 @@ on:
           - uploads
           - test-courses
           - both
+      report_format:
+        description: 'Report format (inline-diff shows full doc with changes marked)'
+        required: true
+        default: 'both'
+        type: choice
+        options:
+          - both
+          - inline-diff
+          - standard
       use_ai:
         description: 'Enable AI-powered suggestions (requires API key)'
         required: false
@@ -93,8 +102,24 @@ jobs:
                 echo ""
                 echo "Processing: $filename"
                 echo "-----------------------------------------"
-                python3 course_editor.py "$docx" --output "../reports/${filename}-report.md" $AI_FLAG $VERBOSE_FLAG || echo "Warning: Failed to process $filename"
-                echo "Report saved: reports/${filename}-report.md"
+
+                # Generate reports based on format selection
+                case "${{ inputs.report_format }}" in
+                  "inline-diff")
+                    python3 course_editor.py "$docx" --inline-diff --output "../reports/${filename}-inline-diff.md" $AI_FLAG $VERBOSE_FLAG || echo "Warning: Failed to process $filename"
+                    echo "Report saved: reports/${filename}-inline-diff.md"
+                    ;;
+                  "standard")
+                    python3 course_editor.py "$docx" --output "../reports/${filename}-report.md" $AI_FLAG $VERBOSE_FLAG || echo "Warning: Failed to process $filename"
+                    echo "Report saved: reports/${filename}-report.md"
+                    ;;
+                  "both")
+                    python3 course_editor.py "$docx" --output "../reports/${filename}-report.md" $AI_FLAG $VERBOSE_FLAG || echo "Warning: Failed to process $filename (standard)"
+                    echo "Report saved: reports/${filename}-report.md"
+                    python3 course_editor.py "$docx" --inline-diff --output "../reports/${filename}-inline-diff.md" $AI_FLAG $VERBOSE_FLAG || echo "Warning: Failed to process $filename (inline-diff)"
+                    echo "Report saved: reports/${filename}-inline-diff.md"
+                    ;;
+                esac
               fi
             done
           }
@@ -145,18 +170,27 @@ jobs:
           echo "## Editorial Review Complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Source folder**: ${{ inputs.source_folder }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Report format**: ${{ inputs.report_format }}" >> $GITHUB_STEP_SUMMARY
           echo "**AI enabled**: ${{ inputs.use_ai }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Generated Reports" >> $GITHUB_STEP_SUMMARY
           for report in reports/*.md; do
             if [ -f "$report" ]; then
               filename=$(basename "$report")
-              echo "- $filename" >> $GITHUB_STEP_SUMMARY
+              echo "- [$filename](reports/$filename)" >> $GITHUB_STEP_SUMMARY
             fi
           done
           echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Report Formats" >> $GITHUB_STEP_SUMMARY
+          echo "- **-report.md**: Table format with line numbers and context preview" >> $GITHUB_STEP_SUMMARY
+          echo "- **-inline-diff.md**: Full document with changes marked: ~~deleted~~ **added**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### How to Find Text in Your Word Doc" >> $GITHUB_STEP_SUMMARY
+          echo "1. Open the inline-diff report" >> $GITHUB_STEP_SUMMARY
+          echo "2. Search for \`~~\` to find all suggested deletions" >> $GITHUB_STEP_SUMMARY
+          echo "3. Copy the surrounding text and Ctrl+F in your Word document" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
-          echo "1. Go to **reports/** folder to view results" >> $GITHUB_STEP_SUMMARY
-          echo "2. Reports show issues by category (SAFE, REVIEW, QUERY)" >> $GITHUB_STEP_SUMMARY
-          echo "3. Delete processed files from uploads/ when done" >> $GITHUB_STEP_SUMMARY
+          echo "1. Click a report link above to view results" >> $GITHUB_STEP_SUMMARY
+          echo "2. Delete processed files from uploads/ when done" >> $GITHUB_STEP_SUMMARY
 
