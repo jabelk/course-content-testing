@@ -5,7 +5,7 @@ Copy this document into Word to see Track Changes formatting.
 
 ---
 
-**Total Changes**: 282 (Auto-fix: 121, Review: 121, Questions: 40)
+**Total Changes**: 273 (Auto-fix: 121, Review: 112, Questions: 40)
 
 ---
 
@@ -25,7 +25,7 @@ Imagine you are a network engineer preparing to deploy a new data center. Dozens
 
 You and your team are under pressure to deliver. Every extra hour spent on initial setup means delayed project milestones, wasted resources, and a higher risk of misconfigurations that can impact network performance from day one.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][Diagram showing an office environment with four people, two large screens in the background, one displaying a network device with a circular flow and the other a project timeline, representing collaborative work or a presentation.](media/image1.bin){width="6.940277777777778in" height="3.1080369641294836in"}
+![Diagram showing an office environment with four people, two large screens in the background, one displaying a network device with a circular flow and the other a project timeline, representing collaborative work or a presentation.](media/image1.bin){width="6.940277777777778in" height="3.1080369641294836in"}
 
 This learning content will transform your approach to Day-Zero operations by showing you how to automate initial device provisioning using PowerOn Auto Provisioning (POAP) and Python scripts. You will learn how to streamline the setup of Cisco Nexus devices, reduce human error, and accelerate the time from unboxing to production-ready.
 
@@ -44,7 +44,7 @@ In this learning content, you will:
 Course to Exam Blueprint Mapping
 
 +--------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------+
-| ~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][Exam prep icon.](media/image2.bin){width="0.9741929133858268in" height="0.9741929133858268in"} | This course aligns to the Cisco 300-635 DCNAUTO v2.0 as outlined below:                       |
+| ![Exam prep icon.](media/image2.bin){width="0.9741929133858268in" height="0.9741929133858268in"} | This course aligns to the Cisco 300-635 DCNAUTO v2.0 as outlined below:                       |
 |                                                                                                  |                                                                                               |
 |                                                                                                  | -   3.0 Network Element Programmability                                                       |
 |                                                                                                  |                                                                                               |
@@ -70,7 +70,7 @@ On Cisco Nexus devices running the Cisco Nexus Operating System (NX-OS), foundat
 
 -   **Day N:** Ongoing maintenance, upgrades, and patching
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][Diagram illustrating the operational phases of a network device lifecycle, presented as a vertical stack of boxes on the left detailing Day 0 Install (P O A P) through Day N Upgrade, Patching, and a circular lifecycle diagram on the right showing the continuous flow of these phases.](media/image3.bin){width="6.94027668416448in" height="3.1146609798775153in"}
+![Diagram illustrating the operational phases of a network device lifecycle, presented as a vertical stack of boxes on the left detailing Day 0 Install (P O A P) through Day N Upgrade, Patching, and a circular lifecycle diagram on the right showing the continuous flow of these phases.](media/image3.bin){width="6.94027668416448in" height="3.1146609798775153in"}
 
 During Day-Zero operations, the device is booted, upgraded to the approved Cisco NX-OS version, and configured with initial parameters such as:
 
@@ -113,7 +113,7 @@ During Day-Zero operations, the device is booted, upgraded to the approved Cisco
 
 To streamline these steps in your deployment, Cisco Nexus devices support POAP, which automates Day-Zero provisioning by downloading and applying configuration files or executing Python scripts at first boot. This ensures that every switch in your racks is provisioned quickly, consistently, and in alignment with your organization's standards---turning hours of manual work into minutes of automated setup.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][Diagram illustrating the P O A P process, where a cloud labeled P O A P delivers a Configuration File and a Python Script to a stack of server like devices for configuration and updates.](media/image4.bin){width="3.406451224846894in" height="5.322579833770779in"}
+![Diagram illustrating the P O A P process, where a cloud labeled P O A P delivers a Configuration File and a Python Script to a stack of server like devices for configuration and updates.](media/image4.bin){width="3.406451224846894in" height="5.322579833770779in"}
 
 Before POAP can run, several back-end services must be in place to provide the device with its initial configuration, scripts, and software images. These services work together to complete the Day-Zero provisioning workflow and form the foundation of the POAP architecture.
 
@@ -121,7 +121,7 @@ POAP Architecture Components
 
 Behind the scenes, POAP relies on several back-end components---services that work together to assign network settings, deliver scripts, and provide software images to your new Cisco Nexus switches. These components form the architecture that makes Day-Zero automation possible, and they can run on a single consolidated server or be distributed across multiple systems, depending on your environment.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][Network diagram illustrating the P O A P architecture components, including a D H C P Server, Script Server, and Configuration and Software Server connected through a cloud and Default Gateway to a Nexus Switch, showing the flow of I P addresses, script files, and configuration and software images.](media/image5.bin){width="6.94027668416448in" height="3.1146609798775153in"}
+![Network diagram illustrating the P O A P architecture components, including a D H C P Server, Script Server, and Configuration and Software Server connected through a cloud and Default Gateway to a Nexus Switch, showing the flow of I P addresses, script files, and configuration and software images.](media/image5.bin){width="6.94027668416448in" height="3.1146609798775153in"}
 
 The following are the key back-end services that enable the POAP process for Cisco Nexus switches, along with their respective roles:
 
@@ -165,7 +165,7 @@ POAP Workflow
 
 The POAP workflow follows a precise sequence from when a switch powers on to when it becomes fully operational. Each step builds on the previous one, beginning with DHCP initialization, moving through script retrieval and device identification, and ending with the configuration application.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][Flowchart illustrating the power-up and configuration process for a network switch. The process starts with powering up the switch. If a startup configuration exists, the switch boots normally with that configuration. If no startup configuration exists, the switch prompts whether to ~~abort~~ **Consider changing 'abort' to 'cancel' or 'terminate'** [Explanation: using 'cancel' or 'terminate' instead of 'abort'. Category: Cisco Style Guide] the P O A P process. If P O A P is ~~aborted~~ **Consider changing 'abort' to 'cancel' or 'terminate'** [Explanation: using 'cancel' or 'terminate' instead of 'abort'. Category: Cisco Style Guide], an interactive setup begins over the serial console. If P O A P is not ~~aborted~~ **Consider changing 'abort' to 'cancel' or 'terminate'** [Explanation: using 'cancel' or 'terminate' instead of 'abort'. Category: Cisco Style Guide], the switch executes D H C P discovery to obtain an I P address and T F T P server address for the P O A P script file. The switch then downloads and executes the P O A P script file. Next, it checks if the bootflash contains the image specified in the script; if not, it downloads the image. Following this, the switch determines and downloads the configuration file, reboots, replays the configuration file to configure itself, and finally saves the configuration locally to N V RAM.](media/image6.bin){width="6.940277777777778in" height="3.1046620734908137in"}
+![Flowchart illustrating the power-up and configuration process for a network switch. The process starts with powering up the switch. If a startup configuration exists, the switch boots normally with that configuration. If no startup configuration exists, the switch prompts whether to ~~abort~~ **Consider changing 'abort' to 'cancel' or 'terminate'** [Explanation: using 'cancel' or 'terminate' instead of 'abort'. Category: Cisco Style Guide] the P O A P process. If P O A P is ~~aborted~~ **Consider changing 'abort' to 'cancel' or 'terminate'** [Explanation: using 'cancel' or 'terminate' instead of 'abort'. Category: Cisco Style Guide], an interactive setup begins over the serial console. If P O A P is not ~~aborted~~ **Consider changing 'abort' to 'cancel' or 'terminate'** [Explanation: using 'cancel' or 'terminate' instead of 'abort'. Category: Cisco Style Guide], the switch executes D H C P discovery to obtain an I P address and T F T P server address for the P O A P script file. The switch then downloads and executes the P O A P script file. Next, it checks if the bootflash contains the image specified in the script; if not, it downloads the image. Following this, the switch determines and downloads the configuration file, reboots, replays the configuration file to configure itself, and finally saves the configuration locally to N V RAM.](media/image6.bin){width="6.940277777777778in" height="3.1046620734908137in"}
 
 To understand how the process unfolds, let's walk through each stage in the following order:
 
@@ -307,7 +307,7 @@ Topology
 
 In this lab, you will use **Leaf-b** and **Leaf-c** Cisco Nexus 9000v switches for POAP. The **Infra-Server** hosts the DHCP, TFTP, and provisioning script services required for POAP. You will access the Infra-Server through the **Student Linux VM**.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][Diagram illustrating a network topology centered around an O O B M G M T device. This device is connected to a Student Linux V M at I P address 10.1.1.10, an Infra S R V at I P address 10.1.1.254, Leaf B at I P address 10.1.1.54, and Leaf C at I P address 10.1.1.55. An additional Student P C is connected to the Student Linux V M.](media/image7.bin){width="6.940277777777778in" height="3.1611789151356082in"}
+![Diagram illustrating a network topology centered around an O O B M G M T device. This device is connected to a Student Linux V M at I P address 10.1.1.10, an Infra S R V at I P address 10.1.1.254, Leaf B at I P address 10.1.1.54, and Leaf C at I P address 10.1.1.55. An additional Student P C is connected to the Student Linux V M.](media/image7.bin){width="6.940277777777778in" height="3.1611789151356082in"}
 
 Job Aid
 
@@ -707,13 +707,13 @@ server-a:\~\$ **ping 192.168.10.102\
 
 Accessing CML through the browser ~~allows you to~~ **lets you** [Explanation: 'lets you' instead of 'allows you to'. Category: Cisco Style Guide] interact with the lab topology and device consoles. This is where you will connect to the Cisco Nexus switches to observe and control the POAP workflow.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][Screenshot of a login screen for Cisco Modeling Labs, showing input fields for Username and Password. The admin username is prefilled, and the password field is obscured. Both input fields are highlighted by a pink rectangle. A LOGIN button is visible, along with the browser bar displaying the U R L 10.1.1.20 slash login.](media/image8.bin){width="6.94027668416448in" height="5.344384295713036in"}
+![Screenshot of a login screen for Cisco Modeling Labs, showing input fields for Username and Password. The admin username is prefilled, and the password field is obscured. Both input fields are highlighted by a pink rectangle. A LOGIN button is visible, along with the browser bar displaying the U R L 10.1.1.20 slash login.](media/image8.bin){width="6.94027668416448in" height="5.344384295713036in"}
 
 **Step ~~4~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]** After logging in to the CML environment, navigate to your topology. Connect to the console on leaf-2.
 
 To connect to the console right-~~click on~~ **click** [Explanation: 'click' instead of 'click on'. Category: Cisco Style Guide] **leaf-2** and then select **Console**. This action opens an interactive console session for the Cisco Nexus switch inside CML. The console gives you direct access to the device's boot process and configuration.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][Diagram illustrating a Cisco Modeling Labs network topology diagram featuring a spine leaf architecture. There are two spine nodes, spine one and spine two, and three leaf nodes, leaf one, leaf two, and leaf three. Two server nodes are also present, labeled ubuntu dev and server B. A context menu is open on leaf two, highlighting the Console option with a pink rectangle among other actions like Stop, Add Link, Hide Links, Delete, and Wipe. Interface labels, such as E one slash 13, are visible on the links.](media/image9.bin){width="4.5870964566929135in" height="5.012902449693788in"}
+![Diagram illustrating a Cisco Modeling Labs network topology diagram featuring a spine leaf architecture. There are two spine nodes, spine one and spine two, and three leaf nodes, leaf one, leaf two, and leaf three. Two server nodes are also present, labeled ubuntu dev and server B. A context menu is open on leaf two, highlighting the Console option with a pink rectangle among other actions like Stop, Add Link, Hide Links, Delete, and Wipe. Interface labels, such as E one slash 13, are visible on the links.](media/image9.bin){width="4.5870964566929135in" height="5.012902449693788in"}
 
 **Step ~~5~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]** Select **OPEN CONSOLE** and log in to the switch using username **admin** and password **1234QWer**.
 
@@ -1163,4 +1163,4 @@ Summary Challenge
 | **text** | Text to add (bold) |
 | [Explanation: ...] | Rationale for change |
 
-*Generated by Course AI Editor on 2026-03-04 14:44*
+*Generated by Course AI Editor on 2026-03-04 15:15*

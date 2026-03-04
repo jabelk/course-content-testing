@@ -7,23 +7,23 @@
 | Word Count | 8,700 |
 | Sections | 1 |
 | Estimated Duration | 58m |
-| Processing Time | 25.6s |
+| Processing Time | 1.3s |
 
 ## Summary
 
-**Total Issues**: 274
+**Total Issues**: 273
 
 | Fix Type | Count | Description |
 |----------|-------|-------------|
 | SAFE | 121 | Auto-fixable with high confidence |
-| REVIEW | 121 | Applied but needs human verification |
-| QUERY | 32 | Questions for author - not auto-fixed |
+| REVIEW | 112 | Applied but needs human verification |
+| QUERY | 40 | Questions for author - not auto-fixed |
 
 ### Issues by Category
 
 | Category | Count |
 |----------|-------|
-| Grammar & Punctuation | 221 |
+| Grammar & Punctuation | 220 |
 | Acronyms | 42 |
 | Cisco Style Guide | 11 |
 
@@ -33,116 +33,138 @@
 
 **Auto-fixable (SAFE)**:
 
-| Line | Original | Suggested | Rationale |
-|------|----------|-----------|-----------|
-| 238 | `desired` | `wanted` | Use 'want' or 'wanted' instead of 'de... |
-| 328 | `initiate` | `start` | Use 'start' or 'begin' instead of 'in... |
-| 400 | `allows you to` | `lets you` | 'lets you' instead of 'allows you to' |
-| 659 | `initiate` | `start` | Use 'start' or 'begin' instead of 'in... |
-| 697 | `allows you to` | `lets you` | 'lets you' instead of 'allows you to' |
-| 703 | `click on` | `click` | Use 'click' instead of 'click on' |
-| 780 | `initiate` | `start` | Use 'start' or 'begin' instead of 'in... |
-| 1086 | `leverage` | `use` | Use 'use' instead of 'leverage' |
+| Line | Context | Change | Rationale |
+|------|---------|--------|-----------|
+| 238 | ...s.10.6.1.F.b... `desired` image filena...... | ~~desired~~ → **wanted** | Use 'want' or 'wanted' instead of 'de... |
+| 328 | ...cript-file-n... `initiate` a Python scr...... | ~~initiate~~ → **start** | Use 'start' or 'begin' instead of 'in... |
+| 400 | ...This connection `allows you to` access the I...... | ~~allows you to~~ → **lets you** | 'lets you' instead of 'allows you to' |
+| 659 | ...vices. You w... `initiate` the automate...... | ~~initiate~~ → **start** | Use 'start' or 'begin' instead of 'in... |
+| 697 | ...CML through ... `allows you to` interact wit...... | ~~allows you to~~ → **lets you** | 'lets you' instead of 'allows you to' |
+| 703 | ...ect to the c... `click on` **leaf-2** a...... | ~~click on~~ → **click** | Use 'click' instead of 'click on' |
+| 780 | ...hen reload t... `initiate` the POAP pro...... | ~~initiate~~ → **start** | Use 'start' or 'begin' instead of 'in... |
+| 1086 | ...rotocols are... `leverage` POAP? (Choos...... | ~~leverage~~ → **use** | Use 'use' instead of 'leverage' |
 
 **Needs Review (REVIEW)**:
 
-| Line | Original | Suggested | Rationale |
-|------|----------|-----------|-----------|
-| 157 | `abort` | `Consider changing 'abort' t...` | using 'cancel' or 'terminate' instead... |
-| 157 | `aborted` | `Consider changing 'abort' t...` | using 'cancel' or 'terminate' instead... |
-| 157 | `aborted` | `Consider changing 'abort' t...` | using 'cancel' or 'terminate' instead... |
+| Line | Context | Change | Rationale |
+|------|---------|--------|-----------|
+| 157 | ...witch prompt... `abort` the P O A P ...... | ~~abort~~ → **Consider changing...** | using 'cancel' or 'terminate' instead... |
+| 157 | ...P process. I... `aborted` , an interac...... | ~~aborted~~ → **Consider changing...** | using 'cancel' or 'terminate' instead... |
+| 157 | ...nsole. If P ... `aborted` , the switch...... | ~~aborted~~ → **Consider changing...** | using 'cancel' or 'terminate' instead... |
 
 ### Acronyms (42 issues)
 
 **Needs Review (REVIEW)**:
 
-| Line | Original | Suggested | Rationale |
-|------|----------|-----------|-----------|
-| 99 | `VXLAN` | `Virtual Extensible LAN (VXLAN)` | Acronym 'VXLAN' not expanded on first... |
-| 119 | `DHCP` | `Dynamic Host Configuration ...` | Acronym 'DHCP' not expanded on first use |
-| 173 | `MAC` | `Media Access Control (MAC)` | Acronym 'MAC' not expanded on first use |
-| 308 | `SSH` | `Secure Shell (SSH)` | Acronym 'SSH' not expanded on first use |
-| 312 | `CML` | `Cisco Modeling Labs (CML)` | Acronym 'CML' not expanded on first use |
-| 361 | `MTU` | `Maximum Transmission Unit (...` | Acronym 'MTU' not expanded on first use |
-| 484 | `PID` | `Product Identifier (PID)` | Acronym 'PID' not expanded on first use |
-| 659 | `ZTP` | `Zero Touch Provisioning (ZTP)` | Acronym 'ZTP' not expanded on first use |
-| 878 | `IT` | `Information Technology (IT)` | Acronym 'IT' not expanded on first use |
-| 955 | `VLANs` | `virtual LAN (VLAN)` | Acronym 'VLAN' not expanded on first use |
+| Line | Context | Change | Rationale |
+|------|---------|--------|-----------|
+| 99 | ...- `VXLAN` Tunnel Endpo...... | ~~VXLAN~~ → **Virtual Extensibl...** | Acronym 'VXLAN' not expanded on first... |
+| 119 | ...-   ** `DHCP` Server:** As...... | ~~DHCP~~ → **Dynamic Host Conf...** | Acronym 'DHCP' not expanded on first use |
+| 173 | ...ts serial nu... `MAC` address, or ...... | ~~MAC~~ → **Media Access Cont...** | Acronym 'MAC' not expanded on first use |
+| 308 | `SSH` 10.10.1.10... | ~~SSH~~ → **Secure Shell (SSH)** | Acronym 'SSH' not expanded on first use |
+| 312 | `CML` Cisco... | ~~CML~~ → **Cisco Modeling La...** | Acronym 'CML' not expanded on first use |
+| 361 | `MTU` 1500 bytes, ...... | ~~MTU~~ → **Maximum Transmiss...** | Acronym 'MTU' not expanded on first use |
+| 484 | ...Main `PID` : 6982 (dhcpd)\... | ~~PID~~ → **Product Identifie...** | Acronym 'PID' not expanded on first use |
+| 659 | ...ou will see ... `ZTP` firsthand, a...... | ~~ZTP~~ → **Zero Touch Provis...** | Acronym 'ZTP' not expanded on first use |
+| 878 | `IT` IS POSSIBLE ...... | ~~IT~~ → **Information Techn...** | Acronym 'IT' not expanded on first use |
+| 955 | ...A. Applies `VLANs` and routing ...... | ~~VLANs~~ → **virtual LAN (VLAN)** | Acronym 'VLAN' not expanded on first use |
 
 **Questions for Author (QUERY)**:
 
-- **Line 498**: Unknown acronym 'LSB' - please provide expansion or confirm intentional
-- **Line 498**: Unknown acronym 'HPA' - please provide expansion or confirm intentional
-- **Line 740**: Unknown acronym 'DEGKNA' - please provide expansion or confirm intentional
-- **Line 746**: Unknown acronym 'FATAL' - please provide expansion or confirm intentional
-- **Line 746**: Unknown acronym 'PMON' - please provide expansion or confirm intentional
-- **Line 747**: Unknown acronym 'CRITICAL' - please provide expansion or confirm intentional
-- **Line 748**: Unknown acronym 'ERROR' - please provide expansion or confirm intentional
-- **Line 750**: Unknown acronym 'INFORMATION' - please provide expansion or confirm intentional
+- **Line 498**: ...? tftpd-hpa.... `LSB` : HPA\'s tft......
+  - Unknown acronym 'LSB' - please provide expansion or confirm intentional
+- **Line 498**: ...tftpd-hpa.se... `HPA` \'s tftp ser......
+  - Unknown acronym 'HPA' - please provide expansion or confirm intentional
+- **Line 740**: ...me admin pas... `DEGKNA` \$GVWhbIl0Ok......
+  - Unknown acronym 'DEGKNA' - please provide expansion or confirm intentional
+- **Line 746**: ...trap public ... `FATAL` (1) owner PM......
+  - Unknown acronym 'FATAL' - please provide expansion or confirm intentional
+- **Line 746**: ...scription FA... `PMON` @FATAL\...
+  - Unknown acronym 'PMON' - please provide expansion or confirm intentional
+- **Line 747**: ...trap public ... `CRITICAL` (2) owner PM......
+  - Unknown acronym 'CRITICAL' - please provide expansion or confirm intentional
+- **Line 748**: ...trap public ... `ERROR` (3) owner PM......
+  - Unknown acronym 'ERROR' - please provide expansion or confirm intentional
+- **Line 750**: ...trap public ... `INFORMATION` (5) owner PM......
+  - Unknown acronym 'INFORMATION' - please provide expansion or confirm intentional
 - *...and 24 more questions*
 
-### Grammar & Punctuation (221 issues)
+### Grammar & Punctuation (220 issues)
 
 **Auto-fixable (SAFE)**:
 
-| Line | Original | Suggested | Rationale |
-|------|----------|-----------|-----------|
-| 40 | ` ` | `` | Remove trailing whitespace |
-| 161 | `.  ` | `. ` | Use single space after period |
-| 163 | `.  ` | `. ` | Use single space after period |
-| 171 | `.  ` | `. ` | Use single space after period |
-| 173 | `.  ` | `. ` | Use single space after period |
-| 175 | `.  ` | `. ` | Use single space after period |
-| 214 | `--` | `—` | Use em dash (—) instead of double hyp... |
-| 214 | `--` | `—` | Use em dash (—) instead of double hyp... |
-| 227 | `--` | `—` | Use em dash (—) instead of double hyp... |
-| 227 | `--` | `—` | Use em dash (—) instead of double hyp... |
-| 241 | `--` | `—` | Use em dash (—) instead of double hyp... |
-| 241 | `--` | `—` | Use em dash (—) instead of double hyp... |
-| 431 | `:` | `Add space after colon` | Add space after colon |
-| 437 | `:` | `Add space after colon` | Add space after colon |
-| 437 | `:` | `Add space after colon` | Add space after colon |
+| Line | Context | Change | Rationale |
+|------|---------|--------|-----------|
+| 40 | ...\| ` ` ```{=html}... | ` ` (question) | Remove trailing whitespace |
+| 161 | ...1 `.  ` **DHCP Initi...... | ~~.  ~~ → **. ** | Use single space after period |
+| 163 | ...2 `.  ` **DHCP Optio...... | ~~.  ~~ → **. ** | Use single space after period |
+| 171 | ...3 `.  ` **Script Ret...... | ~~.  ~~ → **. ** | Use single space after period |
+| 173 | ...4 `.  ` **Device Ide...... | ~~.  ~~ → **. ** | Use single space after period |
+| 175 | ...5 `.  ` **Applying C...... | ~~.  ~~ → **. ** | Use single space after period |
+| 214 | ...\# \-\ `--` Start of use...... | ~~--~~ → **—** | Use em dash (—) instead of double hyp... |
+| 214 | ...ser editable... `--` \... | ~~--~~ → **—** | Use em dash (—) instead of double hyp... |
+| 227 | ...\# \-\ `--` Start of use...... | ~~--~~ → **—** | Use em dash (—) instead of double hyp... |
+| 227 | ...ser editable... `--` \... | ~~--~~ → **—** | Use em dash (—) instead of double hyp... |
+| 241 | ...\# \-\ `--` Start of use...... | ~~--~~ → **—** | Use em dash (—) instead of double hyp... |
+| 241 | ...ser editable... `--` \... | ~~--~~ → **—** | Use em dash (—) instead of double hyp... |
+| 431 | ...ware etherne... `:` d9:63;\... | ~~:~~ → **Add space after c...** | Add space after colon |
+| 437 | ...ware etherne... `:` a5:a3;\... | ~~:~~ → **Add space after c...** | Add space after colon |
+| 437 | ...e ethernet 5... `:` a3;\... | ~~:~~ → **Add space after c...** | Add space after colon |
 | ... | *98 more* | | |
 
 **Needs Review (REVIEW)**:
 
-| Line | Original | Suggested | Rationale |
-|------|----------|-----------|-----------|
-| 17 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
-| 36 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
-| 62 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
-| 105 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
-| 113 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
-| 137 | `1` | `Spell out the number (e.g.,...` | spelling out numbers one through nine... |
-| 151 | `to automatically configure` | `Consider moving the adverb ...` | avoiding split infinitives when possible |
-| 157 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
-| 179 | `1` | `Spell out the number (e.g.,...` | spelling out numbers one through nine... |
-| 197 | ` which ` | `If this is a restrictive cl...` | using 'that' for restrictive clauses ... |
-| ... | *98 more* | | |
+| Line | Context | Change | Rationale |
+|------|---------|--------|-----------|
+| 137 | `1` \. What is t...... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 151 | ...oning, allow... `to automatically ...` itself using...... | ~~to automatically ...~~ → **Consider moving t...** | avoiding split infinitives when possible |
+| 179 | `1` \. What is t...... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 197 | ...stname or IP... ` which ` files are co...... | ~~ which ~~ → **If this is a rest...** | using 'that' for restrictive clauses ... |
+| 257 | `1` \. Which par...... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 341 | ...ract with th... `to automatically ...` its intended...... | ~~to automatically ...~~ → **Consider moving t...** | avoiding split infinitives when possible |
+| 345 | ...**Step `1` ** From the ...... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 362 | ...iability 255... `1` /255, rxload...... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 362 | ...55, txload 1... `1` /255\... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 368 | `1` minute input...... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| ... | *89 more* | | |
+
+**Questions for Author (QUERY)**:
+
+- **Line 160**: ` 1. ` **DHCP Initi......
+  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 1103**: ` 1. ` B...
+  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 1107**: ` 1. ` B...
+  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 1111**: ` 1. ` C...
+  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 1115**: ` 1. ` B...
+  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 1120**: ...``` ` 1. ` B...
+  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 1125**: ...``` ` 1. ` D...
+  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 1129**: ` 1. ` B...
+  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
 
 ## Detailed Changes
 
 *All issues sorted by line number for easy review:*
 
 <details>
-<summary>Click to expand all 274 issues</summary>
+<summary>Click to expand all 273 issues</summary>
 
 | Line | Type | Rule | Message |
 |------|------|------|---------|
-| 17 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
-| 36 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 40 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
-| 62 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 99 | 🟡 | ACRONYM_FIRST_USE | Acronym 'VXLAN' not expanded on first use |
-| 105 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
-| 113 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 119 | 🟡 | ACRONYM_FIRST_USE | Acronym 'DHCP' not expanded on first use |
 | 137 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 151 | 🟡 | GRAMMAR_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 157 | 🟡 | TERM_ABORT | Consider using 'cancel' or 'terminate' instead ... |
 | 157 | 🟡 | TERM_ABORT | Consider using 'cancel' or 'terminate' instead ... |
 | 157 | 🟡 | TERM_ABORT | Consider using 'cancel' or 'terminate' instead ... |
-| 157 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 160 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 161 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 163 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 171 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
@@ -159,7 +181,6 @@
 | 241 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
 | 241 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
 | 257 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 299 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 308 | 🟡 | ACRONYM_FIRST_USE | Acronym 'SSH' not expanded on first use |
 | 312 | 🟡 | ACRONYM_FIRST_USE | Acronym 'CML' not expanded on first use |
 | 328 | 🟢 | TERM_INITIATE | Use 'start' or 'begin' instead of 'initiate' |
@@ -251,10 +272,8 @@
 | 693 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
 | 695 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 697 | 🟢 | TERM_ALLOWS_YOU_TO | Consider 'lets you' instead of 'allows you to' |
-| 699 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 701 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 703 | 🟢 | TERM_CLICK_ON | Use 'click' instead of 'click on' |
-| 705 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 707 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 716 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 718 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
@@ -390,12 +409,19 @@
 | 1086 | 🟢 | TERM_LEVERAGE | Use 'use' instead of 'leverage' |
 | 1086 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 1094 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'RSH' - please provide expansio... |
+| 1103 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1104 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1107 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1108 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1111 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1112 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1115 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1116 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1120 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1121 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1125 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1126 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1129 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1130 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1132 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1134 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
@@ -408,7 +434,7 @@
 
 ---
 
-*Generated by Course AI Editor on 2026-03-03 14:22*
+*Generated by Course AI Editor on 2026-03-04 15:15*
 
 **Fix Type Legend**:
 - 🟢 **SAFE**: High-confidence fix, can be auto-applied

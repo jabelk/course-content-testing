@@ -5,7 +5,7 @@ Copy this document into Word to see Track Changes formatting.
 
 ---
 
-**Total Changes**: 195 (Auto-fix: 101, Review: 61, Questions: 33)
+**Total Changes**: 172 (Auto-fix: 101, Review: 38, Questions: 33)
 
 ---
 
@@ -23,9 +23,9 @@ Introduction to Operating System Installation Workflow
 
 As the name of the server action implies, the Install operating system action installs an operating system on the target server. This capability is different than traditional tools from operating system vendors or utility software providers that lack an underlying knowledge of the specific hardware target. Cisco Intersight operating system installation streamlines the integration of vendor-specific drivers and tools into the operating system installation process.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image1.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image1.bin){width="6.333333333333333in" height="3.5625in"}
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image2.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image2.bin){width="6.333333333333333in" height="3.5625in"}
 
 Operating System Installation Types
 
@@ -35,13 +35,13 @@ Cisco Intersight currently supports an unattended operating system installation 
 
 -   **Custom:** The administrator provides a configuration file containing an installation script or configuration (kickstart) file with the necessary placeholders for the parameters. A placeholder is a variable for a configurable entity. Cisco Intersight assigns the value that the administrator enters in the placeholders to the appropriate parameters.
 
--   **Embedded:** The configuration (kickstart) file is embedded in the operating system ISO image. The ISO image contains the necessary references to the kickstart file from the bootloader configuration to execute an unattended operating system installation. This option is suitable for an operating system image that includes a configuration file.
+-   **Embedded:** The configuration (kickstart) file is embedded in the operating system ISO [QUESTION: Unknown acronym 'ISO' - please provide expansion or confirm intentional. Category: Acronyms] image. The ISO image contains the necessary references to the kickstart file from the bootloader configuration to execute an unattended operating system installation. This option is suitable for an operating system image that includes a configuration file.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image3.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image3.bin){width="6.333333333333333in" height="3.5625in"}
 
 You will ~~initiate~~ **start** [Explanation: 'start' or 'begin' instead of 'initiate'. Category: Cisco Style Guide] the operating system installation wizard for any method by navigating to the target server on~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]you want to install the operating system. From the **Action** menu, choose **Install Operating System**.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image4.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image4.bin){width="6.333333333333333in" height="3.5625in"}
 
 Operating System Installation Types Use Cases
 
@@ -58,7 +58,7 @@ Each of these operating system installation type options has its use cases.
 ```
 -   The Embedded method can run any utility for booting the ISO image, but you must build a complete ISO image with an embedded configuration (kickstart) file.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image5.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image5.bin){width="6.333333333333333in" height="3.5625in"}
 
 ~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which of the following types of servers can be a target for an operating system installation from Cisco Intersight? (Choose three.)
 
@@ -207,17 +207,17 @@ Cisco Intersight uses the sharing repository as the source location for the oper
 
 Your files must be accessible by Cisco Intelligent Contact Management (ICM) on your target server where you want to install your operating system.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image6.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image6.bin){width="6.333333333333333in" height="3.5625in"}
 
 After you add the operating system image once, you can reuse it many times. As you add operating system images, they appear in the list during the operating system install process. You can easily select the operating system that you want to install.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image7.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image7.bin){width="6.333333333333333in" height="3.5625in"}
 
 Adding an Operating System Image
 
 From the navigation menu, ~~click on~~ **click** [Explanation: 'click' instead of 'click on'. Category: Cisco Style Guide] **System**. Click on **Software** **Repository**, and ~~click on~~ **click** [Explanation: 'click' instead of 'click on'. Category: Cisco Style Guide] **OS Image Links** tab. Click on the **Add OS Image Link** button to start the wizard for adding operating system image.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image8.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image8.bin){width="6.333333333333333in" height="3.5625in"}
 
 In the **General** section of the wizard, enter the following details about the operating system image:
 
@@ -235,7 +235,7 @@ In the **General** section of the wizard, enter the following details about the 
                                                                                                                                                                                                                **Username/password:** Strings that are the username and password, respectively, as configured on the CIFS server~~.                                                                                            ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]
   ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image9.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image9.bin){width="6.333333333333333in" height="3.5625in"}
 
 +-----------------------------------------------------------------------+
 | 3~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]HTTP protocol is not supported for Cisco IMM servers~~.             ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]|
@@ -259,7 +259,7 @@ In the **Details** section of the wizard, enter the following details about the 
 
 -   **Add Tag:** Add an optional tag to identify and search for the image.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image10.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image10.bin){width="6.333333333333333in" height="3.5625in"}
 
 After you add the operating system to the software repository, view the added operating system in the table view. Edit or delete details of the operating system in the table view.
 
@@ -285,7 +285,7 @@ Procedure to Add an SCU
 
 From the navigation menu, ~~click on~~ **click** [Explanation: 'click' instead of 'click on'. Category: Cisco Style Guide] **System**. Click on **Software Repository**, and ~~click on~~ **click** [Explanation: 'click' instead of 'click on'. Category: Cisco Style Guide] **SCU Links** tab. Click on the **Add SCU Link** button to start the wizard for adding operating system image.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image11.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image11.bin){width="6.333333333333333in" height="3.5625in"}
 
 In the **General** section of the wizard, enter the following details about the SCU image:
 
@@ -303,7 +303,7 @@ In the **General** section of the wizard, enter the following details about the 
                                                                                                                                                                                                                **Username/password:** The strings that are the username and password respectively as configured on the CIFS server~~.                                                                                         ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]
   ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image12.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image12.bin){width="6.333333333333333in" height="3.5625in"}
 
 +-----------------------------------------------------------------------+
 | 5~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]HTTP protocol is not supported for Cisco IMM servers~~.             ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]|
@@ -329,7 +329,7 @@ In the **Details** section of the wizard, enter the following details about the 
 
 -   In the transfer protocol section, select the transfer protocol configured on the repository location. Depending on your chosen protocol, you will populate different options. The table below summarizes the configuration options for each transfer protocol.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image13.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image13.bin){width="6.333333333333333in" height="3.5625in"}
 
   ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   NFS                                                                                                                                                                                                          CIFS                                                                                                                                                                                                         HTTP(S)
@@ -369,7 +369,7 @@ Procedure for Installing an Operating System Using Cisco Source
 +============================================================================================================================================================================================================================================================================+
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image14.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image14.bin){width="6.333333333333333in" height="3.5625in"}
 
 The operating system installation wizard using Cisco source guides you through the following six steps:
 
@@ -381,7 +381,7 @@ The operating system installation wizard using Cisco source guides you through t
 
 4~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Click the eye icon next to the operating system image to view the configuration file on the right. The configuration file contains provisions or placeholders for the necessary configuration parameter values.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image15.bin){width="6.940277777777778in" height="2.347344706911636in"}
+![](media/image15.bin){width="6.940277777777778in" height="2.347344706911636in"}
 
 5~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Cisco Intersight shows the configuration files according to the operating system image version that you select. The **Set Configuration** section displays the corresponding fields for adding values for the required parameters. Required parameters are mandatory values for a **Static IP** or **~~DHCP~~ **Dynamic Host Configuration Protocol (DHCP)** [Explanation: Acronym 'DHCP' not expanded on first use. Category: Acronyms]** configuration and an option to select the IPv4 protocol or the IPv6 protocol (IP address, netmask or prefix, gateway, name server, hostname, and password). Provide the password for the root/administrator user in the operating system. You can enable the password in encrypted format using the respective encryption mechanism that is supported by the operating system. For Windows installations, you must populate:
 
@@ -389,7 +389,7 @@ The operating system installation wizard using Cisco source guides you through t
 
 -   The administrator password.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image16.bin){width="6.94027668416448in" height="3.9264195100612422in"}
+![](media/image16.bin){width="6.94027668416448in" height="3.9264195100612422in"}
 
 6~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Select~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]SCU that you want ~~to apply to~~ **Consider moving the adverb (e.g., 'to quickly configure' → 'to configure quickly')** [Explanation: avoiding split infinitives when possible. Category: Grammar & Punctuation] during installation. The list within this step contains all SCUs that are defined in the software repository.
 
@@ -445,7 +445,7 @@ You can add new configuration files in the **Software \> Operating System Config
 
 When you install an operating system using the **Custom** option, the selected configuration file can be static or contain placeholders that you can change at run time. A best practice is to prepopulate the static file with the relevant configuration settings. You can also create a template file with placeholders instead of actual answers. If you use a file with custom placeholders, click the **Set Configuration** link on the **Configuration** page. For example, you might need to set the hostname and IP address values for each server. The uploaded answer file placeholder must conform to Golang template syntax.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image17.bin){width="6.940277777777778in" height="3.0403663604549434in"}
+![](media/image17.bin){width="6.940277777777778in" height="3.0403663604549434in"}
 
 The configuration file contains all the answers that you will provide during the operating system installation procedure. The following is an example of a VMware vSphere ESXi configuration file. Lines that start with the pound sign (**\#**) are comments that explain the next line.
 
@@ -475,7 +475,7 @@ Procedure for Installing an Operating System Using Custom Source
 
 The custom operating system installation wizard walks you through six steps. The following figure shows the high-level steps for **Custom** operating system installation.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image18.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image18.bin){width="6.333333333333333in" height="3.5625in"}
 
 The following steps detail the procedure for **Custom** operating system installation:
 
@@ -535,7 +535,7 @@ Procedure for Installing an Operating System Using Embedded Source
 
 The **Embedded** operating system installation wizard walks you through five steps.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image19.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image19.bin){width="6.333333333333333in" height="3.5625in"}
 
 The following steps explain the detailed procedure for an **Embedded** operating system installation:
 
@@ -718,13 +718,13 @@ You can install an operating system on multiple servers using comma-separated va
 
 Procedure for Installing an Operating System Using a CSV File
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image20.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image20.bin){width="6.333333333333333in" height="3.5625in"}
 
 The procedure for installing an operating system using a CSV file is as follows:
 
 1~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Initiate the operating system installation with CSV by selecting the servers defined in the CSV file, clicking the ellipsis (**\...**) symbol in the top left of the **Servers** report, and choosing **Install Operating System**.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image21.bin){width="6.36128937007874in" height="3.8193547681539806in"}
+![](media/image21.bin){width="6.36128937007874in" height="3.8193547681539806in"}
 
 2~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]The operating system install window opens with the **Set Configuration** **via** **Wizard** tab selected.
 
@@ -780,7 +780,7 @@ The CSV file must have the appropriate comma-delineated columns. The following a
 
 The following example of a CSV file shows two headers. The first header, and values that are assigned to its parameters, are common for each target server. The values that are assigned after the second header are values for each server, one per line of the CSV file.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image22.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image22.bin){width="6.333333333333333in" height="3.5625in"}
 
 For more examples of kickstart files for different operating system versions, refer to <https://github.com/CiscoDevNet/intersight-BMaaS/blob/main/os-install/bulk-install-csv-samples/>
 
@@ -918,7 +918,7 @@ Describe the operating system installation procedure using the CSV file
 
 Describe how to install an operating system
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image23.bin){width="6.333333333333333in" height="3.5625in"}
+![](media/image23.bin){width="6.333333333333333in" height="3.5625in"}
 
 
 ---
@@ -931,4 +931,4 @@ Describe how to install an operating system
 | **text** | Text to add (bold) |
 | [Explanation: ...] | Rationale for change |
 
-*Generated by Course AI Editor on 2026-03-04 14:44*
+*Generated by Course AI Editor on 2026-03-04 15:15*

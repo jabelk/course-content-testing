@@ -7,23 +7,23 @@
 | Word Count | 7,600 |
 | Sections | 1 |
 | Estimated Duration | 50m |
-| Processing Time | 81.8s |
+| Processing Time | 1.2s |
 
 ## Summary
 
-**Total Issues**: 217
+**Total Issues**: 200
 
 | Fix Type | Count | Description |
 |----------|-------|-------------|
 | SAFE | 82 | Auto-fixable with high confidence |
-| REVIEW | 119 | Applied but needs human verification |
-| QUERY | 16 | Questions for author - not auto-fixed |
+| REVIEW | 89 | Applied but needs human verification |
+| QUERY | 29 | Questions for author - not auto-fixed |
 
 ### Issues by Category
 
 | Category | Count |
 |----------|-------|
-| Grammar & Punctuation | 182 |
+| Grammar & Punctuation | 165 |
 | Acronyms | 22 |
 | Cisco Style Guide | 13 |
 
@@ -33,119 +33,139 @@
 
 **Auto-fixable (SAFE)**:
 
-| Line | Original | Suggested | Rationale |
-|------|----------|-----------|-----------|
-| 135 | `initiate` | `start` | Use 'start' or 'begin' instead of 'in... |
-| 207 | `e.g. ` | `for example, ` | Use 'for example' instead of 'e.g.' |
-| 209 | `e.g. ` | `for example, ` | Use 'for example' instead of 'e.g.' |
-| 213 | `e.g. ` | `for example, ` | Use 'for example' instead of 'e.g.' |
-| 215 | `e.g. ` | `for example, ` | Use 'for example' instead of 'e.g.' |
-| 259 | `e.g. ` | `for example, ` | Use 'for example' instead of 'e.g.' |
-| 505 | `initiates` | `starts` | Use 'start' or 'begin' instead of 'in... |
-| 511 | `initiates` | `starts` | Use 'start' or 'begin' instead of 'in... |
-| 596 | `desired` | `wanted` | Use 'want' or 'wanted' instead of 'de... |
-| 806 | `initiated` | `started` | Use 'start' or 'begin' instead of 'in... |
-| 847 | `boot up` | `start` | Use 'start' or 'boot' instead of 'boo... |
-| 1039 | `initiate` | `start` | Use 'start' or 'begin' instead of 'in... |
+| Line | Context | Change | Rationale |
+|------|---------|--------|-----------|
+| 135 | ...ssage to the... `initiate` authentication.... | ~~initiate~~ → **start** | Use 'start' or 'begin' instead of 'in... |
+| 207 | ...o authentica... `e.g. ` printers, IP...... | ~~e.g. ~~ → **for example, ** | Use 'for example' instead of 'e.g.' |
+| 209 | ...t need to be... `e.g. ` Cisco Cataly...... | ~~e.g. ~~ → **for example, ** | Use 'for example' instead of 'e.g.' |
+| 213 | ...ing (AAA) se... `e.g. ` Cisco Identi...... | ~~e.g. ~~ → **for example, ** | Use 'for example' instead of 'e.g.' |
+| 215 | ...ollected MAC... `e.g. ` Lightweight ...... | ~~e.g. ~~ → **for example, ** | Use 'for example' instead of 'e.g.' |
+| 259 | ...ord to the M... `e.g. ` Cisco ISE st...... | ~~e.g. ~~ → **for example, ** | Use 'for example' instead of 'e.g.' |
+| 505 | ...02.1X times ... `initiates` a MAB reques...... | ~~initiates~~ → **starts** | Use 'start' or 'begin' instead of 'in... |
+| 511 | ...5.  The client `initiates` an HTTP or H...... | ~~initiates~~ → **starts** | Use 'start' or 'begin' instead of 'in... |
+| 596 | ...Link your WL... `desired` policy profile.... | ~~desired~~ → **wanted** | Use 'want' or 'wanted' instead of 'de... |
+| 806 | ...to understan... `initiated` and authorized.... | ~~initiated~~ → **started** | Use 'start' or 'begin' instead of 'in... |
+| 847 | ...ss point to ... `boot up` , examine th...... | ~~boot up~~ → **start** | Use 'start' or 'boot' instead of 'boo... |
+| 1039 | ...access devic... `initiate` a MAB reques...... | ~~initiate~~ → **start** | Use 'start' or 'begin' instead of 'in... |
 
 **Needs Review (REVIEW)**:
 
-| Line | Original | Suggested | Rationale |
-|------|----------|-----------|-----------|
-| 346 | `Click Add` | `Add bold formatting to the ...` | GUI elements after 'click' should be ... |
+| Line | Context | Change | Rationale |
+|------|---------|--------|-----------|
+| 346 | ...2. `Click Add` to add a RAD...... | ~~Click Add~~ → **Add bold formatti...** | GUI elements after 'click' should be ... |
 
 ### Acronyms (22 issues)
 
 **Needs Review (REVIEW)**:
 
-| Line | Original | Suggested | Rationale |
-|------|----------|-----------|-----------|
-| 5 | `VLANs` | `virtual LAN (VLAN)` | Acronym 'VLAN' not expanded on first use |
-| 10 | `MAC` | `Media Access Control (MAC)` | Acronym 'MAC' not expanded on first use |
-| 17 | `RADIUS` | `Remote Authentication Dial-...` | Acronym 'RADIUS' not expanded on firs... |
-| 135 | `EAP` | `Extensible Authentication P...` | Acronym 'EAP' not expanded on first use |
-| 400 | `DHCP` | `Dynamic Host Configuration ...` | Acronym 'DHCP' not expanded on first use |
-| 497 | `ACL` | `access control list (ACL)` | Acronym 'ACL' not expanded on first use |
+| Line | Context | Change | Rationale |
+|------|---------|--------|-----------|
+| 5 | ...tirely or pl... `VLANs` , underminin...... | ~~VLANs~~ → **virtual LAN (VLAN)** | Acronym 'VLAN' not expanded on first use |
+| 10 | ...fallback mec... `MAC` Authenticati...... | ~~MAC~~ → **Media Access Cont...** | Acronym 'MAC' not expanded on first use |
+| 17 | ...ies, integra... `RADIUS` authenticati...... | ~~RADIUS~~ → **Remote Authentica...** | Acronym 'RADIUS' not expanded on firs... |
+| 135 | ...ort, the swi... `EAP` Request-Iden...... | ~~EAP~~ → **Extensible Authen...** | Acronym 'EAP' not expanded on first use |
+| 400 | ...dress-to-MAC... `DHCP` | ~~DHCP~~ → **Dynamic Host Conf...** | Acronym 'DHCP' not expanded on first use |
+| 497 | ...s through th... `ACL` configuratio...... | ~~ACL~~ → **access control li...** | Acronym 'ACL' not expanded on first use |
 
 **Questions for Author (QUERY)**:
 
-- **Line 5**: Unknown acronym 'IEEE' - please provide expansion or confirm intentional
-- **Line 126**: Unknown acronym 'IPP' - please provide expansion or confirm intentional
-- **Line 126**: Unknown acronym 'LPR' - please provide expansion or confirm intentional
-- **Line 141**: Unknown acronym 'PAP' - please provide expansion or confirm intentional
-- **Line 330**: Unknown acronym 'FQ' - please provide expansion or confirm intentional
-- **Line 332**: Unknown acronym 'DATA' - please provide expansion or confirm intentional
-- **Line 362**: Unknown acronym 'WLAN' - please provide expansion or confirm intentional
-- **Line 473**: Unknown acronym 'LAN' - please provide expansion or confirm intentional
+- **Line 5**: ...ion has alre... `IEEE` 802.1X authe......
+  - Unknown acronym 'IEEE' - please provide expansion or confirm intentional
+- **Line 126**: ...nter's proto... `IPP` (Internet Pr......
+  - Unknown acronym 'IPP' - please provide expansion or confirm intentional
+- **Line 126**: ...et Printing ... `LPR` (Line Printe......
+  - Unknown acronym 'LPR' - please provide expansion or confirm intentional
+- **Line 141**: ...IUS Access-R... `PAP` by default....
+  - Unknown acronym 'PAP' - please provide expansion or confirm intentional
+- **Line 330**: ...ess Method D... `FQ` Session ID\...
+  - Unknown acronym 'FQ' - please provide expansion or confirm intentional
+- **Line 332**: ...1/0/3 0050.5... `DATA` Auth A0A0A03......
+  - Unknown acronym 'DATA' - please provide expansion or confirm intentional
+- **Line 362**: ...**Configure `WLAN` Profile to U......
+  - Unknown acronym 'WLAN' - please provide expansion or confirm intentional
+- **Line 473**: ...vice, such a... `LAN` controller....
+  - Unknown acronym 'LAN' - please provide expansion or confirm intentional
 - *...and 8 more questions*
 
-### Grammar & Punctuation (182 issues)
+### Grammar & Punctuation (165 issues)
 
 **Auto-fixable (SAFE)**:
 
-| Line | Original | Suggested | Rationale |
-|------|----------|-----------|-----------|
-| 135 | `.  ` | `. ` | Use single space after period |
-| 135 | `.                          ...` | `. ` | Use single space after period |
-| 137 | `.                          ...` | `. ` | Use single space after period |
-| 139 | `.                          ...` | `. ` | Use single space after period |
-| 141 | `.  ` | `. ` | Use single space after period |
-| 141 | `.                          ...` | `. ` | Use single space after period |
-| 143 | `.                          ...` | `. ` | Use single space after period |
-| 145 | `.                          ...` | `. ` | Use single space after period |
-| 147 | `.                          ...` | `. ` | Use single space after period |
-| 149 | `.  ` | `. ` | Use single space after period |
-| 149 | `.       ` | `. ` | Use single space after period |
-| 153 | `.                          ...` | `. ` | Use single space after period |
-| 155 | `.                         ` | `. ` | Use single space after period |
-| 157 | `.                          ...` | `. ` | Use single space after period |
-| 159 | `.  ` | `. ` | Use single space after period |
+| Line | Context | Change | Rationale |
+|------|---------|--------|-----------|
+| 135 | ...\| 1 `.  ` Initiation... | ~~.  ~~ → **. ** | Use single space after period |
+| 135 | ...o initiate a... `.                ...` \|... | ~~.                ...~~ → **. ** | Use single space after period |
+| 137 | ...maximum numb... `.                ...` \|... | ~~.                ...~~ → **. ** | Use single space after period |
+| 139 | ...on Bypass), ... `.                ...` \|... | ~~.                ...~~ → **. ** | Use single space after period |
+| 141 | ...\| 2 `.  ` MAC Address ...... | ~~.  ~~ → **. ** | Use single space after period |
+| 141 | ...uest using P... `.                ...` \|... | ~~.                ...~~ → **. ** | Use single space after period |
+| 143 | ...h with a dif... `.                ...` \|... | ~~.                ...~~ → **. ** | Use single space after period |
+| 145 | ...ther authent... `.                ...` \|... | ~~.                ...~~ → **. ** | Use single space after period |
+| 147 | ...and identify... `.                ...` \|... | ~~.                ...~~ → **. ** | Use single space after period |
+| 149 | ...\| 3 `.  ` Session Auth...... | ~~.  ~~ → **. ** | Use single space after period |
+| 149 | ...ion methods ... `.       ` \|... | ~~.       ~~ → **. ** | Use single space after period |
+| 153 | ...eps the port... `.                ...` \|... | ~~.                ...~~ → **. ** | Use single space after period |
+| 155 | ...ary control-... `.                ...` \|... | ~~.                ...~~ → **. ** | Use single space after period |
+| 157 | ...on timer res... `.                ...` \|... | ~~.                ...~~ → **. ** | Use single space after period |
+| 159 | ...\| 4 `.  ` Accounting... | ~~.  ~~ → **. ** | Use single space after period |
 | ... | *55 more* | | |
 
 **Needs Review (REVIEW)**:
 
-| Line | Original | Suggested | Rationale |
-|------|----------|-----------|-----------|
-| 10 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
-| 14 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
-| 17 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
-| 17 | `to securely onboard` | `Consider moving the adverb ...` | avoiding split infinitives when possible |
-| 45 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
-| 60 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
-| 70 | `!` | `Consider using a period ins...` | removing exclamation point from techn... |
-| 87 | `2` | `Spell out the number (e.g.,...` | spelling out numbers one through nine... |
-| 106 | `1` | `Spell out the number (e.g.,...` | spelling out numbers one through nine... |
-| 114 | `3` | `Spell out the number (e.g.,...` | spelling out numbers one through nine... |
-| ... | *102 more* | | |
+| Line | Context | Change | Rationale |
+|------|---------|--------|-----------|
+| 17 | ...o network ac... `to securely onboard` non-supplica...... | ~~to securely onboard~~ → **Consider moving t...** | avoiding split infinitives when possible |
+| 87 | ...MAB acts at ... `2` , allowing y...... | ~~2~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 106 | `1` \. Which ope...... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 114 | ...network traf... `3` | ~~3~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 124 | ...st any Layer... `3` packets to l...... | ~~3~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 143 | ...tes: Usernam... `1` ), Password ...... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 143 | ...1), Password... `2` ), and Calli...... | ~~2~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 147 | ...o switches s... `6` (Service-Typ...... | ~~6~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 167 | `2` \. Which of ...... | ~~2~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 177 | `3` \. Which sce...... | ~~3~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| ... | *72 more* | | |
+
+**Questions for Author (QUERY)**:
+
+- **Line 343**: ` 1. ` Navigate to ......
+  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 363**: ` 1. ` Navigate to ......
+  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 381**: ` 1. ` Click on you......
+  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 441**: ` 1. ` Browser traf......
+  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 478**: ` 1. ` The user ass......
+  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 502**: ` 1. ` The client c......
+  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 1062**: ` 1. ` A...
+  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- **Line 1067**: ...``` ` 1. ` C...
+  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+- *...and 5 more questions*
 
 ## Detailed Changes
 
 *All issues sorted by line number for easy review:*
 
 <details>
-<summary>Click to expand all 217 issues</summary>
+<summary>Click to expand all 200 issues</summary>
 
 | Line | Type | Rule | Message |
 |------|------|------|---------|
 | 5 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'IEEE' - please provide expansi... |
 | 5 | 🟡 | ACRONYM_FIRST_USE | Acronym 'VLAN' not expanded on first use |
-| 10 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 10 | 🟡 | ACRONYM_FIRST_USE | Acronym 'MAC' not expanded on first use |
-| 14 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
-| 17 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 17 | 🟡 | GRAMMAR_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 17 | 🟡 | ACRONYM_FIRST_USE | Acronym 'RADIUS' not expanded on first use |
-| 45 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
-| 60 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
-| 70 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 87 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 106 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 114 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 122 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 124 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 126 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'IPP' - please provide expansio... |
 | 126 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'LPR' - please provide expansio... |
-| 130 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 135 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 135 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 135 | 🟢 | TERM_INITIATE | Use 'start' or 'begin' instead of 'initiate' |
@@ -175,57 +195,47 @@
 | 189 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 191 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 195 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 203 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 207 | 🟢 | TERM_EG | Use 'for example' instead of 'e.g.' |
 | 207 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
 | 209 | 🟢 | TERM_EG | Use 'for example' instead of 'e.g.' |
 | 213 | 🟢 | TERM_EG | Use 'for example' instead of 'e.g.' |
 | 213 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
 | 215 | 🟢 | TERM_EG | Use 'for example' instead of 'e.g.' |
-| 220 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
-| 252 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 259 | 🟢 | TERM_EG | Use 'for example' instead of 'e.g.' |
 | 266 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 280 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 306 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
 | 329 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 330 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'FQ' - please provide expansion... |
 | 331 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
 | 332 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'DATA' - please provide expansi... |
-| 340 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
-| 343 | 🟡 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
+| 343 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 344 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 346 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 346 | 🟡 | GUI_BOLD_CLICK | GUI elements after 'click' should be bold |
 | 348 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 360 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 362 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'WLAN' - please provide expansi... |
-| 363 | 🟡 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
+| 363 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 364 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 364 | 🟡 | GRAMMAR_AMPERSAND_IN_PROSE | Use 'and' instead of '&' in prose text |
 | 366 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 368 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 368 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 376 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 380 | 🟡 | GRAMMAR_AMPERSAND_IN_PROSE | Use 'and' instead of '&' in prose text |
-| 381 | 🟡 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
+| 381 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 382 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 384 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 386 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 388 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 392 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 398 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 400 | 🟡 | ACRONYM_FIRST_USE | Acronym 'DHCP' not expanded on first use |
 | 408 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 418 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 418 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 440 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 441 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 442 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 444 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 447 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
-| 459 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 473 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'LAN' - please provide expansio... |
-| 478 | 🟡 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
+| 478 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 479 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 479 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'SSID' - please provide expansi... |
 | 481 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
@@ -236,8 +246,7 @@
 | 489 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 491 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 497 | 🟡 | ACRONYM_FIRST_USE | Acronym 'ACL' not expanded on first use |
-| 501 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
-| 502 | 🟡 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
+| 502 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 503 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 505 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 505 | 🟢 | TERM_INITIATE | Use 'start' or 'begin' instead of 'initiate' |
@@ -250,9 +259,7 @@
 | 517 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 519 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 525 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 541 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 549 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
-| 557 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 596 | 🟢 | TERM_DESIRE | Use 'want' or 'wanted' instead of 'desire/desired' |
 | 617 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 623 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
@@ -261,12 +268,10 @@
 | 638 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
 | 642 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 652 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 682 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 694 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 703 | 🟡 | GRAMMAR_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 707 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 707 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'CX' - please provide expansion... |
-| 709 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 711 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 724 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 733 | 🟡 | GRAMMAR_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
@@ -310,7 +315,6 @@
 | 920 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 928 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 955 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 969 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
 | 999 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 999 | 🟡 | GRAMMAR_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 1001 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
@@ -325,18 +329,25 @@
 | 1039 | 🟢 | TERM_INITIATE | Use 'start' or 'begin' instead of 'initiate' |
 | 1039 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 1049 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
+| 1062 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1063 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1067 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1068 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1070 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1072 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1075 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1076 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1080 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1081 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1083 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1085 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1088 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1089 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1093 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1094 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1096 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1098 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 1101 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1102 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1104 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1106 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
@@ -349,7 +360,7 @@
 
 ---
 
-*Generated by Course AI Editor on 2026-03-03 14:23*
+*Generated by Course AI Editor on 2026-03-04 15:15*
 
 **Fix Type Legend**:
 - 🟢 **SAFE**: High-confidence fix, can be auto-applied

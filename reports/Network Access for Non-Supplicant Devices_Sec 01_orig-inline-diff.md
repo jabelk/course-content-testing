@@ -5,7 +5,7 @@ Copy this document into Word to see Track Changes formatting.
 
 ---
 
-**Total Changes**: 225 (Auto-fix: 82, Review: 114, Questions: 29)
+**Total Changes**: 200 (Auto-fix: 82, Review: 89, Questions: 29)
 
 ---
 
@@ -18,14 +18,14 @@ As part of a network engineering team managing secure access across a large Cisc
 Imagine the risks introduced when critical but unmanaged devices bypass authentication. For example, a misconfigured printer could offer an entry point for lateral movement, or an IP camera without proper access controls could allow unauthorized monitoring or data exfiltration.
 
   ------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  ~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][http://schemas.openxmlformats.org/drawingml/2006/picture](media/image1.bin){width="0.9741929133858268in" height="0.9741929133858268in"}   While 802.1X provides robust user and device authentication, an enterprise network needs fallback mechanisms like ~~MAC~~ **Media Access Control (MAC)** [Explanation: Acronym 'MAC' not expanded on first use. Category: Acronyms] Authentication Bypass (MAB) to maintain both security and operational continuity. This approach is instrumentational in preserving the integrity of your access control model and aligning with enterprise Zero Trust goals.
+  ![http://schemas.openxmlformats.org/drawingml/2006/picture](media/image1.bin){width="0.9741929133858268in" height="0.9741929133858268in"}   While 802.1X provides robust user and device authentication, an enterprise network needs fallback mechanisms like ~~MAC~~ **Media Access Control (MAC)** [Explanation: Acronym 'MAC' not expanded on first use. Category: Acronyms] Authentication Bypass (MAB) to maintain both security and operational continuity. This approach is instrumentational in preserving the integrity of your access control model and aligning with enterprise Zero Trust goals.
 
   ------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image2.bin){width="6.940277777777778in" height="3.1080369641294836in"}
+![](media/image2.bin){width="6.940277777777778in" height="3.1080369641294836in"}
 
   ------------------------------------------------------------------------------------------------------------------------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  ~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][http://schemas.openxmlformats.org/drawingml/2006/picture](media/image3.bin){width="0.9741929133858268in" height="0.9741929133858268in"}   This course provides a comprehensive overview of implementing MAB on Cisco network access devices ~~to securely onboard~~ **Consider moving the adverb (e.g., 'to quickly configure' → 'to configure quickly')** [Explanation: avoiding split infinitives when possible. Category: Grammar & Punctuation] non-supplicant devices in an 802.1X-enabled network. You will gain an in-depth knowledge on how to design, configure, and validate MAB policies, integrate them with ~~RADIUS~~ **Remote Authentication Dial-In User Service (RADIUS)** [Explanation: Acronym 'RADIUS' not expanded on first use. Category: Acronyms] authentication, and apply identity-based access controls that meet enterprise security standards.
+  ![http://schemas.openxmlformats.org/drawingml/2006/picture](media/image3.bin){width="0.9741929133858268in" height="0.9741929133858268in"}   This course provides a comprehensive overview of implementing MAB on Cisco network access devices ~~to securely onboard~~ **Consider moving the adverb (e.g., 'to quickly configure' → 'to configure quickly')** [Explanation: avoiding split infinitives when possible. Category: Grammar & Punctuation] non-supplicant devices in an 802.1X-enabled network. You will gain an in-depth knowledge on how to design, configure, and validate MAB policies, integrate them with ~~RADIUS~~ **Remote Authentication Dial-In User Service (RADIUS)** [Explanation: Acronym 'RADIUS' not expanded on first use. Category: Acronyms] authentication, and apply identity-based access controls that meet enterprise security standards.
 
   ------------------------------------------------------------------------------------------------------------------------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -53,7 +53,7 @@ MAC Authentication Bypass (MAB) Overview
 
 As a network engineer, you have begun to implement access control in your organization and are deploying 802.1X where possible. However, as shown in the following diagram, you have identified various devices that cannot authenticate using 802.1X.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image4.bin){width="6.940277777777778in" height="2.5470286526684163in"}
+![](media/image4.bin){width="6.940277777777778in" height="2.5470286526684163in"}
 
 You have determined that these devices may not be able to use 802.1X authentication for the following reasons:
 
@@ -68,7 +68,7 @@ You have determined that these devices may not be able to use 802.1X authenticat
 Due to these limitations, the devices either need to have an alternate means to authenticate or must have a fallback mechanism to authenticate if 802.1X is unable to be used.
 
   ------------------------------------------------------------------------------------------------------------------------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  ~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][http://schemas.openxmlformats.org/drawingml/2006/picture](media/image3.bin){width="0.9741929133858268in" height="0.9741929133858268in"}   This training introduces MAC Authentication Bypass (MAB), a method that enables non-802.1X-capable devices to gain network access based on their MAC addresses. In this overview, you will explore how MAB can be used when 802.1X is not supported. You will also identify MAB's benefits and limitations, as well as how the MAB process operates to ensure secure and manageable network access.
+  ![http://schemas.openxmlformats.org/drawingml/2006/picture](media/image3.bin){width="0.9741929133858268in" height="0.9741929133858268in"}   This training introduces MAC Authentication Bypass (MAB), a method that enables non-802.1X-capable devices to gain network access based on their MAC addresses. In this overview, you will explore how MAB can be used when 802.1X is not supported. You will also identify MAB's benefits and limitations, as well as how the MAB process operates to ensure secure and manageable network access.
 
   ------------------------------------------------------------------------------------------------------------------------------------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -78,7 +78,7 @@ MAB offers a method for network access control with notable Benefits and Limitat
 
 MAB is an authentication mechanism that allows non-supplicant devices to be authenticated based on MAC addresses to gain access to the network. It is typically implemented when more secure methods like 802.1X (which uses user credentials or certificates) aren\'t supported.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image5.bin){width="6.940277777777778in" height="3.6175404636920385in"}
+![](media/image5.bin){width="6.940277777777778in" height="3.6175404636920385in"}
 
 **Benefits**
 
@@ -130,7 +130,7 @@ Understanding MAB Operation helps ensure that non-802.1X capable devices can sti
 
 As illustrated in the following figure, before MAB authentication, the identity of the endpoint is unknown and all traffic is blocked.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image6.bin){width="6.940277777777778in" height="3.1231244531933506in"}
+![](media/image6.bin){width="6.940277777777778in" height="3.1231244531933506in"}
 
 The switch examines the first client packet to learn and authenticate the source MAC address. If 802.1X is the primary means of authentication, packets that are sent before the port has fallen back to MAB (during the IEEE 802.1X timeout phase) are discarded immediately. They cannot be used to learn the MAC address. The switch can use almost any Layer 2 and Layer ~~3~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] packets to learn MAC addresses. The exception is bridging frames, such as Cisco Discovery Protocol, Link Layer Discovery Protocol (LLDP), Spanning Tree Protocol (STP), and Dynamic Trunking Protocol (DTP).
 
@@ -138,7 +138,7 @@ After MAB authentication succeeds, the identity of the endpoint is known and all
 
 There are four phases of the MAB process. The following figure illustrates the flow of the MAB process when MAB is configured as a fallback mechanism to 802.1X.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image7.bin){width="6.940277777777778in" height="3.118205380577428in"}
+![](media/image7.bin){width="6.940277777777778in" height="3.118205380577428in"}
 
 +------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Phase                              | Task                                                                                                                                                                                                                         |
@@ -211,7 +211,7 @@ During your preparations to implement MAB you have identified many devices on yo
 
 The following figure illustrates the various components that make up a MAB solution:
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image8.bin){width="6.940277777777778in" height="2.4856747594050743in"}
+![](media/image8.bin){width="6.940277777777778in" height="2.4856747594050743in"}
 
 Several items should be considered before deploying MAB. These items include:
 
@@ -228,7 +228,7 @@ Several items should be considered before deploying MAB. These items include:
 -   If the switchports might connect to IP phones, which might have computers connected to them, has the host mode been identified as part of the 802.1X configuration? (single host, multidomain authentication, multi-authentication host, or multihost)
 
   ------------------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  ~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][http://schemas.openxmlformats.org/drawingml/2006/picture](media/image3.bin){width="0.9741929133858268in" height="0.9741929133858268in"}   This training explains how to configure MAB for devices that can\'t use 802.1X. It explores planning considerations, MAC address collection and storage, and detailed steps to set up MAB on Cisco switches and wireless controllers using RADIUS servers for authentication.
+  ![http://schemas.openxmlformats.org/drawingml/2006/picture](media/image3.bin){width="0.9741929133858268in" height="0.9741929133858268in"}   This training explains how to configure MAB for devices that can\'t use 802.1X. It explores planning considerations, MAC address collection and storage, and detailed steps to set up MAB on Cisco switches and wireless controllers using RADIUS servers for authentication.
 
   ------------------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -260,7 +260,7 @@ If also implementing 802.1X with Cisco ISE as the RADIUS server, use a phased de
 
 After you have collected the allowed MAC addresses that you wish to authenticate via MAB, you must store them in a database. The RADIUS server must access this database during the MAB attempt. As shown in the following figure, there are several factors to consider when storing your device MACs.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image9.bin){width="6.940277777777778in" height="1.5164260717410323in"}
+![](media/image9.bin){width="6.940277777777778in" height="1.5164260717410323in"}
 
 Options for storing the device MAC addresses used for MAB authentication include:
 
@@ -288,7 +288,7 @@ Cisco Catalyst Switch MAB Configuration
 
 The following figure illustrates the key steps in configuring MAB on a Cisco Catalyst switch:
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image10.bin){width="6.94027668416448in" height="1.8756485126859144in"}
+![](media/image10.bin){width="6.94027668416448in" height="1.8756485126859144in"}
 
 **Enable AAA**
 
@@ -348,7 +348,7 @@ Cisco Catalyst Wireless Controller MAB Configuration
 
 The following figure illustrates the key steps in configuring MAB on a Cisco Catalyst Wireless Controller:
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image11.bin){width="6.940277777777778in" height="1.7218525809273841in"}
+![](media/image11.bin){width="6.940277777777778in" height="1.7218525809273841in"}
 
 **Enable RADIUS Server for Authentication**
 
@@ -368,7 +368,7 @@ The following figure illustrates the key steps in configuring MAB on a Cisco Cat
 
 The following figure shows the AAA server configuration:
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image12.bin){width="6.940277777777778in" height="2.941917104111986in"}
+![](media/image12.bin){width="6.940277777777778in" height="2.941917104111986in"}
 
 **Configure WLAN Profile to Use MAB**
 
@@ -384,7 +384,7 @@ The following figure shows the AAA server configuration:
 
 The following figure shows selecting MAC Filtering for a WLAN:
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image13.bin){width="6.940277777777778in" height="2.424675196850394in"}
+![](media/image13.bin){width="6.940277777777778in" height="2.424675196850394in"}
 
 **Enable AAA override and set Client Exclusion**
 
@@ -400,7 +400,7 @@ Navigate to **Configuration** \> **Tags~~ & ~~ **Change '&' to 'and'** [Explanat
 
 The following figure shows the policy that is configured with AAA override enabled and Client exclusion set:
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image14.bin){width="6.94027668416448in" height="4.715569772528434in"}
+![](media/image14.bin){width="6.94027668416448in" height="4.715569772528434in"}
 
 **Verifying Switch MAB Configuration and Operation**
 
@@ -448,14 +448,14 @@ Due to the limitations of providing guest access with 802.1X or MAB solutions, y
 
 Web authentication allows users to authenticate via HTTP(S) without requiring an 802.1X supplicant or MAC address that is defined in an endpoint database. As illustrated in the following figure, when web authentication is implemented:
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image15.bin){width="6.94027668416448in" height="1.988844050743657in"}
+![](media/image15.bin){width="6.94027668416448in" height="1.988844050743657in"}
 
 1~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Browser traffic from the client is intercepted by the network access device (NAD) and the user is redirected to a login page on the Cisco ISE web portal.
 
 2~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]After successful authentication, appropriate network access is provided.
 
   ------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  ~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][http://schemas.openxmlformats.org/drawingml/2006/picture](media/image3.bin){width="0.9741929133858268in" height="0.9741929133858268in"}   This training introduces web authentication as a solution for providing guest access and a fallback when 802.1X authentication fails. It focuses on the Central Web Authentication (CWA) method, exploring the CWA process and how to configure it on Cisco Catalyst switches and wireless controllers.
+  ![http://schemas.openxmlformats.org/drawingml/2006/picture](media/image3.bin){width="0.9741929133858268in" height="0.9741929133858268in"}   This training introduces web authentication as a solution for providing guest access and a fallback when 802.1X authentication fails. It focuses on the Central Web Authentication (CWA) method, exploring the CWA process and how to configure it on Cisco Catalyst switches and wireless controllers.
 
   ------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -467,7 +467,7 @@ Web authentication provides a means to provide access to endpoints that do not h
 
 The following figure shows the basic functionality of Web Authentication using Cisco ISE as the authentication server:
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image16.bin){width="6.94027668416448in" height="3.035903324584427in"}
+![](media/image16.bin){width="6.94027668416448in" height="3.035903324584427in"}
 
 Web authentication is typically used to provide guest access to a network via HTTP or HTTPS. However, it can also serve as a fallback method for endpoint authentication. For example, when an 802.1X supplicant is not installed, misconfigured, or nonfunctional, web authentication can act as a last resort. In such cases, it can prompt the user for credentials through a web portal and still allow network access. Web authentication may also be used for guest users who have an 802.1X supplicant but lack a user account in the appropriate identity database.
 
@@ -509,7 +509,7 @@ When wired or wireless guest users first connect to the network, they have limit
 
 The following diagram illustrates the process of a client being authenticated using the CWA method:
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image17.bin){width="6.940277777777778in" height="3.0937674978127734in"}
+![](media/image17.bin){width="6.940277777777778in" height="3.0937674978127734in"}
 
 1~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]The client connects to the NAD through a wired or wireless connection. The client may or may not have an 802.1X supplicant.
 
@@ -549,7 +549,7 @@ To enable CWA on the Cisco Catalyst switch, you must configure AAA, the appropri
 
 The following figure illustrates the key steps in configuring CWA on a Cisco Catalyst switch:
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image18.bin){width="6.94027668416448in" height="1.8794225721784776in"}
+![](media/image18.bin){width="6.94027668416448in" height="1.8794225721784776in"}
 
 In a typical network access implementation, web authentication is used with 802.1X and MAB. Once an endpoint connects to the switch, the web authentication process is performed after 802.1X, and MAB fails. Therefore, the switch needs to be configured with AAA, RADIUS, and global 802.1X settings. Also, ensure that CoA is configured for dynamic VLAN assignment and all necessary interfaces have the appropriate interface-specific 802.1X and MAB settings.
 
@@ -565,7 +565,7 @@ To enable CWA on the Cisco Catalyst Wireless Controller, you must configure AAA,
 
 The following figure illustrates the key steps in configuring CWA on a Cisco Catalyst Wireless Controller:
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image19.bin){width="6.940277777777778in" height="1.7445089676290464in"}
+![](media/image19.bin){width="6.940277777777778in" height="1.7445089676290464in"}
 
 **Configure AAA, WLANs, and Policy Mapping**
 
@@ -690,7 +690,7 @@ During the lab, you will perform the following key activities:
 
 Topology
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image20.bin){width="6.940277777777778in" height="3.1687150043744534in"}
+![](media/image20.bin){width="6.940277777777778in" height="3.1687150043744534in"}
 
 Job Aid
 
@@ -717,7 +717,7 @@ Activity
 
 **Step ~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]** From the Admin-PC, open Putty and start a terminal session to access your C3560-CX access switch using the credentials username: **admin**, and password: **1234QWer**.
 
-~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][](media/image21.bin){width="2.65161198600175in" height="2.948386920384952in"}
+![](media/image21.bin){width="2.65161198600175in" height="2.948386920384952in"}
 
 **Step ~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]** Examine the current AAA configuration on the switch by using the **show run \| sec aaa** command.
 
@@ -977,7 +977,7 @@ Summary
 Now that you have explored the essentials of implementing MAB on Cisco Catalyst switches, you are prepared to extend reliable and scalable access control solutions beyond traditional 802.1X authentication. By integrating MAB, your network infrastructure can securely accommodate devices that are not 802.1X-capable, ensuring consistent policy enforcement and alignment with enterprise security standards.
 
   -------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------
-  ~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation][http://schemas.openxmlformats.org/drawingml/2006/picture](media/image22.bin){width="0.9741929133858268in" height="0.9741929133858268in"}   Consider the following questions as you apply these concepts within your organization:
+  ![http://schemas.openxmlformats.org/drawingml/2006/picture](media/image22.bin){width="0.9741929133858268in" height="0.9741929133858268in"}   Consider the following questions as you apply these concepts within your organization:
 
   -------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------
 
@@ -1135,4 +1135,4 @@ Summary Challenge
 | **text** | Text to add (bold) |
 | [Explanation: ...] | Rationale for change |
 
-*Generated by Course AI Editor on 2026-03-04 14:44*
+*Generated by Course AI Editor on 2026-03-04 15:15*
