@@ -231,13 +231,13 @@ def generate_category_sections(result: ValidationResult) -> List[str]:
         if safe_issues:
             lines.append("**Auto-fixable (SAFE)**:")
             lines.append("")
-            lines.append("| Line | Original | Suggested | Rationale |")
-            lines.append("|------|----------|-----------|-----------|")
+            lines.append("| Line | Context | Change | Rationale |")
+            lines.append("|------|---------|--------|-----------|")
             for issue in sorted(safe_issues, key=lambda x: x.line_number)[:15]:
-                orig = escape_table_cell(truncate(issue.original_text, 30))
-                sugg = escape_table_cell(truncate(issue.suggested_fix or '', 30))
+                context = format_context_preview(issue)
+                change = format_inline_change(issue)
                 rationale = get_rationale(issue)
-                lines.append(f"| {issue.line_number} | `{orig}` | `{sugg}` | {rationale} |")
+                lines.append(f"| {issue.line_number} | {context} | {change} | {rationale} |")
             if len(safe_issues) > 15:
                 lines.append(f"| ... | *{len(safe_issues) - 15} more* | | |")
             lines.append("")
@@ -247,13 +247,13 @@ def generate_category_sections(result: ValidationResult) -> List[str]:
         if review_issues:
             lines.append("**Needs Review (REVIEW)**:")
             lines.append("")
-            lines.append("| Line | Original | Suggested | Rationale |")
-            lines.append("|------|----------|-----------|-----------|")
+            lines.append("| Line | Context | Change | Rationale |")
+            lines.append("|------|---------|--------|-----------|")
             for issue in sorted(review_issues, key=lambda x: x.line_number)[:10]:
-                orig = escape_table_cell(truncate(issue.original_text, 30))
-                sugg = escape_table_cell(truncate(issue.suggested_fix or '', 30))
+                context = format_context_preview(issue)
+                change = format_inline_change(issue)
                 rationale = get_rationale(issue)
-                lines.append(f"| {issue.line_number} | `{orig}` | `{sugg}` | {rationale} |")
+                lines.append(f"| {issue.line_number} | {context} | {change} | {rationale} |")
             if len(review_issues) > 10:
                 lines.append(f"| ... | *{len(review_issues) - 10} more* | | |")
             lines.append("")
@@ -264,7 +264,9 @@ def generate_category_sections(result: ValidationResult) -> List[str]:
             lines.append("**Questions for Author (QUERY)**:")
             lines.append("")
             for issue in sorted(query_issues, key=lambda x: x.line_number)[:8]:
-                lines.append(f"- **Line {issue.line_number}**: {issue.message}")
+                context = format_context_preview(issue)
+                lines.append(f"- **Line {issue.line_number}**: {context}")
+                lines.append(f"  - {issue.message}")
             if len(query_issues) > 8:
                 lines.append(f"- *...and {len(query_issues) - 8} more questions*")
             lines.append("")
@@ -346,6 +348,50 @@ def escape_table_cell(text: str) -> str:
     text = text.replace('\n', ' ')
     text = text.replace('\r', '')
     return text
+
+
+def format_context_preview(issue: EditorialIssue) -> str:
+    """
+    Format context preview showing text before and after the match.
+
+    Returns something like: "...before text **MATCH** after text..."
+    """
+    before = issue.context_before if hasattr(issue, 'context_before') and issue.context_before else ""
+    after = issue.context_after if hasattr(issue, 'context_after') and issue.context_after else ""
+    original = issue.original_text
+
+    # Escape and truncate
+    before = escape_table_cell(truncate(before, 15))
+    after = escape_table_cell(truncate(after, 15))
+    original = escape_table_cell(truncate(original, 20))
+
+    # Build preview
+    parts = []
+    if before:
+        parts.append(f"...{before}")
+    parts.append(f"`{original}`")
+    if after:
+        parts.append(f"{after}...")
+
+    return ' '.join(parts)
+
+
+def format_inline_change(issue: EditorialIssue) -> str:
+    """
+    Format the change in track-changes style.
+
+    Returns: ~~original~~ → **suggested**
+    """
+    original = escape_table_cell(truncate(issue.original_text, 20))
+    suggested = issue.suggested_fix or ''
+    suggested = escape_table_cell(truncate(suggested, 20))
+
+    if suggested and suggested != original:
+        return f"~~{original}~~ → **{suggested}**"
+    elif suggested:
+        return f"`{original}` (no change)"
+    else:
+        return f"`{original}` (question)"
 
 
 def get_type_badge(fix_type: str) -> str:

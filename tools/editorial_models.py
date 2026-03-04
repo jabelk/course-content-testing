@@ -118,6 +118,9 @@ class EditorialIssue:
         column_start: Column position start
         column_end: Column position end
         applied: Whether fix was applied
+        context_before: ~20 chars before the match for locating in document
+        context_after: ~20 chars after the match for locating in document
+        absolute_offset: Character offset in full document for inline diff
     """
     rule_id: str
     file_path: str
@@ -130,6 +133,9 @@ class EditorialIssue:
     column_start: int = 0
     column_end: int = 0
     applied: bool = False
+    context_before: str = ""
+    context_after: str = ""
+    absolute_offset: int = 0
 
     def to_dict(self) -> dict:
         """Convert to dictionary for JSON serialization"""
@@ -144,7 +150,10 @@ class EditorialIssue:
             'suggested_fix': self.suggested_fix,
             'column_start': self.column_start,
             'column_end': self.column_end,
-            'applied': self.applied
+            'applied': self.applied,
+            'context_before': self.context_before,
+            'context_after': self.context_after,
+            'absolute_offset': self.absolute_offset
         }
 
 

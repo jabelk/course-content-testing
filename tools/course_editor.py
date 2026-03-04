@@ -70,7 +70,7 @@ def convert_and_validate(
     use_ai: bool = True,
     verbose: bool = False,
     show_progress: bool = False
-) -> tuple[Optional[ValidationResult], Optional[CourseModule], str]:
+) -> tuple[Optional[ValidationResult], Optional[CourseModule], str, str]:
     """
     Convert a DOCX file to markdown and validate it through editorial rules.
 
@@ -87,23 +87,23 @@ def convert_and_validate(
         show_progress: Show progress indicator for large documents
 
     Returns:
-        Tuple of (ValidationResult, CourseModule, error_message)
-        On success: (result, course_module, '')
-        On failure: (None, None, error_message)
+        Tuple of (ValidationResult, CourseModule, error_message, markdown_content)
+        On success: (result, course_module, '', markdown_content)
+        On failure: (None, None, error_message, '')
     """
     start_time = time.time()
 
     # Check pandoc is installed
     pandoc_ok, pandoc_msg = check_pandoc_installed()
     if not pandoc_ok:
-        return None, None, f"Pandoc not available: {pandoc_msg}"
+        return None, None, f"Pandoc not available: {pandoc_msg}", ""
 
     # Validate input file
     if not os.path.exists(docx_path):
-        return None, None, f"File not found: {docx_path}"
+        return None, None, f"File not found: {docx_path}", ""
 
     if not docx_path.lower().endswith('.docx'):
-        return None, None, f"Not a DOCX file: {docx_path}"
+        return None, None, f"Not a DOCX file: {docx_path}", ""
 
     # Get file size for progress estimation
     file_size = os.path.getsize(docx_path)
@@ -117,7 +117,10 @@ def convert_and_validate(
     conversion_result = convert_docx_to_markdown(docx_path, timeout=300)
 
     if not conversion_result.success:
-        return None, None, f"Conversion failed: {conversion_result.error_message}"
+        return None, None, f"Conversion failed: {conversion_result.error_message}", ""
+
+    # Store markdown content for inline diff generation
+    markdown_content = conversion_result.markdown_content
 
     if show_progress:
         print(f"done ({conversion_result.word_count} words)")
@@ -180,7 +183,7 @@ def convert_and_validate(
         elapsed_time = int((time.time() - start_time) * 1000)
         result.processing_time_ms = elapsed_time
 
-        return result, course_module, ''
+        return result, course_module, '', markdown_content
 
     finally:
         # Always cleanup temp folder
@@ -310,6 +313,16 @@ def main():
         action='store_true',
         help='Generate DOCX with track changes instead of markdown report'
     )
+    parser.add_argument(
+        '--inline-diff',
+        action='store_true',
+        help='Generate inline diff with track-changes style markup (~~deleted~~ **added**)'
+    )
+    parser.add_argument(
+        '--change-list',
+        action='store_true',
+        help='Generate change list with context preview (alternative to inline-diff)'
+    )
 
     args = parser.parse_args()
 
@@ -320,7 +333,7 @@ def main():
         return 1
 
     # Run conversion and validation
-    result, course_module, error = convert_and_validate(
+    result, course_module, error, markdown_content = convert_and_validate(
         docx_path=args.docx_path,
         use_ai=not args.no_ai,
         verbose=args.verbose,
@@ -371,6 +384,14 @@ def main():
         print(f"  Comments added: {stats['comments_added']}")
         output = None  # No text output for DOCX mode
 
+    elif args.inline_diff:
+        # Generate inline diff with track-changes style markup
+        from inline_diff_generator import generate_inline_diff
+        output = generate_inline_diff(markdown_content, result, course_module.name)
+    elif args.change_list:
+        # Generate change list with context preview
+        from inline_diff_generator import generate_change_list_with_context
+        output = generate_change_list_with_context(result, course_module.name)
     elif args.json:
         output = format_json_output(result, course_module)
     else:

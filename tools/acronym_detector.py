@@ -141,6 +141,12 @@ class AcronymDetector:
                         print(f"  Skipping {acronym} at line {line_num}: well-established")
                     continue
 
+                # Get context for locating in document
+                match_start = match.start()
+                match_end = match.end()
+                context_before = line[max(0, match_start-25):match_start].strip()
+                context_after = line[match_end:min(len(line), match_end+25)].strip()
+
                 # Process the acronym
                 issue = self._process_acronym(
                     acronym=base_acronym,
@@ -149,7 +155,10 @@ class AcronymDetector:
                     line_num=line_num,
                     line=line,
                     tutorial_title=tutorial_title,
-                    verbose=verbose
+                    verbose=verbose,
+                    context_before=context_before,
+                    context_after=context_after,
+                    absolute_offset=absolute_pos
                 )
 
                 if issue:
@@ -198,7 +207,10 @@ class AcronymDetector:
         line_num: int,
         line: str,
         tutorial_title: str,
-        verbose: bool = False
+        verbose: bool = False,
+        context_before: str = "",
+        context_after: str = "",
+        absolute_offset: int = 0
     ) -> Optional[EditorialIssue]:
         """
         Process a single acronym and determine if an issue should be created.
@@ -274,16 +286,19 @@ class AcronymDetector:
             # Known acronym - check if deprecated
             if db_entry.get('deprecated', False):
                 return self._create_deprecated_issue(
-                    acronym, original_text, file_path, line_num, db_entry, verbose
+                    acronym, original_text, file_path, line_num, db_entry, verbose,
+                    context_before, context_after, absolute_offset
                 )
             else:
                 return self._create_expansion_issue(
-                    acronym, original_text, file_path, line_num, db_entry, verbose
+                    acronym, original_text, file_path, line_num, db_entry, verbose,
+                    context_before, context_after, absolute_offset
                 )
         else:
             # Unknown acronym - create QUERY
             return self._create_unknown_issue(
-                acronym, original_text, file_path, line_num, verbose
+                acronym, original_text, file_path, line_num, verbose,
+                context_before, context_after, absolute_offset
             )
 
     def _create_expansion_issue(
@@ -293,7 +308,10 @@ class AcronymDetector:
         file_path: str,
         line_num: int,
         db_entry: dict,
-        verbose: bool
+        verbose: bool,
+        context_before: str = "",
+        context_after: str = "",
+        absolute_offset: int = 0
     ) -> EditorialIssue:
         """Create a REVIEW issue for acronym needing expansion."""
         expansion = db_entry.get('expansion', '')
@@ -320,7 +338,10 @@ class AcronymDetector:
             fix_type='REVIEW',
             message=f"Acronym '{acronym}' not expanded on first use",
             confidence=0.85,
-            suggested_fix=first_use
+            suggested_fix=first_use,
+            context_before=context_before,
+            context_after=context_after,
+            absolute_offset=absolute_offset
         )
 
     def _create_deprecated_issue(
@@ -330,7 +351,10 @@ class AcronymDetector:
         file_path: str,
         line_num: int,
         db_entry: dict,
-        verbose: bool
+        verbose: bool,
+        context_before: str = "",
+        context_after: str = "",
+        absolute_offset: int = 0
     ) -> EditorialIssue:
         """Create a REVIEW issue for deprecated acronym."""
         full_name = db_entry.get('full_name', db_entry.get('expansion', acronym))
@@ -361,7 +385,10 @@ class AcronymDetector:
             fix_type='REVIEW',
             message=message,
             confidence=0.9,
-            suggested_fix=full_name
+            suggested_fix=full_name,
+            context_before=context_before,
+            context_after=context_after,
+            absolute_offset=absolute_offset
         )
 
     def _create_unknown_issue(
@@ -370,7 +397,10 @@ class AcronymDetector:
         original_text: str,
         file_path: str,
         line_num: int,
-        verbose: bool
+        verbose: bool,
+        context_before: str = "",
+        context_after: str = "",
+        absolute_offset: int = 0
     ) -> EditorialIssue:
         """Create a QUERY issue for unknown acronym."""
         # Track state
@@ -393,7 +423,10 @@ class AcronymDetector:
             fix_type='QUERY',
             message=f"Unknown acronym '{acronym}' - please provide expansion or confirm intentional",
             confidence=0.5,
-            suggested_fix=None
+            suggested_fix=None,
+            context_before=context_before,
+            context_after=context_after,
+            absolute_offset=absolute_offset
         )
 
 

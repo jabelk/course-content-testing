@@ -209,6 +209,38 @@ def should_skip_context(match_text: str, line: str, skip_contexts: List[str]) ->
 # Rule Execution
 # =============================================================================
 
+def get_context(content: str, start: int, end: int, context_chars: int = 25) -> tuple:
+    """
+    Extract context before and after a match position.
+
+    Args:
+        content: Full content
+        start: Start offset of match
+        end: End offset of match
+        context_chars: Number of characters of context to capture
+
+    Returns:
+        Tuple of (context_before, context_after)
+    """
+    # Get context before (up to context_chars, but stop at newline)
+    ctx_start = max(0, start - context_chars)
+    before = content[ctx_start:start]
+    # Find last newline in before and trim
+    last_nl = before.rfind('\n')
+    if last_nl != -1:
+        before = before[last_nl + 1:]
+
+    # Get context after (up to context_chars, but stop at newline)
+    ctx_end = min(len(content), end + context_chars)
+    after = content[end:ctx_end]
+    # Find first newline in after and trim
+    first_nl = after.find('\n')
+    if first_nl != -1:
+        after = after[:first_nl]
+
+    return before.strip(), after.strip()
+
+
 def apply_regex_rule(
     rule: EditorialRule,
     content: str,
@@ -244,6 +276,7 @@ def apply_regex_rule(
     for start_offset, end_offset, region_text in regions:
         for match in pattern.finditer(region_text):
             absolute_offset = start_offset + match.start()
+            absolute_end = start_offset + match.end()
             line_num = get_line_number(content, absolute_offset)
             line = lines[line_num - 1] if line_num <= len(lines) else ''
             match_text = match.group()
@@ -260,6 +293,9 @@ def apply_regex_rule(
             # Calculate confidence based on fix type
             confidence = 0.99 if rule.fix_type == 'SAFE' else 0.85 if rule.fix_type == 'REVIEW' else 0.5
 
+            # Get surrounding context for locating in original document
+            context_before, context_after = get_context(content, absolute_offset, absolute_end)
+
             issue = EditorialIssue(
                 rule_id=rule.id,
                 file_path=file_path,
@@ -270,7 +306,10 @@ def apply_regex_rule(
                 confidence=confidence,
                 suggested_fix=suggested_fix,
                 column_start=match.start(),
-                column_end=match.end()
+                column_end=match.end(),
+                context_before=context_before,
+                context_after=context_after,
+                absolute_offset=absolute_offset
             )
             issues.append(issue)
 
@@ -567,6 +606,7 @@ def apply_ai_rule(
     for start_offset, end_offset, region_text in regions:
         for match in pattern.finditer(region_text):
             absolute_offset = start_offset + match.start()
+            absolute_end = start_offset + match.end()
             line_num = get_line_number(content, absolute_offset)
             line = lines[line_num - 1] if line_num <= len(lines) else ''
             match_text = match.group()
@@ -576,6 +616,9 @@ def apply_ai_rule(
                 if verbose:
                     print(f"  Skipping {rule.id} match at line {line_num}: context skip")
                 continue
+
+            # Get surrounding context for locating in original document
+            context_before, context_after = get_context(content, absolute_offset, absolute_end)
 
             if ai_available:
                 # Use AI for intelligent suggestion
@@ -589,7 +632,10 @@ def apply_ai_rule(
                         fix_type='REVIEW',
                         message=rule.message.replace('{match}', match_text),
                         confidence=ai_response.confidence,
-                        suggested_fix=ai_response.suggestion
+                        suggested_fix=ai_response.suggestion,
+                        context_before=context_before,
+                        context_after=context_after,
+                        absolute_offset=absolute_offset
                     )
                     issues.append(issue)
                     if verbose:
@@ -605,7 +651,10 @@ def apply_ai_rule(
                     fix_type='QUERY',  # Downgrade to QUERY when AI unavailable
                     message=f"{rule.message.replace('{match}', match_text)} (AI unavailable - manual review needed)",
                     confidence=0.5,
-                    suggested_fix=None
+                    suggested_fix=None,
+                    context_before=context_before,
+                    context_after=context_after,
+                    absolute_offset=absolute_offset
                 )
                 issues.append(issue)
                 if verbose:
