@@ -232,6 +232,36 @@ When Kim reviews the PoC reports, gather feedback on:
 4. **Report format**: Easy to navigate?
 5. **Category mapping**: Do the 4 categories make sense?
 
+## Real-World Feedback: Kim's Intersight Comparison (March 2026)
+
+Kim provided direct comparison of the same Intersight document processed through both systems.
+
+### Results
+
+| Metric | Our System | Circuit |
+|--------|-----------|---------|
+| Total Changes | 172 | 144 |
+| Auto-fix rate | 59% (101 SAFE) | N/A (all manual) |
+| Consistency | 100% | Variable |
+
+### Our Strengths
+- Cisco-specific style rules ("click on" → "click", etc.)
+- Acronym expansion checking
+- Deterministic, repeatable output
+
+### What Circuit Catches Better
+- Typos ("ICM" → "IMC")
+- Duplicate paragraph detection
+- Sophisticated clarity rewrites
+
+### False Positives to Fix
+- Quiz question numbers ("1.") flagged incorrectly
+- Some valid "which" usages
+- Numbers with units (2 TiB)
+
+### Kim's Feedback
+> "We love your concept and what you've done!"
+
 ## Conclusion
 
 The PoC demonstrates that:
@@ -239,5 +269,9 @@ The PoC demonstrates that:
 - DOCX conversion via pandoc is reliable and fast
 - 100% consistency (vs Circuit's 50%+ variance) is achievable
 - ~70% of checklist requirements met in first iteration
+- Real-world comparison validates the approach
 
-Next steps depend on Kim's feedback on the generated reports.
+Next steps:
+1. Fix false positives (quiz numbers, which/that context)
+2. Add duplicate content detection
+3. Consider hybrid: regex for SAFE + AI for QUERY
