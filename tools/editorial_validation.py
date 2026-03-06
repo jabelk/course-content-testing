@@ -68,6 +68,10 @@ CODE_BLOCK_PATTERN = re.compile(r'```[\s\S]*?```', re.MULTILINE)
 INLINE_CODE_PATTERN = re.compile(r'`[^`]+`')
 URL_PATTERN = re.compile(r'https?://[^\s\)]+')
 FILE_PATH_PATTERN = re.compile(r'\./[^\s\)]+|\b[\w/-]+\.\w+')
+# Quiz question pattern: line starting with number followed by period (e.g., "1. Which of the following...")
+QUIZ_QUESTION_PATTERN = re.compile(r'^\s*\d+\.\s+', re.MULTILINE)
+# Answer choice pattern: A. B. C. D. etc.
+ANSWER_CHOICE_PATTERN = re.compile(r'^[A-F]\.\s+', re.MULTILINE)
 
 
 # =============================================================================
@@ -179,7 +183,7 @@ def should_skip_context(match_text: str, line: str, skip_contexts: List[str]) ->
     Args:
         match_text: The matched text
         line: The full line containing the match
-        skip_contexts: List of contexts to skip ('code_block', 'inline_code', 'url', 'file_path')
+        skip_contexts: List of contexts to skip ('code_block', 'inline_code', 'url', 'file_path', 'quiz_question')
 
     Returns:
         True if match should be skipped
@@ -202,7 +206,91 @@ def should_skip_context(match_text: str, line: str, skip_contexts: List[str]) ->
             if match_text in path_match.group():
                 return True
 
+    if 'quiz_question' in skip_contexts:
+        # Check if line is a quiz question (starts with number.) or answer choice (starts with A. B. etc.)
+        if QUIZ_QUESTION_PATTERN.match(line) or ANSWER_CHOICE_PATTERN.match(line.strip()):
+            return True
+
     return False
+
+
+# =============================================================================
+# Duplicate Detection
+# =============================================================================
+
+def detect_duplicate_paragraphs(content: str, file_path: str, min_words: int = 15) -> List[EditorialIssue]:
+    """
+    Detect duplicate or near-duplicate paragraphs in content.
+
+    Args:
+        content: File content to analyze
+        file_path: Relative path to the file
+        min_words: Minimum word count to consider for duplication
+
+    Returns:
+        List of EditorialIssue objects for duplicate content found
+    """
+    issues = []
+
+    # Split into paragraphs (blank line separated)
+    paragraphs = re.split(r'\n\s*\n', content)
+
+    # Normalize paragraphs for comparison
+    def normalize(text: str) -> str:
+        """Normalize text for comparison (lowercase, single spaces, strip)."""
+        text = re.sub(r'\s+', ' ', text.lower().strip())
+        # Remove markdown formatting for comparison
+        text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)  # bold
+        text = re.sub(r'\*([^*]+)\*', r'\1', text)      # italic
+        text = re.sub(r'`([^`]+)`', r'\1', text)        # inline code
+        return text
+
+    # Track seen paragraphs with their first occurrence line
+    seen_paragraphs = {}  # normalized_text -> (original_text, first_line_num)
+
+    current_line = 1
+    for para in paragraphs:
+        if not para.strip():
+            current_line += 1
+            continue
+
+        # Skip code blocks
+        if para.strip().startswith('```'):
+            current_line += para.count('\n') + 2
+            continue
+
+        # Skip very short paragraphs
+        word_count = len(para.split())
+        if word_count < min_words:
+            current_line += para.count('\n') + 2
+            continue
+
+        normalized = normalize(para)
+
+        if normalized in seen_paragraphs:
+            first_text, first_line = seen_paragraphs[normalized]
+
+            # Create issue for duplicate
+            issue = EditorialIssue(
+                rule_id='CONTENT_DUPLICATE_PARAGRAPH',
+                file_path=file_path,
+                line_number=current_line,
+                original_text=para[:100] + ('...' if len(para) > 100 else ''),
+                fix_type='REVIEW',
+                message=f"Duplicate paragraph (first appears at line {first_line})",
+                confidence=0.95,
+                suggested_fix="Consider removing this duplicate paragraph",
+                context_before="",
+                context_after="",
+                absolute_offset=0
+            )
+            issues.append(issue)
+        else:
+            seen_paragraphs[normalized] = (para, current_line)
+
+        current_line += para.count('\n') + 2
+
+    return issues
 
 
 # =============================================================================
@@ -402,6 +490,32 @@ def generate_suggestion(rule: EditorialRule, match_text: str) -> Optional[str]:
         result = re.sub(r'\bdesires\b', 'wants', match_text)
         result = re.sub(r'\bdesired\b', 'wanted', result)
         result = re.sub(r'\bdesire\b', 'want', result)
+        return result
+    # New rules from Kim's Circuit comparison
+    elif rule.id == 'TERM_DIFFERENT_THAN':
+        return re.sub(r'\bdifferent than\b', 'different from', match_text, flags=re.IGNORECASE)
+    elif rule.id == 'TERM_REFER_TO':
+        result = re.sub(r'\bRefer to\b', 'See', match_text)
+        result = re.sub(r'\brefer to\b', 'see', result)
+        return result
+    elif rule.id == 'TERM_DROPDOWN_MENU':
+        return re.sub(r'\bdrop-?down menu\b', 'drop-down list', match_text, flags=re.IGNORECASE)
+    elif rule.id == 'TERM_TABLE_BELOW':
+        # Transform "table below" to "following table"
+        result = re.sub(r'\b(table|figure|diagram|image|screenshot)\s+below\b',
+                       r'following \1', match_text, flags=re.IGNORECASE)
+        return result
+    elif rule.id == 'TERM_DUE_TO':
+        return re.sub(r'\bdue to\b', 'because of', match_text, flags=re.IGNORECASE)
+    elif rule.id == 'TERM_WISH_TO':
+        return re.sub(r'\bwish to\b', 'want to', match_text, flags=re.IGNORECASE)
+    elif rule.id == 'TERM_RUNTIME':
+        return re.sub(r'\brun time\b', 'runtime', match_text, flags=re.IGNORECASE)
+    elif rule.id == 'TERM_CHECKBOX':
+        return re.sub(r'\bcheckbox\b', 'check box', match_text, flags=re.IGNORECASE)
+    elif rule.id == 'TERM_USERID':
+        result = re.sub(r'\buserid\b', 'user ID', match_text, flags=re.IGNORECASE)
+        result = re.sub(r'\buser-id\b', 'user ID', result, flags=re.IGNORECASE)
         return result
     elif rule.id == 'HEADING_GERUND':
         # Try to convert gerund to imperative (remove -ing, add appropriate ending)
@@ -758,6 +872,12 @@ def validate_tutorial(
 
         # Validate file with regex rules
         issues = validate_file(file_path, rules, {}, verbose, use_ai)
+
+        # Run duplicate paragraph detection
+        duplicate_issues = detect_duplicate_paragraphs(content, relative_path)
+        issues.extend(duplicate_issues)
+        if verbose and duplicate_issues:
+            print(f"  Found {len(duplicate_issues)} duplicate paragraph(s)")
 
         # Run acronym detection (stateful across files)
         acronym_issues, _ = acronym_detector.detect_acronyms(

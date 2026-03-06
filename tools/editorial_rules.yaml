@@ -352,6 +352,188 @@ rules:
     priority: 20
     context_skip: [code_block, inline_code]
 
+  - id: TERM_DIFFERENT_THAN
+    name: "Grammar: Different Than"
+    category: terminology
+    severity: medium
+    fix_type: SAFE
+    pattern: "\\bdifferent than\\b"
+    pattern_type: regex
+    message: "Use 'different from' instead of 'different than'"
+    suggestion_template: "Change 'different than' to 'different from'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_REFER_TO
+    name: "Formality: Refer To"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\b[Rr]efer to\\b"
+    pattern_type: regex
+    message: "Use 'see' instead of 'refer to' per Cisco Style Guide C-13.1"
+    suggestion_template: "Change 'refer to' to 'see'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_DROPDOWN_MENU
+    name: "Terminology: Drop-Down Menu"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bdrop-?down menu\\b"
+    pattern_type: regex
+    message: "Use 'drop-down list' instead of 'drop-down menu' per Cisco Style Guide C-18.3"
+    suggestion_template: "Change 'drop-down menu' to 'drop-down list'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_TABLE_BELOW
+    name: "Reference: Table Below"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\b(?:table|figure|diagram|image|screenshot)\\s+below\\b"
+    pattern_type: regex
+    message: "Use 'following' instead of 'below' per Cisco Style Guide C-17.1"
+    suggestion_template: "Change 'X below' to 'following X'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_ABOVE_BELOW
+    name: "Reference: Above/Below"
+    category: terminology
+    severity: low
+    fix_type: REVIEW
+    pattern: "\\b(?:shown|described|listed|mentioned)\\s+(?:above|below)\\b"
+    pattern_type: regex
+    message: "Consider using 'previous/following' or 'earlier/later' instead of 'above/below'"
+    suggestion_template: "Change 'above' to 'previous/earlier' or 'below' to 'following/later'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_DUE_TO
+    name: "Formality: Due To"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bdue to\\b"
+    pattern_type: regex
+    message: "Use 'because of' instead of 'due to'"
+    suggestion_template: "Change 'due to' to 'because of'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_WISH_TO
+    name: "Formality: Wish To"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bwish to\\b"
+    pattern_type: regex
+    message: "Use 'want to' instead of 'wish to'"
+    suggestion_template: "Change 'wish to' to 'want to'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_ENSURE_VERIFY
+    name: "Clarity: Ensure vs Verify"
+    category: terminology
+    severity: low
+    fix_type: REVIEW
+    pattern: "\\bensure that all\\b"
+    pattern_type: regex
+    message: "Consider 'verify' when checking settings (ensure = make certain, verify = confirm correct)"
+    suggestion_template: "Consider changing 'ensure' to 'verify' for checking/reviewing contexts"
+    enabled: true
+    priority: 25
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_RUNTIME
+    name: "Spelling: Runtime"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\brun time\\b"
+    pattern_type: regex
+    message: "Use 'runtime' (one word) as a noun/adjective"
+    suggestion_template: "Change 'run time' to 'runtime'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_SWITCHPORT
+    name: "Spelling: Switch Port"
+    category: terminology
+    severity: low
+    fix_type: REVIEW
+    pattern: "\\bswitchport\\b"
+    pattern_type: regex
+    message: "Use 'switch port' (two words) in narrative text"
+    suggestion_template: "Change 'switchport' to 'switch port' in prose"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_CHECKBOX
+    name: "Spelling: Check Box"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\bcheckbox\\b"
+    pattern_type: regex
+    message: "Use 'check box' (two words) per Cisco Style Guide"
+    suggestion_template: "Change 'checkbox' to 'check box'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_USERID
+    name: "Spelling: User ID"
+    category: terminology
+    severity: low
+    fix_type: SAFE
+    pattern: "\\buserid\\b|\\buser-id\\b"
+    pattern_type: regex
+    message: "Use 'user ID' (two words) per Cisco Style Guide"
+    suggestion_template: "Change to 'user ID'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_LOGIN_VERB
+    name: "Spelling: Log In (verb)"
+    category: terminology
+    severity: low
+    fix_type: REVIEW
+    pattern: "\\blogin\\s+to\\b|\\bto\\s+login\\b"
+    pattern_type: regex
+    message: "Use 'log in' (two words) as a verb, 'login' (one word) as a noun"
+    suggestion_template: "Change 'login to' to 'log in to'"
+    enabled: true
+    priority: 20
+    context_skip: [code_block, inline_code]
+
+  - id: TERM_ENABLE_CHECKBOX
+    name: "GUI: Enable vs Check"
+    category: gui_format
+    severity: low
+    fix_type: SAFE
+    pattern: "\\b[Ee]nable the\\s+\\*\\*[^*]+\\*\\*\\s+check box\\b"
+    pattern_type: regex
+    message: "Use 'check' for activating a check box, not 'enable' per Cisco Style Guide C-18.1"
+    suggestion_template: "Change 'Enable the X check box' to 'Check the X check box'"
+    enabled: true
+    priority: 15
+    context_skip: [code_block, inline_code]
+
   # =============================================================================
   # PUNCTUATION RULES (SAFE) - Deterministic fixes
   # =============================================================================
@@ -534,6 +716,33 @@ rules:
     priority: 25
     context_skip: [code_block, inline_code]
 
+  - id: PROD_VMWARE_POSSESSIVE
+    name: "VMware Possessive"
+    category: product_naming
+    severity: medium
+    fix_type: REVIEW
+    pattern: "\\bVMware(?:\\s+\\w+)?'s\\b"
+    pattern_type: regex
+    message: "Avoid possessive form with product names"
+    suggestion_template: "Change to 'the VMware [product]' form instead of possessive"
+    enabled: true
+    priority: 25
+    context_skip: [code_block, inline_code]
+
+  - id: PROD_GENERIC_POSSESSIVE
+    name: "Product Name Possessive"
+    category: product_naming
+    severity: low
+    fix_type: REVIEW
+    # Common product/device names that shouldn't use possessive
+    pattern: "\\b(?:Windows|Linux|Ubuntu|Red Hat|Microsoft|Apple|Google|Amazon|AWS|Azure)'s\\b"
+    pattern_type: regex
+    message: "Avoid possessive form with product/company names - use 'the [product]' instead"
+    suggestion_template: "Change to 'the [product]' form instead of possessive"
+    enabled: true
+    priority: 30
+    context_skip: [code_block, inline_code]
+
   - id: PROD_BOX_SERVER
     name: "Box to Server/Appliance"
     category: product_naming
@@ -694,14 +903,16 @@ rules:
     category: grammar
     severity: low
     fix_type: REVIEW
-    # Match standalone digits 1-9 in prose context (not in version numbers, IPs, etc.)
-    pattern: "(?<![\\d.v:/-])\\b[1-9]\\b(?![\\d.:])"
+    # Match standalone digits 1-9 in prose context
+    # Excludes: version numbers, IPs, quiz questions (^1.), numbers with units (2 TB, 3 hours)
+    # Units excluded: TB, TiB, TIB, GB, GiB, GIB, MB, MiB, MIB, KB, KiB, KIB, bytes, hours, minutes, seconds, ms, days, weeks, months, years
+    pattern: "(?<!^)(?<![\\d.v:/-])\\b[1-9]\\b(?![\\d.:]|\\s*(?:TB|TiB|TIB|GB|GiB|GIB|MB|MiB|MIB|KB|KiB|KIB|bytes?|hours?|hrs?|minutes?|mins?|seconds?|secs?|ms|days?|weeks?|months?|years?|yrs?|%|x|X)\\b)"
     pattern_type: regex
     message: "Consider spelling out numbers one through nine in prose"
     suggestion_template: "Spell out the number (e.g., '3 items' → 'three items')"
     enabled: true
     priority: 40
-    context_skip: [code_block, inline_code, url, file_path]
+    context_skip: [code_block, inline_code, url, file_path, quiz_question]
 
   - id: GRAMMAR_PERCENT_SYMBOL
     name: "Percent Symbol Usage"
@@ -722,13 +933,15 @@ rules:
     severity: low
     fix_type: REVIEW
     # "which" without preceding comma often should be "that"
-    pattern: "(?<!,)\\s+which\\s+"
+    # Excludes prepositional phrases: on which, from which, in which, of which, to which, by which, for which, with which, at which
+    # Also excludes "For which" at start of question
+    pattern: "(?<!,)(?<!\\bon)(?<!\\bfrom)(?<!\\bin)(?<!\\bof)(?<!\\bto)(?<!\\bby)(?<!\\bfor)(?<!\\bwith)(?<!\\bat)(?<!\\bFor)\\s+which\\s+"
     pattern_type: regex
     message: "Consider using 'that' for restrictive clauses (no comma before 'which')"
     suggestion_template: "If this is a restrictive clause, use 'that' instead of 'which'"
     enabled: true
     priority: 45
-    context_skip: [code_block, inline_code]
+    context_skip: [code_block, inline_code, quiz_question]
 
   - id: GRAMMAR_COMPOUND_WELL_KNOWN
     name: "Compound: Well-Known"
