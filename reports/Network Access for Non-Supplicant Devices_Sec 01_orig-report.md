@@ -7,29 +7,29 @@
 | Word Count | 7,600 |
 | Sections | 1 |
 | Estimated Duration | 50m |
-| Processing Time | 1.2s |
+| Processing Time | 49.9s |
 
 ## Summary
 
-**Total Issues**: 200
+**Total Issues**: 169
 
 | Fix Type | Count | Description |
 |----------|-------|-------------|
-| SAFE | 82 | Auto-fixable with high confidence |
-| REVIEW | 89 | Applied but needs human verification |
-| QUERY | 29 | Questions for author - not auto-fixed |
+| SAFE | 83 | Auto-fixable with high confidence |
+| REVIEW | 70 | Applied but needs human verification |
+| QUERY | 16 | Questions for author - not auto-fixed |
 
 ### Issues by Category
 
 | Category | Count |
 |----------|-------|
-| Grammar & Punctuation | 165 |
+| Grammar & Punctuation | 126 |
 | Acronyms | 22 |
-| Cisco Style Guide | 13 |
+| Cisco Style Guide | 21 |
 
 ## Changes by Category
 
-### Cisco Style Guide (13 issues)
+### Cisco Style Guide (21 issues)
 
 **Auto-fixable (SAFE)**:
 
@@ -40,6 +40,7 @@
 | 209 | ...t need to be... `e.g. ` Cisco Cataly...... | ~~e.g. ~~ → **for example, ** | Use 'for example' instead of 'e.g.' |
 | 213 | ...ing (AAA) se... `e.g. ` Cisco Identi...... | ~~e.g. ~~ → **for example, ** | Use 'for example' instead of 'e.g.' |
 | 215 | ...ollected MAC... `e.g. ` Lightweight ...... | ~~e.g. ~~ → **for example, ** | Use 'for example' instead of 'e.g.' |
+| 250 | ...d MAC addres... `wish to` authenticate...... | ~~wish to~~ → **want to** | Use 'want to' instead of 'wish to' |
 | 259 | ...ord to the M... `e.g. ` Cisco ISE st...... | ~~e.g. ~~ → **for example, ** | Use 'for example' instead of 'e.g.' |
 | 505 | ...02.1X times ... `initiates` a MAB reques...... | ~~initiates~~ → **starts** | Use 'start' or 'begin' instead of 'in... |
 | 511 | ...5.  The client `initiates` an HTTP or H...... | ~~initiates~~ → **starts** | Use 'start' or 'begin' instead of 'in... |
@@ -53,6 +54,13 @@
 | Line | Context | Change | Rationale |
 |------|---------|--------|-----------|
 | 346 | ...2. `Click Add` to add a RAD...... | ~~Click Add~~ → **Add bold formatti...** | GUI elements after 'click' should be ... |
+| 757 | ...ial configur... `switchport` we are going...... | ~~switchport~~ → **Change 'switchpor...** | Use 'switch port' (two words) in narr... |
+| 771 | `switchport` access vlan 50\... | ~~switchport~~ → **Change 'switchpor...** | Use 'switch port' (two words) in narr... |
+| 772 | `switchport` mode access\... | ~~switchport~~ → **Change 'switchpor...** | Use 'switch port' (two words) in narr... |
+| 791 | `switchport` access vlan 50\... | ~~switchport~~ → **Change 'switchpor...** | Use 'switch port' (two words) in narr... |
+| 792 | `switchport` mode access\... | ~~switchport~~ → **Change 'switchpor...** | Use 'switch port' (two words) in narr... |
+| 931 | `switchport` access vlan 50\... | ~~switchport~~ → **Change 'switchpor...** | Use 'switch port' (two words) in narr... |
+| 932 | `switchport` mode access\... | ~~switchport~~ → **Change 'switchpor...** | Use 'switch port' (two words) in narr... |
 
 ### Acronyms (22 issues)
 
@@ -87,7 +95,7 @@
   - Unknown acronym 'LAN' - please provide expansion or confirm intentional
 - *...and 8 more questions*
 
-### Grammar & Punctuation (165 issues)
+### Grammar & Punctuation (126 issues)
 
 **Auto-fixable (SAFE)**:
 
@@ -116,42 +124,22 @@
 |------|---------|--------|-----------|
 | 17 | ...o network ac... `to securely onboard` non-supplica...... | ~~to securely onboard~~ → **Consider moving t...** | avoiding split infinitives when possible |
 | 87 | ...MAB acts at ... `2` , allowing y...... | ~~2~~ → **Spell out the num...** | spelling out numbers one through nine... |
-| 106 | `1` \. Which ope...... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
-| 114 | ...network traf... `3` | ~~3~~ → **Spell out the num...** | spelling out numbers one through nine... |
 | 124 | ...st any Layer... `3` packets to l...... | ~~3~~ → **Spell out the num...** | spelling out numbers one through nine... |
 | 143 | ...tes: Usernam... `1` ), Password ...... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
 | 143 | ...1), Password... `2` ), and Calli...... | ~~2~~ → **Spell out the num...** | spelling out numbers one through nine... |
 | 147 | ...o switches s... `6` (Service-Typ...... | ~~6~~ → **Spell out the num...** | spelling out numbers one through nine... |
-| 167 | `2` \. Which of ...... | ~~2~~ → **Spell out the num...** | spelling out numbers one through nine... |
-| 177 | `3` \. Which sce...... | ~~3~~ → **Spell out the num...** | spelling out numbers one through nine... |
-| ... | *72 more* | | |
-
-**Questions for Author (QUERY)**:
-
-- **Line 343**: ` 1. ` Navigate to ......
-  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
-- **Line 363**: ` 1. ` Navigate to ......
-  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
-- **Line 381**: ` 1. ` Click on you......
-  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
-- **Line 441**: ` 1. ` Browser traf......
-  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
-- **Line 478**: ` 1. ` The user ass......
-  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
-- **Line 502**: ` 1. ` The client c......
-  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
-- **Line 1062**: ` 1. ` A...
-  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
-- **Line 1067**: ...``` ` 1. ` C...
-  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
-- *...and 5 more questions*
+| 207 | ...-   Determining ` which ` devices you ...... | ~~ which ~~ → **If this is a rest...** | using 'that' for restrictive clauses ... |
+| 213 | ...-   Determining ` which ` Authenticati...... | ~~ which ~~ → **If this is a rest...** | using 'that' for restrictive clauses ... |
+| 329 | ...ess session ... `1` /0/3**\... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 343 | ` 1. ` Navigate to ...... | ~~ 1. ~~ → **To enable a RADIU...** | Numbered list may need a procedural i... |
+| ... | *46 more* | | |
 
 ## Detailed Changes
 
 *All issues sorted by line number for easy review:*
 
 <details>
-<summary>Click to expand all 200 issues</summary>
+<summary>Click to expand all 169 issues</summary>
 
 | Line | Type | Rule | Message |
 |------|------|------|---------|
@@ -161,8 +149,6 @@
 | 17 | 🟡 | GRAMMAR_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 17 | 🟡 | ACRONYM_FIRST_USE | Acronym 'RADIUS' not expanded on first use |
 | 87 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 106 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 114 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 124 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 126 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'IPP' - please provide expansio... |
 | 126 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'LPR' - please provide expansio... |
@@ -189,53 +175,41 @@
 | 159 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 159 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 163 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 167 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 177 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 187 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 189 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 191 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 195 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 207 | 🟢 | TERM_EG | Use 'for example' instead of 'e.g.' |
 | 207 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
 | 209 | 🟢 | TERM_EG | Use 'for example' instead of 'e.g.' |
 | 213 | 🟢 | TERM_EG | Use 'for example' instead of 'e.g.' |
 | 213 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
 | 215 | 🟢 | TERM_EG | Use 'for example' instead of 'e.g.' |
+| 250 | 🟢 | TERM_WISH_TO | Use 'want to' instead of 'wish to' |
 | 259 | 🟢 | TERM_EG | Use 'for example' instead of 'e.g.' |
-| 266 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 306 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
 | 329 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 330 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'FQ' - please provide expansion... |
 | 331 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
 | 332 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'DATA' - please provide expansi... |
-| 343 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
+| 343 | 🟡 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 344 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 346 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 346 | 🟡 | GUI_BOLD_CLICK | GUI elements after 'click' should be bold |
 | 348 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 362 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'WLAN' - please provide expansi... |
-| 363 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
+| 363 | 🟡 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 364 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 364 | 🟡 | GRAMMAR_AMPERSAND_IN_PROSE | Use 'and' instead of '&' in prose text |
 | 366 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 368 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 368 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 380 | 🟡 | GRAMMAR_AMPERSAND_IN_PROSE | Use 'and' instead of '&' in prose text |
-| 381 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
+| 381 | 🟡 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 382 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 384 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 386 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 388 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 398 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 400 | 🟡 | ACRONYM_FIRST_USE | Acronym 'DHCP' not expanded on first use |
-| 408 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 418 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 418 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 441 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 442 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 444 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 473 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'LAN' - please provide expansio... |
-| 478 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
+| 478 | 🟡 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 479 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 479 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'SSID' - please provide expansi... |
 | 481 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
@@ -246,7 +220,7 @@
 | 489 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 491 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 497 | 🟡 | ACRONYM_FIRST_USE | Acronym 'ACL' not expanded on first use |
-| 502 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
+| 502 | 🟡 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 503 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 505 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 505 | 🟢 | TERM_INITIATE | Use 'start' or 'begin' instead of 'initiate' |
@@ -258,16 +232,11 @@
 | 515 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 517 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 519 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 525 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 549 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
 | 596 | 🟢 | TERM_DESIRE | Use 'want' or 'wanted' instead of 'desire/desired' |
 | 617 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 623 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
 | 623 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
-| 632 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 638 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
-| 642 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 652 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 694 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
 | 703 | 🟡 | GRAMMAR_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 707 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
@@ -280,17 +249,21 @@
 | 746 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'USER' - please provide expansi... |
 | 746 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'ATTRIBUTES' - please provide e... |
 | 749 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'ACSACL' - please provide expan... |
+| 757 | 🟡 | TERM_SWITCHPORT | Use 'switch port' (two words) in narrative text |
 | 757 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 757 | 🟡 | GRAMMAR_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 760 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 760 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 760 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 760 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
-| 760 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
 | 764 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 768 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
+| 771 | 🟡 | TERM_SWITCHPORT | Use 'switch port' (two words) in narrative text |
+| 772 | 🟡 | TERM_SWITCHPORT | Use 'switch port' (two words) in narrative text |
 | 779 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 779 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
+| 791 | 🟡 | TERM_SWITCHPORT | Use 'switch port' (two words) in narrative text |
+| 792 | 🟡 | TERM_SWITCHPORT | Use 'switch port' (two words) in narrative text |
 | 802 | 🟡 | GRAMMAR_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 806 | 🟢 | TERM_INITIATE | Use 'start' or 'begin' instead of 'initiate' |
 | 810 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
@@ -314,40 +287,24 @@
 | 889 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 920 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 928 | 🟡 | PUNCT_EXCLAMATION_IN_PROSE | Consider removing exclamation point from techni... |
-| 955 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 999 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
+| 931 | 🟡 | TERM_SWITCHPORT | Use 'switch port' (two words) in narrative text |
+| 932 | 🟡 | TERM_SWITCHPORT | Use 'switch port' (two words) in narrative text |
 | 999 | 🟡 | GRAMMAR_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
-| 1001 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 1003 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 1003 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'BYPASS' - please provide expan... |
-| 1007 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 1009 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 1015 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 1019 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 1029 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 1029 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 1039 | 🟢 | TERM_INITIATE | Use 'start' or 'begin' instead of 'initiate' |
-| 1039 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 1049 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 1062 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1063 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 1067 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1068 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1070 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1072 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 1075 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1076 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 1080 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1081 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1083 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1085 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 1088 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1089 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 1093 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1094 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1096 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1098 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 1101 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1102 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1104 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1106 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
@@ -360,7 +317,7 @@
 
 ---
 
-*Generated by Course AI Editor on 2026-03-04 15:15*
+*Generated by Course AI Editor on 2026-03-09 18:31*
 
 **Fix Type Legend**:
 - 🟢 **SAFE**: High-confidence fix, can be auto-applied

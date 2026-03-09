@@ -7,41 +7,44 @@
 | Word Count | 8,700 |
 | Sections | 1 |
 | Estimated Duration | 58m |
-| Processing Time | 1.3s |
+| Processing Time | 30.6s |
 
 ## Summary
 
-**Total Issues**: 273
+**Total Issues**: 250
 
 | Fix Type | Count | Description |
 |----------|-------|-------------|
-| SAFE | 121 | Auto-fixable with high confidence |
-| REVIEW | 112 | Applied but needs human verification |
-| QUERY | 40 | Questions for author - not auto-fixed |
+| SAFE | 124 | Auto-fixable with high confidence |
+| REVIEW | 94 | Applied but needs human verification |
+| QUERY | 32 | Questions for author - not auto-fixed |
 
 ### Issues by Category
 
 | Category | Count |
 |----------|-------|
-| Grammar & Punctuation | 220 |
+| Grammar & Punctuation | 194 |
 | Acronyms | 42 |
-| Cisco Style Guide | 11 |
+| Cisco Style Guide | 14 |
 
 ## Changes by Category
 
-### Cisco Style Guide (11 issues)
+### Cisco Style Guide (14 issues)
 
 **Auto-fixable (SAFE)**:
 
 | Line | Context | Change | Rationale |
 |------|---------|--------|-----------|
+| 50 | ...Day-Zero ope... `refer to` the automate...... | ~~refer to~~ → **see** | Use 'see' instead of 'refer to' per C... |
 | 238 | ...s.10.6.1.F.b... `desired` image filena...... | ~~desired~~ → **wanted** | Use 'want' or 'wanted' instead of 'de... |
+| 321 | ...formation th... `Refer to` this list if...... | ~~Refer to~~ → **See** | Use 'see' instead of 'refer to' per C... |
 | 328 | ...cript-file-n... `initiate` a Python scr...... | ~~initiate~~ → **start** | Use 'start' or 'begin' instead of 'in... |
 | 400 | ...This connection `allows you to` access the I...... | ~~allows you to~~ → **lets you** | 'lets you' instead of 'allows you to' |
 | 659 | ...vices. You w... `initiate` the automate...... | ~~initiate~~ → **start** | Use 'start' or 'begin' instead of 'in... |
 | 697 | ...CML through ... `allows you to` interact wit...... | ~~allows you to~~ → **lets you** | 'lets you' instead of 'allows you to' |
 | 703 | ...ect to the c... `click on` **leaf-2** a...... | ~~click on~~ → **click** | Use 'click' instead of 'click on' |
 | 780 | ...hen reload t... `initiate` the POAP pro...... | ~~initiate~~ → **start** | Use 'start' or 'begin' instead of 'in... |
+| 797 | ...itch will as... `wish to` go back to n...... | ~~wish to~~ → **want to** | Use 'want to' instead of 'wish to' |
 | 1086 | ...rotocols are... `leverage` POAP? (Choos...... | ~~leverage~~ → **use** | Use 'use' instead of 'leverage' |
 
 **Needs Review (REVIEW)**:
@@ -89,7 +92,7 @@
   - Unknown acronym 'INFORMATION' - please provide expansion or confirm intentional
 - *...and 24 more questions*
 
-### Grammar & Punctuation (220 issues)
+### Grammar & Punctuation (194 issues)
 
 **Auto-fixable (SAFE)**:
 
@@ -116,63 +119,41 @@
 
 | Line | Context | Change | Rationale |
 |------|---------|--------|-----------|
-| 137 | `1` \. What is t...... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
 | 151 | ...oning, allow... `to automatically ...` itself using...... | ~~to automatically ...~~ → **Consider moving t...** | avoiding split infinitives when possible |
-| 179 | `1` \. What is t...... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
-| 197 | ...stname or IP... ` which ` files are co...... | ~~ which ~~ → **If this is a rest...** | using 'that' for restrictive clauses ... |
-| 257 | `1` \. Which par...... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
 | 341 | ...ract with th... `to automatically ...` its intended...... | ~~to automatically ...~~ → **Consider moving t...** | avoiding split infinitives when possible |
 | 345 | ...**Step `1` ** From the ...... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
 | 362 | ...iability 255... `1` /255, rxload...... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
 | 362 | ...55, txload 1... `1` /255\... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
-| 368 | `1` minute input...... | ~~1~~ → **Spell out the num...** | spelling out numbers one through nine... |
-| ... | *89 more* | | |
-
-**Questions for Author (QUERY)**:
-
-- **Line 160**: ` 1. ` **DHCP Initi......
-  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
-- **Line 1103**: ` 1. ` B...
-  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
-- **Line 1107**: ` 1. ` B...
-  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
-- **Line 1111**: ` 1. ` C...
-  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
-- **Line 1115**: ` 1. ` B...
-  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
-- **Line 1120**: ...``` ` 1. ` B...
-  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
-- **Line 1125**: ...``` ` 1. ` D...
-  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
-- **Line 1129**: ` 1. ` B...
-  - Numbered list may need a procedural introduction (e.g., 'To configure the service:') (AI unavailable - manual review needed)
+| 384 | ...**Step `2` ** On Leaf-b...... | ~~2~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 398 | ...**Step `3` ** From the ...... | ~~3~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 407 | ...**Step `4` ** The Infra...... | ~~4~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 444 | ...**Step `5` ** Update th...... | ~~5~~ → **Spell out the num...** | spelling out numbers one through nine... |
+| 458 | `host leaf-b {\ ha...` | ~~host leaf-b {\ ha...~~ → **Consider removing...** | Duplicate paragraph (first appears at... |
+| ... | *71 more* | | |
 
 ## Detailed Changes
 
 *All issues sorted by line number for easy review:*
 
 <details>
-<summary>Click to expand all 273 issues</summary>
+<summary>Click to expand all 250 issues</summary>
 
 | Line | Type | Rule | Message |
 |------|------|------|---------|
 | 40 | 🟢 | PUNCT_TRAILING_SPACE | Remove trailing whitespace |
+| 50 | 🟢 | TERM_REFER_TO | Use 'see' instead of 'refer to' per Cisco Style... |
 | 99 | 🟡 | ACRONYM_FIRST_USE | Acronym 'VXLAN' not expanded on first use |
 | 119 | 🟡 | ACRONYM_FIRST_USE | Acronym 'DHCP' not expanded on first use |
-| 137 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 151 | 🟡 | GRAMMAR_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 157 | 🟡 | TERM_ABORT | Consider using 'cancel' or 'terminate' instead ... |
 | 157 | 🟡 | TERM_ABORT | Consider using 'cancel' or 'terminate' instead ... |
 | 157 | 🟡 | TERM_ABORT | Consider using 'cancel' or 'terminate' instead ... |
-| 160 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 161 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 163 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 171 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 173 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 173 | 🟡 | ACRONYM_FIRST_USE | Acronym 'MAC' not expanded on first use |
 | 175 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 179 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 197 | 🟡 | GRAMMAR_THAT_WHICH | Consider using 'that' for restrictive clauses (... |
 | 214 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
 | 214 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
 | 227 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
@@ -180,18 +161,15 @@
 | 238 | 🟢 | TERM_DESIRE | Use 'want' or 'wanted' instead of 'desire/desired' |
 | 241 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
 | 241 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
-| 257 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 308 | 🟡 | ACRONYM_FIRST_USE | Acronym 'SSH' not expanded on first use |
 | 312 | 🟡 | ACRONYM_FIRST_USE | Acronym 'CML' not expanded on first use |
+| 321 | 🟢 | TERM_REFER_TO | Use 'see' instead of 'refer to' per Cisco Style... |
 | 328 | 🟢 | TERM_INITIATE | Use 'start' or 'begin' instead of 'initiate' |
 | 341 | 🟡 | GRAMMAR_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 345 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 361 | 🟡 | ACRONYM_FIRST_USE | Acronym 'MTU' not expanded on first use |
 | 362 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 362 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 368 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 369 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 375 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 384 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 398 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 400 | 🟢 | TERM_ALLOWS_YOU_TO | Consider 'lets you' instead of 'allows you to' |
@@ -201,6 +179,7 @@
 | 437 | 🟢 | PUNCT_COLON_SPACE | Add space after colon |
 | 444 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 451 | 🟢 | PUNCT_COLON_SPACE | Add space after colon |
+| 458 | 🟡 | CONTENT_DUPLICATE_PARAGRAPH | Duplicate paragraph (first appears at line 450) |
 | 459 | 🟢 | PUNCT_COLON_SPACE | Add space after colon |
 | 467 | 🟢 | PUNCT_COLON_SPACE | Add space after colon |
 | 467 | 🟢 | PUNCT_COLON_SPACE | Add space after colon |
@@ -260,7 +239,6 @@
 | 645 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
 | 645 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
 | 645 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 647 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 659 | 🟢 | TERM_INITIATE | Use 'start' or 'begin' instead of 'initiate' |
 | 659 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 659 | 🟡 | ACRONYM_FIRST_USE | Acronym 'ZTP' not expanded on first use |
@@ -306,6 +284,7 @@
 | 780 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 785 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'CNTL' - please provide expansi... |
 | 797 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
+| 797 | 🟢 | TERM_WISH_TO | Use 'want to' instead of 'wish to' |
 | 801 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 803 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'DHCPDISCOVER' - please provide... |
 | 803 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'DHCPOFFER' - please provide ex... |
@@ -350,7 +329,6 @@
 | 851 | 🟢 | PUNCT_COLON_SPACE | Add space after colon |
 | 853 | 🟢 | PUNCT_COLON_SPACE | Add space after colon |
 | 854 | 🟢 | PUNCT_COLON_SPACE | Add space after colon |
-| 859 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 862 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 862 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 864 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
@@ -386,7 +364,6 @@
 | 933 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 933 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 947 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'GAKCCK' - please provide expan... |
-| 953 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 955 | 🟡 | ACRONYM_FIRST_USE | Acronym 'VLAN' not expanded on first use |
 | 965 | 🟡 | GRAMMAR_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
 | 982 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'PING' - please provide expansi... |
@@ -395,33 +372,17 @@
 | 988 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
 | 988 | 🟢 | PUNCT_DOUBLE_HYPHEN | Use em dash (—) instead of double hyphen (--) |
 | 989 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 989 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 994 | 🟡 | GRAMMAR_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
-| 996 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 1020 | 🟡 | GRAMMAR_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
-| 1026 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 1036 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 1046 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 1056 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 1056 | 🟡 | GRAMMAR_SPLIT_INFINITIVE | Consider avoiding split infinitives when possible |
-| 1066 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
-| 1076 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 1086 | 🟢 | TERM_LEVERAGE | Use 'use' instead of 'leverage' |
-| 1086 | 🟡 | GRAMMAR_NUMBER_SPELL_OUT | Consider spelling out numbers one through nine ... |
 | 1094 | 🔴 | ACRONYM_UNKNOWN | Unknown acronym 'RSH' - please provide expansio... |
-| 1103 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1104 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 1107 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1108 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 1111 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1112 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 1115 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1116 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 1120 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1121 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 1125 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1126 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
-| 1129 | 🔴 | AI_PROCEDURAL_INTRO | Numbered list may need a procedural introductio... |
 | 1130 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1132 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
 | 1134 | 🟢 | PUNCT_DOUBLE_SPACE | Use single space after period |
@@ -434,7 +395,7 @@
 
 ---
 
-*Generated by Course AI Editor on 2026-03-04 15:15*
+*Generated by Course AI Editor on 2026-03-09 18:30*
 
 **Fix Type Legend**:
 - 🟢 **SAFE**: High-confidence fix, can be auto-applied

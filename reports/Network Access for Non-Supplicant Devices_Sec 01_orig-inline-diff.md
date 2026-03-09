@@ -5,7 +5,7 @@ Copy this document into Word to see Track Changes formatting.
 
 ---
 
-**Total Changes**: 192 (Auto-fix: 82, Review: 94, Questions: 16)
+**Total Changes**: 167 (Auto-fix: 83, Review: 68, Questions: 16)
 
 ---
 
@@ -114,7 +114,7 @@ MAB has the following limitations that you must consider before you decide to im
   Strength of authentication          Unlike IEEE 802.1X, MAB is not a strong authentication method. MAB can be defeated by spoofing the MAC address of a valid device.
   -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which operational challenge must be addressed when deploying MAB as a network access control method?
+1\. Which operational challenge must be addressed when deploying MAB as a network access control method?
 
 A. Maintaining an up-to-date database of authorized MAC addresses
 
@@ -122,7 +122,7 @@ B. Ensuring all devices support certificate-based authentication
 
 C. Providing per-user authentication on every connected device
 
-D. Encrypting all network traffic at Layer ~~3~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]
+D. Encrypting all network traffic at Layer 3
 
 MAB Operation
 
@@ -175,7 +175,7 @@ There are four phases of the MAB process. The following figure illustrates the f
 +==========================================================================================================================================================+
 +----------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which of the following is considered a limitation of a MAB implementation?
+2\. Which of the following is considered a limitation of a MAB implementation?
 
 A. Visibility
 
@@ -185,7 +185,7 @@ C. Strength of authentication
 
 D. Access Control at the Edge
 
-~~3~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which scenario best demonstrates a primary benefit of implementing MAB in a network environment?
+3\. Which scenario best demonstrates a primary benefit of implementing MAB in a network environment?
 
 A. Authenticating devices that lack IEEE 802.1X support, such as printers or cameras
 
@@ -195,15 +195,15 @@ C. Enabling user-specific access controls based on login credentials
 
 D. Encrypting network traffic for all connected endpoints
 
-~~4~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. During the MAC Authentication Bypass (MAB) process on a switch configured with 802.1X, which attribute is uniquely set to identify a MAB Access-Request message to the RADIUS server?
+4\. During the MAC Authentication Bypass (MAB) process on a switch configured with 802.1X, which attribute is uniquely set to identify a MAB Access-Request message to the RADIUS server?
 
-A. Attribute ~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] (Username)
+A. Attribute 1 (Username)
 
-B. Attribute ~~6~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] (Service-Type)
+B. Attribute 6 (Service-Type)
 
 C. Attribute 31 (Calling-Station-Id)
 
-D. Attribute ~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] (Password)
+D. Attribute 2 (Password)
 
 MAC Authentication Bypass (MAB) Configuration and Verification
 
@@ -258,7 +258,7 @@ If also implementing 802.1X with Cisco ISE as the RADIUS server, use a phased de
 
 **MAC Storage**
 
-After you have collected the allowed MAC addresses that you wish to authenticate via MAB, you must store them in a database. The RADIUS server must access this database during the MAB attempt. As shown in the following figure, there are several factors to consider when storing your device MACs.
+After you have collected the allowed MAC addresses that you ~~wish to~~ **want to** [Explanation: 'want to' instead of 'wish to'. Category: Cisco Style Guide] authenticate via MAB, you must store them in a database. The RADIUS server must access this database during the MAB attempt. As shown in the following figure, there are several factors to consider when storing your device MACs.
 
 ![](media/image9.bin){width="6.940277777777778in" height="1.5164260717410323in"}
 
@@ -274,7 +274,7 @@ Options for storing the device MAC addresses used for MAB authentication include
   Microsoft Active Directory        Microsoft Active Directory is a widely deployed directory service for users. To simplify MAC address storage, Microsoft Active Directory provides a special object class for MAC addresses that is called "ieee802Device".
   --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which of the following sources can be used to collect MAC addresses when building a database for MAB (MAC Authentication Bypass)?
+1\. Which of the following sources can be used to collect MAC addresses when building a database for MAB (MAC Authentication Bypass)?
 
 A. Cisco Unified Communication Manager lists
 
@@ -314,7 +314,7 @@ While the **aaa accounting dot1x default start-stop group radius** command ident
 
 This step enables port authentication, determines the order of authentication methods attempted, enables MAB, and configures the switch port to be an 802.1X Authenticator.
 
-In the interface configuration on the access switch, there are two ways in~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]you can configure MAB:
+In the interface configuration on the access switch, there are two ways in which you can configure MAB:
 
 -   **Standalone**: Supports MAB authentication only, typically used with ports being used by non-supplicant devices.
 
@@ -376,7 +376,7 @@ The following figure shows the AAA server configuration:
 
 2~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Select the WLAN that you want to configure MAB for.
 
-3~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Under **Security** \> **Layer ~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]**:
+3~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Under **Security** \> **Layer 2**:
 
 -   Enable MAC Filtering.
 
@@ -406,7 +406,7 @@ The following figure shows the policy that is configured with AAA override enabl
 
 The easiest way to verify wireless MAB authentication, and authentication failure and reasoning, is the RADIUS server logs. In Cisco ISE these are located in the RADIUS live logs.
 
-~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. What is the significance of the \"ieee802Device\" object class in Microsoft Active Directory when storing MAC addresses?
+2\. What is the significance of the \"ieee802Device\" object class in Microsoft Active Directory when storing MAC addresses?
 
 A. It enables IP address-to-MAC binding for ~~DHCP~~ **Dynamic Host Configuration Protocol (DHCP)** [Explanation: Acronym 'DHCP' not expanded on first use. Category: Acronyms]
 
@@ -416,7 +416,7 @@ C. It provides a standardized schema to store MAC addresses
 
 D. It enforces 802.1X policy enforcement on all Active Directory users
 
-~~3~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. When storing MAC addresses for MAB authentication, what is a key feature of using Microsoft Active Directory?
+3\. When storing MAC addresses for MAB authentication, what is a key feature of using Microsoft Active Directory?
 
 A. It uses a dedicated object class called \"ieee802Device\" for MAC addresses
 
@@ -426,7 +426,7 @@ C. It encrypts MAC addresses in endpoint databases by default
 
 D. It restricts MAC address storage to wireless devices only
 
-~~4~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. When configuring a WLAN profile for MAC Authentication Bypass (MAB) only, which Layer ~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] security setting should be applied?
+4\. When configuring a WLAN profile for MAC Authentication Bypass (MAB) only, which Layer ~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] security setting should be applied?
 
 A. Enable 802.1X and MAC Filtering simultaneously
 
@@ -533,7 +533,7 @@ The following diagram illustrates the process of a client being authenticated us
 
 11. The NAD applies the received new authorization settings and returns a CoA acknowledgment back to the Cisco ISE.
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. What is a key limitation of LWA when compared to CWA in Cisco environments?
+1\. What is a key limitation of LWA when compared to CWA in Cisco environments?
 
 A. LWA does not support CoA and does not log information in a centralized audit trail
 
@@ -640,17 +640,17 @@ This step consists of the following tasks:
 
 -   It is better to restrict to port 8443, which is typically the port that is used by the guest portal (although in some specific cases, other ports can be involved).
 
-~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. In the CWA process, what is the purpose of the redirect ACL on a switch or wireless controller?
+2\. In the CWA process, what is the purpose of the redirect ACL on a switch or wireless controller?
 
 A. To filter out malicious HTTP/HTTPS traffic
 
 B. To drop all unauthorized DNS and DHCP traffic
 
-C. To determine~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]client traffic should be sent to Cisco ISE
+C. To determine which client traffic should be sent to Cisco ISE
 
 D. To assign VLANs for authenticated users
 
-~~3~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which configuration step is required to ensure that a Cisco Catalyst Wireless Controller can successfully redirect HTTP traffic from wireless clients to Cisco ISE for CWA?
+3\. Which configuration step is required to ensure that a Cisco Catalyst Wireless Controller can successfully redirect HTTP traffic from wireless clients to Cisco ISE for CWA?
 
 A. Enable HTTP server globally using the ip http server command on the WLC
 
@@ -660,7 +660,7 @@ C. Set up WPA2-Enterprise as the only security method on the WLAN
 
 D. Configure a static IP address for each wireless client
 
-~~4~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. In the context of configuring a redirect ACL for CWA on a Cisco Catalyst Wireless Controller, which type of traffic should typically be denied preventing unnecessary redirection?
+4\. In the context of configuring a redirect ACL for CWA on a Cisco Catalyst Wireless Controller, which type of traffic should typically be denied preventing unnecessary redirection?
 
 A. All traffic destined for external web servers
 
@@ -765,10 +765,10 @@ In this task, you will configure a switch port to support MAB for an access poin
 
 Activity
 
-**Step ~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]** Examine the initial configuration on the switchport we are going ~~to apply MAB~~ **Consider moving the adverb (e.g., 'to quickly configure' → 'to configure quickly')** [Explanation: avoiding split infinitives when possible. Category: Grammar & Punctuation] configuration to, run the **show run interface GigabitEthernet 0/1** command.
+**Step ~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]** Examine the initial configuration on the ~~switchport~~ **Change 'switchport' to 'switch port' in prose** [Explanation: 'switch port' (two words) in narrative text. Category: Cisco Style Guide] we are going ~~to apply MAB~~ **Consider moving the adverb (e.g., 'to quickly configure' → 'to configure quickly')** [Explanation: avoiding split infinitives when possible. Category: Grammar & Punctuation] configuration to, run the **show run interface GigabitEthernet 0/1** command.
 
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 3~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]There are two different hardware pools used in this lab set. The switches either use **GigabitEthernet 0/x** or **GigabitEthernet ~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]/0/x** interface formatting so take note of~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]interfaces you have in your assigned lab environment.The lab pods use two different types of switches, which have different interface naming conventions. Depending on your assigned pod, your switch interfaces will be labeled either as GigabitEthernet 0/x or GigabitEthernet ~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]/0/x. Please verify~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]interface format is used in your lab environment. |
+| 3~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]There are two different hardware pools used in this lab set. The switches either use **GigabitEthernet 0/x** or **GigabitEthernet ~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]/0/x** interface formatting so take note of which interfaces you have in your assigned lab environment.The lab pods use two different types of switches, which have different interface naming conventions. Depending on your assigned pod, your switch interfaces will be labeled either as GigabitEthernet 0/x or GigabitEthernet ~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]/0/x. Please verify~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]interface format is used in your lab environment. |
 +=========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
@@ -779,8 +779,8 @@ Current configuration : 237 bytes\
 ~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation]\
 interface GigabitEthernet1/0/1\
 description Access-Point\
-switchport access vlan 50\
-switchport mode access\
+~~switchport~~ **Change 'switchport' to 'switch port' in prose** [Explanation: 'switch port' (two words) in narrative text. Category: Cisco Style Guide] access vlan 50\
+~~switchport~~ **Change 'switchport' to 'switch port' in prose** [Explanation: 'switch port' (two words) in narrative text. Category: Cisco Style Guide] mode access\
 access-session host-mode single-host\
 access-session closed\
 spanning-tree portfast edge\
@@ -799,8 +799,8 @@ service-policy type control subscriber POLICY_Gi1/0/1
 
 interface GigabitEthernet1/0/1\
 description Access-Point\
-switchport access vlan 50\
-switchport mode access\
+~~switchport~~ **Change 'switchport' to 'switch port' in prose** [Explanation: 'switch port' (two words) in narrative text. Category: Cisco Style Guide] access vlan 50\
+~~switchport~~ **Change 'switchport' to 'switch port' in prose** [Explanation: 'switch port' (two words) in narrative text. Category: Cisco Style Guide] mode access\
 access-session host-mode single-host\
 access-session closed\
 access-session port-control auto\
@@ -939,8 +939,8 @@ Current configuration : 356 bytes\
 ~~!~~ **Consider using a period instead of exclamation point** [Explanation: removing exclamation point from technical content. Category: Grammar & Punctuation]\
 interface GigabitEthernet1/0/1\
 description Access-Point\
-switchport access vlan 50\
-switchport mode access\
+~~switchport~~ **Change 'switchport' to 'switch port' in prose** [Explanation: 'switch port' (two words) in narrative text. Category: Cisco Style Guide] access vlan 50\
+~~switchport~~ **Change 'switchport' to 'switch port' in prose** [Explanation: 'switch port' (two words) in narrative text. Category: Cisco Style Guide] mode access\
 access-session host-mode single-host\
 access-session closed\
 access-session port-control auto\
@@ -963,7 +963,7 @@ event session-started match-all\
 10 class always do-until-failure\
 10 authenticate using dot1x priority 10\
 event authentication-failure match-first\
-~~5~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] class DOT1X_FAILED do-until-failure\
+5 class DOT1X_FAILED do-until-failure\
 10 terminate dot1x\
 20 authenticate using mab priority 20\
 **10 class DOT1X_NO_RESP do-until-failure\
@@ -1007,27 +1007,27 @@ C. Completion of successful 802.1X authentication
 
 D. Initial port configuration during switch boot-up
 
-~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which attribute value does a Cisco Catalyst switch use ~~to uniquely identify~~ **Consider moving the adverb (e.g., 'to quickly configure' → 'to configure quickly')** [Explanation: avoiding split infinitives when possible. Category: Grammar & Punctuation] a MAB request to a RADIUS server?
+2\. Which attribute value does a Cisco Catalyst switch use ~~to uniquely identify~~ **Consider moving the adverb (e.g., 'to quickly configure' → 'to configure quickly')** [Explanation: avoiding split infinitives when possible. Category: Grammar & Punctuation] a MAB request to a RADIUS server?
 
-A. Attribute ~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] (Username) set to \"MAB\"
+A. Attribute 1 (Username) set to \"MAB\"
 
-B. D. Attribute ~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] (Password) set to \"MAC-BYPASS\"
+B. D. Attribute 2 (Password) set to \"MAC-BYPASS\"
 
 C. Attribute 31 (Calling-Station-Id) cleared
 
-D. Attribute ~~6~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] (Service-Type) set to 10 (Call-Check)
+D. Attribute 6 (Service-Type) set to 10 (Call-Check)
 
-~~3~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. What is a key security limitation of MAB?
+3\. What is a key security limitation of MAB?
 
 A. It authenticates only user credentials, not devices.
 
 B. It can be bypassed easily by spoofing a MAC address.
 
-C. It enforces authentication at Layer ~~3~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] instead of Layer 2.
+C. It enforces authentication at Layer 3 instead of Layer 2.
 
 D. It prevents fallback to other authentication methods.
 
-~~4~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which Cisco Catalyst switch CLI command verifies whether a device was authenticated via MAB on a specific port?
+4\. Which Cisco Catalyst switch CLI command verifies whether a device was authenticated via MAB on a specific port?
 
 A. **show authentication status**
 
@@ -1037,7 +1037,7 @@ C. **show running-config interface**
 
 D. **show mab sessions**
 
-~~5~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. When configuring a WLAN profile on a Cisco Catalyst Wireless Controller for MAB-only authentication, which Layer ~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] security settings are required?
+5\. When configuring a WLAN profile on a Cisco Catalyst Wireless Controller for MAB-only authentication, which Layer ~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] security settings are required?
 
 A. Enable WPA2-Enterprise and 802.1X
 
@@ -1047,7 +1047,7 @@ C. Enable MAC Filtering and disable 802.1X
 
 D. Enable WPA2-Personal with a pre-shared key
 
-~~6~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. During the Central Web Authentication (CWA) process, when does the network access device typically ~~initiate~~ **start** [Explanation: 'start' or 'begin' instead of 'initiate'. Category: Cisco Style Guide] a MAB request for a client?
+6\. During the Central Web Authentication (CWA) process, when does the network access device typically ~~initiate~~ **start** [Explanation: 'start' or 'begin' instead of 'initiate'. Category: Cisco Style Guide] a MAB request for a client?
 
 A. After 802.1X times out and no supplicant is present
 
@@ -1057,7 +1057,7 @@ C. When DNS resolution for the guest portal fails
 
 D. Before assigning an IP address to the client
 
-~~7~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Why should DNS traffic typically be excluded (denied) in a redirect ACL for Central Web Authentication (CWA)?
+7\. Why should DNS traffic typically be excluded (denied) in a redirect ACL for Central Web Authentication (CWA)?
 
 A. DNS traffic must be dropped before HTTP redirection occurs.
 
@@ -1135,4 +1135,4 @@ Summary Challenge
 | **text** | Text to add (bold) |
 | [Explanation: ...] | Rationale for change |
 
-*Generated by Course AI Editor on 2026-03-04 22:01*
+*Generated by Course AI Editor on 2026-03-09 18:32*

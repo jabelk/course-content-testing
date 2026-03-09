@@ -5,7 +5,7 @@ Copy this document into Word to see Track Changes formatting.
 
 ---
 
-**Total Changes**: 265 (Auto-fix: 121, Review: 112, Questions: 32)
+**Total Changes**: 250 (Auto-fix: 124, Review: 94, Questions: 32)
 
 ---
 
@@ -58,7 +58,7 @@ Day-Zero Operations
 
 You have just powered on racks of new Cisco Nexus switches in the data center. The project deadline is tight, and manual configuration for each device would consume hours and risk introducing inconsistencies. This is where Day-Zero operations come in.
 
-Day-Zero operations refer to the automated process of bringing a network device from its initial power-on state to a functional, production-ready configuration with minimal manual intervention. This stage is critical for accelerating deployments, reducing human error, and ensuring consistent configurations across all devices---exactly what you need to meet your deployment schedule.
+Day-Zero operations ~~refer to~~ **see** [Explanation: 'see' instead of 'refer to' per Cisco Style Guide C-13.1. Category: Cisco Style Guide] the automated process of bringing a network device from its initial power-on state to a functional, production-ready configuration with minimal manual intervention. This stage is critical for accelerating deployments, reducing human error, and ensuring consistent configurations across all devices---exactly what you need to meet your deployment schedule.
 
 On Cisco Nexus devices running the Cisco Nexus Operating System (NX-OS), foundational automation capabilities support the entire device lifecycle:
 
@@ -145,7 +145,7 @@ POAP offers several benefits, including:
 
 POAP also integrates with existing network management workflows and automation tools, enabling seamless Day-Zero provisioning as part of broader network operations.
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. What is the primary goal of Day-Zero operations in Cisco Nexus device deployment?
+1\. What is the primary goal of Day-Zero operations in Cisco Nexus device deployment?
 
 A. To monitor network traffic continuously
 
@@ -187,7 +187,7 @@ To understand how the process unfolds, let's walk through each stage in the foll
 
 By using POAP, you transform what could be hours of manual work into an automated, repeatable workflow. This ensures all your Cisco Nexus switches are configured and ready for production in minutes.
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. What is the purpose of DHCP Option 66 in the POAP process for Cisco Nexus switches?
+1\. What is the purpose of DHCP Option 66 in the POAP process for Cisco Nexus switches?
 
 A. To assign a temporary IP address to the switch
 
@@ -205,7 +205,7 @@ The Cisco provided poap.py Python script automates Day-Zero provisioning and upg
 
 The script requires several user-editable parameters to customize provisioning:
 
--   **hostname:** The file server's hostname or IP address from~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]files are copied.
+-   **hostname:** The file server's hostname or IP address from which files are copied.
 
 -   **transfer_protocol:** The protocol used for file transfer (Secure Copy Protocol \[SCP\], FTP, SFTP, HTTP, HTTPS, TFTP). The default is SCP.
 
@@ -265,7 +265,7 @@ The script can also copy extra files such as monitoring agents, scripts, or tarb
 
 download_user_app(\"/source\", \"filename.tar\", \"/destination\", unpack=True, delete_after_unpack=True)
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which parameter in the poap.py Python script specifies how the Cisco Nexus switch identifies itself to the file server to receive the correct configuration?
+1\. Which parameter in the poap.py Python script specifies how the Cisco Nexus switch identifies itself to the file server to receive the correct configuration?
 
 A. **hostname**
 
@@ -329,7 +329,7 @@ Device Information
 
 Command List
 
-The table describes the commands that are used in this activity. The commands are listed in alphabetical order so that you can easily locate the information that you need. Refer to this list if you need configuration command assistance during the lab activity.
+The table describes the commands that are used in this activity. The commands are listed in alphabetical order so that you can easily locate the information that you need. ~~Refer to~~ **See** [Explanation: 'see' instead of 'refer to' per Cisco Style Guide C-13.1. Category: Cisco Style Guide] this list if you need configuration command assistance during the lab activity.
 
   ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   Command                        Description
@@ -376,14 +376,14 @@ full-duplex, 1000 Mb/s\
 Auto-Negotiation is turned on\
 Auto-mdix is turned off\
 EtherType is 0x0000\
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] minute input rate 1528 bits/sec, 0 packets/sec\
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] minute output rate 624 bits/sec, 0 packets/sec\
+1 minute input rate 1528 bits/sec, 0 packets/sec\
+1 minute output rate 624 bits/sec, 0 packets/sec\
 Rx\
 707 input packets 103 unicast packets 124 multicast packets\
 480 broadcast packets 210619 bytes\
 Tx\
 100 output packets 64 unicast packets 32 multicast packets\
-~~4~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] broadcast packets 20339 bytes\
+4 broadcast packets 20339 bytes\
 Management transceiver: Absent\
 Active connector: Link Down\
 Configured Media-type: RJ45
@@ -655,7 +655,7 @@ drwxr-xr-x 46 root root 4096 Aug 19 07:16 ..\
 -rw-r\~~--~~ **—** [Explanation: em dash (—) instead of double hyphen (--). Category: Grammar & Punctuation]r\~~--~~ **—** [Explanation: em dash (—) instead of double hyphen (--). Category: Grammar & Punctuation] ~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] root root 111596 Aug 19 09:07 poap.py\
 -rw-r\~~--~~ **—** [Explanation: em dash (—) instead of double hyphen (--). Category: Grammar & Punctuation]r\~~--~~ **—** [Explanation: em dash (—) instead of double hyphen (--). Category: Grammar & Punctuation] ~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] root root 111553 Aug 19 09:07 poap.py.md5
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Why must you update the MD5 checksum for poap.py and configuration files after editing them?
+1\. Why must you update the MD5 checksum for poap.py and configuration files after editing them?
 
 A. To allow TFTP to transfer files faster
 
@@ -805,7 +805,7 @@ This command will reboot the system. (y/n)? \[n\] **y**
 To start POAP, you would normally erase the startup configuration and reload a device. In this remote lab, the startup configuration enables POAP boot and specifies the boot image to prevent the virtual switch from getting stuck in the bootloader. This allows the switch to be provisioned through POAP despite a non-empty startup configuration.
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| 2~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]If you are observing the switch boot process via CML, the switch will ask you if you wish to go back to normal setup. There is no need to press anything, wait for the switch to execute the POAP boot. |
+| 2~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]If you are observing the switch boot process via CML, the switch will ask you if you ~~wish to~~ **want to** [Explanation: 'want to' instead of 'wish to'. Category: Cisco Style Guide] go back to normal setup. There is no need to press anything, wait for the switch to execute the POAP boot. |
 +=============================================================================================================================================================================================================+
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
@@ -867,7 +867,7 @@ You will see the switch send out DHCP requests, receive an IP address, netmask, 
 
 These logs show how POAP automates what would otherwise be a manual provisioning process---assigning network details, pulling scripts, validating integrity, and finally applying the intended configuration.
 
-POAP takes about ~~5~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] minutes as the switch will reload after applying its configuration.
+POAP takes about 5 minutes as the switch will reload after applying its configuration.
 
 +--------------------------------------------------------------------------------------------------------------------------------------------------+
 | 3~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]**If POAP stalls at DHCP:** Re-check the hardware Ethernet Lines in the DHCP config file /etc/dhcp/dhcpd.conf~~.                               ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]|
@@ -961,7 +961,7 @@ copp profile lenient\
 \
 \<\... output omitted \...\>
 
-~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. During the POAP workflow, what action does the switch take immediately after downloading the poap.py script?
+2\. During the POAP workflow, what action does the switch take immediately after downloading the poap.py script?
 
 A. Applies ~~VLANs~~ **virtual LAN (VLAN)** [Explanation: Acronym 'VLAN' not expanded on first use. Category: Acronyms] and routing protocols directly
 
@@ -997,14 +997,14 @@ PING 192.168.10.102 (192.168.10.102): 56 data bytes\
 64 bytes from 192.168.10.102: seq=~~3~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] ttl=42 time=9.197 ms\
 64 bytes from 192.168.10.102: seq=~~4~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] ttl=42 time=10.131 ms\
 \-\~~--~~ **—** [Explanation: em dash (—) instead of double hyphen (--). Category: Grammar & Punctuation] 192.168.10.102 ping statistics \-\~~--~~ **—** [Explanation: em dash (—) instead of double hyphen (--). Category: Grammar & Punctuation]\
-~~5~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] packets transmitted, ~~5~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] packets received, 0% packet loss\
+5 packets transmitted, ~~5~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] packets received, 0% packet loss\
 round-trip min/avg/max = 7.096/9.233/10.198 ms
 
 If the ping is successful, it confirms that the fabric is correctly provisioned, and both servers are now reachable through the configured leaf switches.
 
 This lab simulation provides a comprehensive, hands-on experience with Cisco POAP, enabling network engineers ~~to efficiently deploy~~ **Consider moving the adverb (e.g., 'to quickly configure' → 'to configure quickly')** [Explanation: avoiding split infinitives when possible. Category: Grammar & Punctuation] and manage Cisco Nexus devices at scale.
 
-~~3~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. The poap.py script that is used in the POAP process contains an options dictionary. Which parameter within this dictionary is responsible for instructing the Cisco Nexus switch to select a configuration file based on its unique serial number?
+3\. The poap.py script that is used in the POAP process contains an options dictionary. Which parameter within this dictionary is responsible for instructing the Cisco Nexus switch to select a configuration file based on its unique serial number?
 
 A. transfer_protocol
 
@@ -1034,7 +1034,7 @@ By applying what you have learned in this learning content, you will be able to 
 
 Summary Challenge
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. What is one of the main benefits of using POAP in large-scale data center deployments?
+1\. What is one of the main benefits of using POAP in large-scale data center deployments?
 
 A. Provides continuous traffic monitoring
 
@@ -1044,7 +1044,7 @@ C. Eliminates the need for software image
 
 D. Reduces the number of DHCP servers required
 
-~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which day-zero provisioning technology can execute a Python script as part of its workflow?
+2\. Which day-zero provisioning technology can execute a Python script as part of its workflow?
 
 A. POAP
 
@@ -1054,7 +1054,7 @@ C. Etherboot
 
 D. gPXE
 
-~~3~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which step occurs first when a Cisco Nexus switch boots without a startup configuration and enters the POAP workflow?
+3\. Which step occurs first when a Cisco Nexus switch boots without a startup configuration and enters the POAP workflow?
 
 A. The switch downloads the Python script from the TFTP/HTTP server.
 
@@ -1064,7 +1064,7 @@ C. The switch acts as a DHCP client to obtain an IP address and boot parameters.
 
 D. The switch installs the target NX-OS image.
 
-~~4~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which identifier can POAP use ~~to uniquely match~~ **Consider moving the adverb (e.g., 'to quickly configure' → 'to configure quickly')** [Explanation: avoiding split infinitives when possible. Category: Grammar & Punctuation] a Cisco Nexus switch to the correct configuration file?
+4\. Which identifier can POAP use ~~to uniquely match~~ **Consider moving the adverb (e.g., 'to quickly configure' → 'to configure quickly')** [Explanation: avoiding split infinitives when possible. Category: Grammar & Punctuation] a Cisco Nexus switch to the correct configuration file?
 
 A. Hostname
 
@@ -1074,7 +1074,7 @@ C. VLAN ID
 
 D. IP address of the management interface
 
-~~5~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which DHCP option does POAP use to locate the TFTP server to obtain the POAP script?
+5\. Which DHCP option does POAP use to locate the TFTP server to obtain the POAP script?
 
 A. Option 66
 
@@ -1084,7 +1084,7 @@ C. Option 15
 
 D. Option 151
 
-~~6~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which DHCP option returns a list of TFTP servers that can be used by POAP to retrieve the configuration file?
+6\. Which DHCP option returns a list of TFTP servers that can be used by POAP to retrieve the configuration file?
 
 A. Option 47
 
@@ -1094,7 +1094,7 @@ C. Option 67
 
 D. Option 150
 
-~~7~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which two protocols are required to ~~leverage~~ **use** [Explanation: 'use' instead of 'leverage'. Category: Cisco Style Guide] POAP? (Choose two.)
+7\. Which two protocols are required to ~~leverage~~ **use** [Explanation: 'use' instead of 'leverage'. Category: Cisco Style Guide] POAP? (Choose two.)
 
 A. DHCP
 
@@ -1163,4 +1163,4 @@ Summary Challenge
 | **text** | Text to add (bold) |
 | [Explanation: ...] | Rationale for change |
 
-*Generated by Course AI Editor on 2026-03-04 22:00*
+*Generated by Course AI Editor on 2026-03-09 18:30*

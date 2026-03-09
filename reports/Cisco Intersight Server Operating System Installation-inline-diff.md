@@ -5,7 +5,7 @@ Copy this document into Word to see Track Changes formatting.
 
 ---
 
-**Total Changes**: 168 (Auto-fix: 101, Review: 39, Questions: 28)
+**Total Changes**: 154 (Auto-fix: 112, Review: 14, Questions: 28)
 
 ---
 
@@ -21,7 +21,7 @@ This topic describes how to install an operating system by using Cisco Intersigh
 
 Introduction to Operating System Installation Workflow
 
-As the name of the server action implies, the Install operating system action installs an operating system on the target server. This capability is different than traditional tools from operating system vendors or utility software providers that lack an underlying knowledge of the specific hardware target. Cisco Intersight operating system installation streamlines the integration of vendor-specific drivers and tools into the operating system installation process.
+As the name of the server action implies, the Install operating system action installs an operating system on the target server. This capability is ~~different than~~ **different from** [Explanation: 'different from' instead of 'different than'. Category: Cisco Style Guide] traditional tools from operating system vendors or utility software providers that lack an underlying knowledge of the specific hardware target. Cisco Intersight operating system installation streamlines the integration of vendor-specific drivers and tools into the operating system installation process.
 
 ![](media/image1.bin){width="6.333333333333333in" height="3.5625in"}
 
@@ -35,11 +35,11 @@ Cisco Intersight currently supports an unattended operating system installation 
 
 -   **Custom:** The administrator provides a configuration file containing an installation script or configuration (kickstart) file with the necessary placeholders for the parameters. A placeholder is a variable for a configurable entity. Cisco Intersight assigns the value that the administrator enters in the placeholders to the appropriate parameters.
 
--   **Embedded:** The configuration (kickstart) file is embedded in the operating system ISO [QUESTION: Unknown acronym 'ISO' - please provide expansion or confirm intentional. Category: Acronyms] image. The ISO image contains the necessary references to the kickstart file from the bootloader configuration to execute an unattended operating system installation. This option is suitable for an operating system image that includes a configuration file.
+-   **Embedded:** The configuration (kickstart) file is embedded in the operating system ISO image. The ISO image contains the necessary references to the kickstart file from the bootloader configuration to execute an unattended operating system installation. This option is suitable for an operating system image that includes a configuration file.
 
 ![](media/image3.bin){width="6.333333333333333in" height="3.5625in"}
 
-You will ~~initiate~~ **start** [Explanation: 'start' or 'begin' instead of 'initiate'. Category: Cisco Style Guide] the operating system installation wizard for any method by navigating to the target server on~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]you want to install the operating system. From the **Action** menu, choose **Install Operating System**.
+You will ~~initiate~~ **start** [Explanation: 'start' or 'begin' instead of 'initiate'. Category: Cisco Style Guide] the operating system installation wizard for any method by navigating to the target server on which you want to install the operating system. From the **Action** menu, choose **Install Operating System**.
 
 ![](media/image4.bin){width="6.333333333333333in" height="3.5625in"}
 
@@ -60,7 +60,7 @@ Each of these operating system installation type options has its use cases.
 
 ![](media/image5.bin){width="6.333333333333333in" height="3.5625in"}
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which of the following types of servers can be a target for an operating system installation from Cisco Intersight? (Choose three.)
+1\. Which of the following types of servers can be a target for an operating system installation from Cisco Intersight? (Choose three.)
 
 A. Cisco UCS B-Series in IMM mode
 
@@ -80,7 +80,7 @@ This topic lists currently supported hardware for operating system installation 
 
 Supported Hardware
 
-To use the operating system installation feature from Cisco Intersight, the type of target server on~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]an operating system is to be installed must be supported. Each management mode has specific supported servers for the operating system install feature.
+To use the operating system installation feature from Cisco Intersight, the type of target server on which an operating system is to be installed must be supported. Each management mode has specific supported servers for the operating system install feature.
 
 Supported Hardware for the Operating System Install Feature
 
@@ -181,9 +181,9 @@ The following limitations apply to target devices:
 
 -   Targets with the Internet Small Computer Systems Interface (iSCSI) and Non-Volatile Memory Express (NVMe) types are not supported.
 
--   The legacy boot mode installation does not support partitions greater than ~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] TIB. UEFI boot mode can be used for partitions greater than ~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation] TIB.
+-   The legacy boot mode installation does not support partitions greater than 2 TIB. UEFI boot mode can be used for partitions greater than 2 TIB.
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. For~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]operating system Intersight installation is supported on servers in standalone mode, but not on servers in Cisco IMM mode?
+1\. For which operating system Intersight installation is supported on servers in standalone mode, but not on servers in Cisco IMM mode?
 
 A. CentOS
 
@@ -221,9 +221,9 @@ From the navigation menu, ~~click on~~ **click** [Explanation: 'click' instead o
 
 In the **General** section of the wizard, enter the following details about the operating system image:
 
--   **Organization:** From the drop-down menu, select the organization to make a resource available to users. The organization can be a default or a specific entity, but it must be the same as the organization from~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]the operating system installation is triggered.
+-   **Organization:** From the ~~drop-down menu~~ **drop-down list** [Explanation: 'drop-down list' instead of 'drop-down menu' per Cisco St.... Category: Cisco Style Guide], select the organization to make a resource available to users. The organization can be a default or a specific entity, but it must be the same as the organization from which the operating system installation is triggered.
 
--   In the transfer protocol section, select the transfer protocol configured on the repository location. Depending on your chosen protocol, you will have to populate different options. The table below summarizes the configuration options for each transfer protocol.
+-   In the transfer protocol section, select the transfer protocol configured on the repository location. Depending on your chosen protocol, you will have to populate different options. The ~~table below~~ **following table** [Explanation: 'following' instead of 'below' per Cisco Style Guide C-17.1. Category: Cisco Style Guide] summarizes the configuration options for each transfer protocol.
 
   ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   NFS                                                                                                                                                                                                          CIFS                                                                                                                                                                                                          HTTP(S)
@@ -263,7 +263,7 @@ In the **Details** section of the wizard, enter the following details about the 
 
 After you add the operating system to the software repository, view the added operating system in the table view. Edit or delete details of the operating system in the table view.
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which one of the transfer protocols have configuration options for file location, mount option, and authentication?
+1\. Which one of the transfer protocols have configuration options for file location, mount option, and authentication?
 
 A. NFS
 
@@ -289,9 +289,9 @@ From the navigation menu, ~~click on~~ **click** [Explanation: 'click' instead o
 
 In the **General** section of the wizard, enter the following details about the SCU image:
 
--   **Organization:** From the drop-down menu, select the organization to make a resource available to users. The organization can be a default or a specific entity, but it must be the same as the organization from~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]the operating system installation is triggered.
+-   **Organization:** From the ~~drop-down menu~~ **drop-down list** [Explanation: 'drop-down list' instead of 'drop-down menu' per Cisco St.... Category: Cisco Style Guide], select the organization to make a resource available to users. The organization can be a default or a specific entity, but it must be the same as the organization from which the operating system installation is triggered.
 
--   In the transfer protocol section, select the transfer protocol configured on the repository location. Depending on your chosen protocol, you will populate different options. The table below summarizes the configuration options for each transfer protocol.
+-   In the transfer protocol section, select the transfer protocol configured on the repository location. Depending on your chosen protocol, you will populate different options. The ~~table below~~ **following table** [Explanation: 'following' instead of 'below' per Cisco Style Guide C-17.1. Category: Cisco Style Guide] summarizes the configuration options for each transfer protocol.
 
   ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   NFS                                                                                                                                                                                                          CIFS                                                                                                                                                                                                         HTTP(S)
@@ -316,7 +316,7 @@ In the **Details** section of the wizard, enter the following details about the 
 
 -   **Version:** The vendor-provided version of the utility.
 
--   **Supported Models:** The server model for~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]the image of the SCU is applicable. You can add up to four models.
+-   **Supported Models:** The server model for which the image of the SCU is applicable. You can add up to four models.
 
 +--------------------------------------------------------------------------------+
 | 6~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]SCU support is available for both Cisco UCS B-Series and C-Series servers. |
@@ -327,7 +327,7 @@ In the **Details** section of the wizard, enter the following details about the 
 
 -   **Set Tag:** Add an optional tag to identify and search for the SCU.
 
--   In the transfer protocol section, select the transfer protocol configured on the repository location. Depending on your chosen protocol, you will populate different options. The table below summarizes the configuration options for each transfer protocol.
+-   In the transfer protocol section, select the transfer protocol configured on the repository location. Depending on your chosen protocol, you will populate different options. The ~~table below~~ **following table** [Explanation: 'following' instead of 'below' per Cisco Style Guide C-17.1. Category: Cisco Style Guide] summarizes the configuration options for each transfer protocol.
 
 ![](media/image13.bin){width="6.333333333333333in" height="3.5625in"}
 
@@ -348,7 +348,7 @@ In the **Details** section of the wizard, enter the following details about the 
 
 After you add the SCU to the software repository, you can view the added SCU in the table view.
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which one of these transfer protocols for adding SCU is *not* available for IMM servers?
+1\. Which one of these transfer protocols for adding SCU is *not* available for IMM servers?
 
 A. NFS
 
@@ -373,7 +373,7 @@ Procedure for Installing an Operating System Using Cisco Source
 
 The operating system installation wizard using Cisco source guides you through the following six steps:
 
-1~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]The wizard offers confirmation of the server on~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]you want to install the operating system. Optionally, you can select two or more servers from the tabled view in Cisco Intersight and perform an automated installation of the operating system to the selected servers.
+1~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]The wizard offers confirmation of the server on which you want to install the operating system. Optionally, you can select two or more servers from the tabled view in Cisco Intersight and perform an automated installation of the operating system to the selected servers.
 
 2~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Select the operating system and the version that you want to install. The list contains all the operating system images that are defined in the software repository. If you do not see the operating system that you want to install, select **Add Operating System Image** to add it to the system.
 
@@ -391,7 +391,7 @@ The operating system installation wizard using Cisco source guides you through t
 
 ![](media/image16.bin){width="6.94027668416448in" height="3.9264195100612422in"}
 
-6~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Select~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]SCU that you want ~~to apply to~~ **Consider moving the adverb (e.g., 'to quickly configure' → 'to configure quickly')** [Explanation: avoiding split infinitives when possible. Category: Grammar & Punctuation] during installation. The list within this step contains all SCUs that are defined in the software repository.
+6~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Select which SCU that you want ~~to apply to~~ **Consider moving the adverb (e.g., 'to quickly configure' → 'to configure quickly')** [Explanation: avoiding split infinitives when possible. Category: Grammar & Punctuation] during installation. The list within this step contains all SCUs that are defined in the software repository.
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | 9~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Different utilities exist for different servers. For example, you cannot apply an SCU to a Cisco M6 server if it is used for a Cisco M5 server. Always ~~make sure~~ **ensure** [Explanation: 'ensure' or 'verify' instead of 'make sure'. Category: Cisco Style Guide] that you have an up-to-date and current SCU. |
@@ -421,11 +421,11 @@ The operating system installation wizard using Cisco source guides you through t
 
 -   Physical disks configured as Just a Bunch of Disks (JBOD)
 
-8~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]After you have completed the wizard, it provides a summary for you to ensure that all the settings are correct. This step is your opportunity to correct any settings.
+8~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]After you have completed the wizard, it provides a summary for you to ~~ensure that all~~ **Consider changing 'ensure' to 'verify' for checking/reviewing contexts** [Explanation: 'verify' when checking settings (ensure = make certain, v.... Category: Cisco Style Guide] the settings are correct. This step is your opportunity to correct any settings.
 
 You can monitor the installation status under the **Active Tasks** menu and watch the progress of the operating system install process. You can also monitor the progress using a keyboard, video, mouse (KVM) window to see what is happening in the output from the server. To see the embedded server KVM window inside Cisco Intersight, you must launch tunneled KVM from the server's **Action** menu.
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which is a supported type of storage controller for installing an operating system from Cisco Intersight?
+1\. Which is a supported type of storage controller for installing an operating system from Cisco Intersight?
 
 A. Cisco 12G Modular RAID
 
@@ -443,7 +443,7 @@ Custom Configuration File
 
 You can add new configuration files in the **Software \> Operating System Configuration Files** section. The list of configuration files is filtered based on the operating system vendor and version. If you want to create a new operating system configuration file, click the **Create New** button.
 
-When you install an operating system using the **Custom** option, the selected configuration file can be static or contain placeholders that you can change at run time. A best practice is to prepopulate the static file with the relevant configuration settings. You can also create a template file with placeholders instead of actual answers. If you use a file with custom placeholders, click the **Set Configuration** link on the **Configuration** page. For example, you might need to set the hostname and IP address values for each server. The uploaded answer file placeholder must conform to Golang template syntax.
+When you install an operating system using the **Custom** option, the selected configuration file can be static or contain placeholders that you can change at ~~run time~~ **runtime** [Explanation: 'runtime' (one word) as a noun/adjective. Category: Cisco Style Guide]. A best practice is to prepopulate the static file with the relevant configuration settings. You can also create a template file with placeholders instead of actual answers. If you use a file with custom placeholders, click the **Set Configuration** link on the **Configuration** page. For example, you might need to set the hostname and IP address values for each server. The uploaded answer file placeholder must conform to Golang template syntax.
 
 ![](media/image17.bin){width="6.940277777777778in" height="3.0403663604549434in"}
 
@@ -479,9 +479,9 @@ The custom operating system installation wizard walks you through six steps. The
 
 The following steps detail the procedure for **Custom** operating system installation:
 
-1~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]The wizard offers the confirmation of the server selection on~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]you want to install the operating system. Optionally, you can select two or more servers from the tabled view in Cisco Intersight and perform an automated installation of the operating system to selected servers.
+1~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]The wizard offers the confirmation of the server selection on which you want to install the operating system. Optionally, you can select two or more servers from the tabled view in Cisco Intersight and perform an automated installation of the operating system to selected servers.
 
-2~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]You will select~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]operating system and version that you wish to install. The list contains all the operating system images that are defined in the software repository. If you do not see the operating system that you want to install, select **Add Operating System Image** to add it to the system.
+2~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]You will select which operating system and version that you ~~wish to~~ **want to** [Explanation: 'want to' instead of 'wish to'. Category: Cisco Style Guide] install. The list contains all the operating system images that are defined in the software repository. If you do not see the operating system that you want to install, select **Add Operating System Image** to add it to the system.
 
 3~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]With the **Custom** option, you can upload a kickstart (configuration) file or a file with the necessary placeholders for configuration parameters. The Configuration page of the operating system installation wizard provides two tabs supporting management operating system installation files:
 
@@ -497,7 +497,7 @@ b~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Pun
 ```
 4~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]The requested values are pulled from the kickstart file that you use. The names that you use in the kickstart file are what you see to populate the variables. Click the eye icon to view the configuration file details.
 
-5~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Select the installation target, which is the partition in~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]you will install the operating system. The same type of installation target is supported with both the **Cisco** and **Custom** options.
+5~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Select the installation target, which is the partition in which you will install the operating system. The same type of installation target is supported with both the **Cisco** and **Custom** options.
 
 6~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]The wizard provides a summary for you to review, to verify that all the settings are correct. This step is your opportunity to correct the configuration.
 
@@ -505,7 +505,7 @@ You can monitor the installation status under the active tasks menu and watch th
 
 After you enter the required values, the installation prompts and warns the administrator that it will start the installation and overwrite any existing operating system that might be there.
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. The configuration file template must comply with~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]of the following programming languages?
+1\. The configuration file template must comply with which of the following programming languages?
 
 A. Golang
 
@@ -539,9 +539,9 @@ The **Embedded** operating system installation wizard walks you through five ste
 
 The following steps explain the detailed procedure for an **Embedded** operating system installation:
 
-1~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]The wizard offers confirmation of the server selection on~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]you want to install the operating system. Optionally, select two or more servers from the tabled view in Cisco Intersight and perform an automated installation of the operating system to the selected servers.
+1~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]The wizard offers confirmation of the server selection on which you want to install the operating system. Optionally, select two or more servers from the tabled view in Cisco Intersight and perform an automated installation of the operating system to the selected servers.
 
-2~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Select~~ which ~~ **If this is a restrictive clause, use 'that' instead of 'which'** [Explanation: using 'that' for restrictive clauses (no comma before 'wh.... Category: Grammar & Punctuation]operating system and version to install. The list contains all the operating system images that are defined in the software repository. You must add an embedded ISO image location to the software repository before you run an operating system install procedure.
+2~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Select which operating system and version to install. The list contains all the operating system images that are defined in the software repository. You must add an embedded ISO image location to the software repository before you run an operating system install procedure.
 
 3~~.  ~~ **. ** [Explanation: single space after period. Category: Grammar & Punctuation]Select the **Embedded** option. You will not be able to modify your target operating system configuration. Your configuration should be embedded in the ISO image that you selected in the previous step.
 
@@ -556,7 +556,7 @@ From Cisco Intersight, you can monitor the limited execution flow for the operat
 %post \~~--~~ **—** [Explanation: em dash (—) instead of double hyphen (--). Category: Grammar & Punctuation]interpreter=busybox \~~--~~ **—** [Explanation: em dash (—) instead of double hyphen (--). Category: Grammar & Punctuation]ignorefailure=true ESXI_INSTALL_LOG=/var/log/esxi_install.log\
 echo \\\"OS INSTALL COMPLETED\\\" \>\> /var/log/Xinstall.log /opt/ucs_tool_esxi/ucs_ipmitool write_file /var/log/Xinstall.log osProgress.log
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which two ISO utilities can be used to create ISO files with embedded configuration files (kickstart files)? (Choose two.)
+1\. Which two ISO utilities can be used to create ISO files with embedded configuration files (kickstart files)? (Choose two.)
 
 A. genisofs
 
@@ -636,9 +636,9 @@ reboot
 +=========================================================================================================================================+
 +-----------------------------------------------------------------------------------------------------------------------------------------+
 
-For more examples of kickstart files for different operating system versions, refer to <https://github.com/CiscoDevNet/intersight-BMaaS/tree/main/os-install/kickstart-samples>.
+For more examples of kickstart files for different operating system versions, ~~refer to~~ **see** [Explanation: 'see' instead of 'refer to' per Cisco Style Guide C-13.1. Category: Cisco Style Guide] <https://github.com/CiscoDevNet/intersight-BMaaS/tree/main/os-install/kickstart-samples>.
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which two types of placeholders exist in the operating system configuration files? (Choose two.)
+1\. Which two types of placeholders exist in the operating system configuration files? (Choose two.)
 
 A. automatic
 
@@ -662,7 +662,7 @@ You can use a password encryption service for both **Cisco** and **Custom** oper
 
 For VMware vSphere ESXi and other Linux-based operating systems, you can generate a secure (hashed) password on another Linux-based system using the SHA-512 algorithm with the **mkpasswd \~~--~~ **—** [Explanation: em dash (—) instead of double hyphen (--). Category: Grammar & Punctuation]method=sha-512** command. Alternatively, use an online encoding source to generate the password by specifying **SHA-512** in the protocol options.
 
-Windows-based systems use the base64 method to generate an encrypted password. Confirm that you set the destination character to UTF-16LE. To get the password, apply a password encrypting service and append the password with **AdministratorPassword**. For example, if your password is **myPassword1234**, enter **myPassword1234AdministratorPassword**. Enable the **Password provided is in encrypted format** check box to use an encrypted password in the **Password** field in the operating system installation wizard.
+Windows-based systems use the base64 method to generate an encrypted password. Confirm that you set the destination character to UTF-16LE. To get the password, apply a password encrypting service and append the password with **AdministratorPassword**. For example, if your password is **myPassword1234**, enter **myPassword1234AdministratorPassword**. ~~Enable the **Password provided is in encrypted format** check box~~ **Change 'Enable the X check box' to 'Check the X check box'** [Explanation: 'check' for activating a check box, not 'enable' per Cisc.... Category: Cisco Style Guide] to use an encrypted password in the **Password** field in the operating system installation wizard.
 
 If you use custom templates to install Windows, you must provide two placeholder passwords for the Auto Logon and the Administrator passwords in the following formats in the answer file:
 
@@ -702,7 +702,7 @@ When you populate these two placeholders, passwords are generated, and Cisco Int
 \<PlainText\>false\</PlainText\>\
 \</AdministratorPassword\>
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which encoding method is used in Windows-based systems to generate an encrypted password?
+1\. Which encoding method is used in Windows-based systems to generate an encrypted password?
 
 A. ASCII
 
@@ -782,9 +782,9 @@ The following example of a CSV file shows two headers. The first header, and val
 
 ![](media/image22.bin){width="6.333333333333333in" height="3.5625in"}
 
-For more examples of kickstart files for different operating system versions, refer to <https://github.com/CiscoDevNet/intersight-BMaaS/blob/main/os-install/bulk-install-csv-samples/>
+For more examples of kickstart files for different operating system versions, ~~refer to~~ **see** [Explanation: 'see' instead of 'refer to' per Cisco Style Guide C-13.1. Category: Cisco Style Guide] <https://github.com/CiscoDevNet/intersight-BMaaS/blob/main/os-install/bulk-install-csv-samples/>
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which of the following encoding formats is recommended for creating text-based CSV files?
+1\. Which of the following encoding formats is recommended for creating text-based CSV files?
 
 A. ASCII
 
@@ -806,7 +806,7 @@ Form
 
 Item Group
 
-~~1~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which of the following operating system installation types are available in the Cisco Intersight? (Choose three.)
+1\. Which of the following operating system installation types are available in the Cisco Intersight? (Choose three.)
 
 A. Cisco
 
@@ -820,7 +820,7 @@ E. Repository
 
 F. Third-party
 
-~~2~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which of the following types of servers are supported targets for the operating system installation feature from the Cisco Intersight? (Choose three.)
+2\. Which of the following types of servers are supported targets for the operating system installation feature from the Cisco Intersight? (Choose three.)
 
 A. B-Series
 
@@ -834,7 +834,7 @@ E. Third-party
 
 F. X-Series
 
-~~3~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which of the following transfer protocols are available options for adding operating system images and SCU files in the Cisco Intersight? (Choose three.)
+3\. Which of the following transfer protocols are available options for adding operating system images and SCU files in the Cisco Intersight? (Choose three.)
 
 A. CIFS
 
@@ -850,7 +850,7 @@ F. SFTP
 
 G. TFTP
 
-~~4~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. When using the custom source for the operating system installation feature using Cisco Intersight, which of the following options are available for selecting the configuration file? (Choose two.)
+4\. When using the custom source for the operating system installation feature using Cisco Intersight, which of the following options are available for selecting the configuration file? (Choose two.)
 
 A. Embedded
 
@@ -862,7 +862,7 @@ D. Network Share
 
 E. Software Repository
 
-~~5~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which of the following steps is mandatory in the operating system installation process using embedded source?
+5\. Which of the following steps is mandatory in the operating system installation process using embedded source?
 
 A. Populate placeholders
 
@@ -872,7 +872,7 @@ C. Select operating system image
 
 D. Select SCU
 
-~~6~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which of the following placeholders is mandatory for all types of operating systems?
+6\. Which of the following placeholders is mandatory for all types of operating systems?
 
 A. DISKIDPLACEHOLDER
 
@@ -882,7 +882,7 @@ C. PARTITIONIDPLACEHOLDER
 
 D. PARTITIONPLACEHOLDER
 
-~~7~~ **Spell out the number (e.g., '3 items' → 'three items')** [Explanation: spelling out numbers one through nine in prose. Category: Grammar & Punctuation]\. Which of the following is the correct separator for values of parameters in a CSV file used for the operating system install feature in the Cisco Intersight?
+7\. Which of the following is the correct separator for values of parameters in a CSV file used for the operating system install feature in the Cisco Intersight?
 
 A. Comma
 
@@ -931,4 +931,4 @@ Describe how to install an operating system
 | **text** | Text to add (bold) |
 | [Explanation: ...] | Rationale for change |
 
-*Generated by Course AI Editor on 2026-03-04 22:00*
+*Generated by Course AI Editor on 2026-03-09 18:29*
