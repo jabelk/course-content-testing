@@ -6,6 +6,9 @@ python-docx>=0.8.11      # DOCX file manipulation
 PyYAML>=6.0              # YAML rule configuration
 lxml>=4.9.0              # XML processing for track changes
 
+# AI features (optional - for AI-powered editorial suggestions)
+boto3>=1.26.0            # AWS Bedrock for Claude API
+
 # MCP Server (optional - for Cursor/Claude Code integration)
 fastmcp>=0.1.0           # Model Context Protocol server framework
 

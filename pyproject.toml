@@ -30,6 +30,9 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+ai = [
+    "boto3>=1.26.0",  # AWS Bedrock for Claude API
+]
 mcp = [
     "fastmcp>=0.1.0",
 ]
@@ -38,7 +41,7 @@ dev = [
     "pytest-cov>=4.0.0",
 ]
 all = [
-    "course-content-testing[mcp,dev]",
+    "course-content-testing[ai,mcp,dev]",
 ]
 
 [project.scripts]
