@@ -25,7 +25,7 @@ except ImportError:
 
 
 # API Configuration - AWS Bedrock
-AWS_REGION = os.environ.get("AWS_REGION", "us-east-1")
+AWS_REGION = os.environ.get("AWS_REGION", "us-east-2")
 # Bedrock model IDs: https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html
 # Default: Claude 3.5 Sonnet v2 (on-demand, no inference profile needed)
 # For Opus 4.5+, set BEDROCK_MODEL_ID to an inference profile ARN
