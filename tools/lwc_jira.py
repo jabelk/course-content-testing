@@ -257,6 +257,8 @@ class LWCJiraClient:
         pr_title: str = None,
         linting_passed: bool = True,
         issues_count: int = 0,
+        total_issues: int = 0,
+        auto_fixed: int = 0,
         create_if_missing: bool = False
     ) -> Optional[str]:
         """
@@ -270,6 +272,8 @@ class LWCJiraClient:
             pr_title: PR title (alternative source for ticket ID)
             linting_passed: Whether linting passed
             issues_count: Number of editorial issues needing review
+            total_issues: Total number of issues found
+            auto_fixed: Number of issues auto-fixed
             create_if_missing: Create a new ticket if none found
 
         Returns:
@@ -317,7 +321,9 @@ class LWCJiraClient:
         status_emoji = "✓" if linting_passed and issues_count == 0 else "⚠️"
         comment = f"{status_emoji} Editorial Review Complete\n\n"
         comment += f"- Linting: {'Passed' if linting_passed else 'Failed'}\n"
-        comment += f"- Editorial Issues Needing Review: {issues_count}\n"
+        comment += f"- Issues Found: {total_issues}\n"
+        comment += f"- Auto-Fixed: {auto_fixed}\n"
+        comment += f"- Needs Review: {issues_count}\n"
         comment += f"- PR: {pr_url}"
 
         try:
@@ -362,6 +368,18 @@ def main():
         default=0,
         help="Number of editorial issues needing review"
     )
+    pr_parser.add_argument(
+        "--total-issues",
+        type=int,
+        default=0,
+        help="Total number of editorial issues found"
+    )
+    pr_parser.add_argument(
+        "--auto-fixed",
+        type=int,
+        default=0,
+        help="Number of issues auto-fixed"
+    )
     pr_parser.add_argument("--project-key", help="Jira project key (default: LACP)")
     pr_parser.add_argument(
         "--create-if-missing",
@@ -385,6 +403,8 @@ def main():
                 pr_title=args.pr_title,
                 linting_passed=args.linting_passed,
                 issues_count=args.issues_count,
+                total_issues=args.total_issues,
+                auto_fixed=args.auto_fixed,
                 create_if_missing=args.create_if_missing
             )
             if result:

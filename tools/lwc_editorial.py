@@ -201,6 +201,52 @@ def _basic_validation(topic_file: TopicFile) -> List[EditorialIssue]:
     return issues
 
 
+def apply_safe_fixes(topic_file: TopicFile, issues: List[EditorialIssue], verbose: bool = False) -> int:
+    """
+    Apply SAFE severity fixes to the original file.
+
+    Args:
+        topic_file: The TopicFile object with path to original file
+        issues: List of editorial issues found
+        verbose: Whether to print verbose output
+
+    Returns:
+        Number of fixes applied
+    """
+    safe_issues = [i for i in issues if i.severity == FixSeverity.SAFE]
+    if not safe_issues:
+        return 0
+
+    # Read the original file content
+    content = topic_file.raw_content
+    fixes_applied = 0
+
+    # Apply fixes by rule type
+    for issue in safe_issues:
+        if issue.rule_id == 'DOUBLE_SPACE':
+            # Replace multiple consecutive spaces with single space (not in code blocks)
+            new_content = re.sub(r'(?<!`)  +(?!`)', ' ', content)
+            if new_content != content:
+                content = new_content
+                fixes_applied += 1
+        elif issue.rule_id == 'TRAILING_WHITESPACE':
+            # Remove trailing whitespace from all lines
+            lines = content.split('\n')
+            new_lines = [line.rstrip() for line in lines]
+            new_content = '\n'.join(new_lines)
+            if new_content != content:
+                content = new_content
+                fixes_applied += 1
+
+    # Write back to file if changes were made
+    if content != topic_file.raw_content:
+        topic_file.path.write_text(content, encoding='utf-8')
+        if verbose:
+            print(f"  - Applied {fixes_applied} fixes to {topic_file.filename}", file=sys.stderr)
+
+    return fixes_applied
+
+
 def _get_severity_badge(severity: FixSeverity) -> str:
     """Get visual badge for severity level."""
     badges = {
@@ -418,6 +464,11 @@ def main():
         action='store_true',
         help='Show detailed processing information'
     )
+    parser.add_argument(
+        '--apply-fixes',
+        action='store_true',
+        help='Apply SAFE fixes to files (writes changes back to disk)'
+    )
 
     args = parser.parse_args()
 
@@ -462,6 +513,12 @@ def main():
             if args.verbose:
                 print(f"  - {len(result.issues)} issues found", file=sys.stderr)
                 print(f"  - {len(topic_file.components)} components skipped", file=sys.stderr)
+
+            # Apply fixes if requested
+            if args.apply_fixes and result.issues:
+                fixes_count = apply_safe_fixes(topic_file, result.issues, args.verbose)
+                if fixes_count > 0 and args.verbose:
+                    print(f"  - Applied {fixes_count} auto-fixes", file=sys.stderr)
 
         # Format output
         if args.format == 'json':
