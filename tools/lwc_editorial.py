@@ -23,6 +23,7 @@ import json
 import os
 import sys
 import re
+import yaml
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
 
@@ -32,9 +33,384 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from component_skipper import extract_components, restore_components, strip_markers, map_line_number
 from lwc_models import (
     TopicFile, EditorialResult, EditorialIssue, EditorialCategory, FixSeverity,
-    PRComment, LintingResult
+    PRComment, LintingResult, EditorialRule, AcronymEntry
 )
 from lwc_constants import TOPIC_FILE_PATTERN
+
+# Global caches for rules and acronyms
+_EDITORIAL_RULES: List[EditorialRule] = []
+_ACRONYM_DATABASE: Dict[str, AcronymEntry] = {}
+
+
+def load_editorial_rules(rules_file: Optional[str] = None) -> List[EditorialRule]:
+    """
+    Load editorial rules from YAML file.
+
+    Args:
+        rules_file: Path to editorial_rules.yaml (default: same directory as this script)
+
+    Returns:
+        List of EditorialRule objects
+    """
+    global _EDITORIAL_RULES
+    if _EDITORIAL_RULES and not rules_file:
+        return _EDITORIAL_RULES
+
+    if rules_file is None:
+        rules_file = os.path.join(os.path.dirname(__file__), 'editorial_rules.yaml')
+
+    rules = []
+    try:
+        with open(rules_file, 'r', encoding='utf-8') as f:
+            data = yaml.safe_load(f)
+
+        for rule_data in data.get('rules', []):
+            if not rule_data.get('enabled', True):
+                continue
+
+            rule = EditorialRule(
+                id=rule_data.get('id', ''),
+                name=rule_data.get('name', ''),
+                category=rule_data.get('category', 'grammar'),
+                severity=rule_data.get('severity', 'medium'),
+                fix_type=rule_data.get('fix_type', 'REVIEW'),
+                pattern=rule_data.get('pattern', ''),
+                pattern_type=rule_data.get('pattern_type', 'regex'),
+                message=rule_data.get('message', ''),
+                suggestion_template=rule_data.get('suggestion_template', ''),
+                enabled=rule_data.get('enabled', True),
+                priority=rule_data.get('priority', 50),
+                context_skip=rule_data.get('context_skip', []),
+            )
+            rules.append(rule)
+
+        # Sort by priority (lower = higher priority)
+        rules.sort(key=lambda r: r.priority)
+        _EDITORIAL_RULES = rules
+
+    except Exception as e:
+        print(f"Warning: Could not load editorial rules from {rules_file}: {e}", file=sys.stderr)
+
+    return rules
+
+
+def load_acronym_database(db_file: Optional[str] = None) -> Dict[str, AcronymEntry]:
+    """
+    Load acronym database from JSON file.
+
+    Args:
+        db_file: Path to acronym-database.json (default: .claude/references/)
+
+    Returns:
+        Dictionary mapping acronyms to AcronymEntry objects
+    """
+    global _ACRONYM_DATABASE
+    if _ACRONYM_DATABASE and not db_file:
+        return _ACRONYM_DATABASE
+
+    if db_file is None:
+        # Default path relative to tools directory
+        db_file = os.path.join(
+            os.path.dirname(__file__), '..', '.claude', 'references', 'acronym-database.json'
+        )
+
+    acronyms = {}
+    try:
+        with open(db_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+
+        # Process each category in the database
+        for category, entries in data.items():
+            if category.startswith('_'):  # Skip metadata
+                continue
+
+            if isinstance(entries, dict):
+                for acronym, entry_data in entries.items():
+                    if isinstance(entry_data, dict):
+                        entry = AcronymEntry(
+                            acronym=acronym,
+                            expansion=entry_data.get('expansion', ''),
+                            category=category,
+                            full_name=entry_data.get('full_name'),
+                            first_use=entry_data.get('first_use'),
+                            subsequent=entry_data.get('subsequent', []),
+                            deprecated=entry_data.get('deprecated', False),
+                            well_known=entry_data.get('well_known', False),
+                            skip_expansion=entry_data.get('skip_expansion', False),
+                            notes=entry_data.get('notes'),
+                        )
+                        acronyms[acronym] = entry
+                    elif isinstance(entry_data, str):
+                        # Simple string entry (just expansion)
+                        entry = AcronymEntry(
+                            acronym=acronym,
+                            expansion=entry_data,
+                            category=category,
+                        )
+                        acronyms[acronym] = entry
+
+        _ACRONYM_DATABASE = acronyms
+
+    except Exception as e:
+        print(f"Warning: Could not load acronym database from {db_file}: {e}", file=sys.stderr)
+
+    return acronyms
+
+
+def apply_rule(rule: EditorialRule, content: str, filename: str, issue_counter: int) -> Tuple[List[EditorialIssue], int]:
+    """
+    Apply a single editorial rule to content.
+
+    Args:
+        rule: EditorialRule to apply
+        content: Text content to validate
+        filename: Source filename for issue IDs
+        issue_counter: Starting counter for issue IDs
+
+    Returns:
+        Tuple of (list of issues found, updated counter)
+    """
+    issues = []
+
+    if rule.pattern_type != 'regex' or not rule.pattern:
+        return issues, issue_counter
+
+    try:
+        pattern = re.compile(rule.pattern, re.IGNORECASE)
+    except re.error:
+        return issues, issue_counter
+
+    lines = content.split('\n')
+    for line_num, line in enumerate(lines, 1):
+        # Skip code blocks (simple heuristic)
+        if 'code_block' in rule.context_skip and line.strip().startswith('```'):
+            continue
+
+        # Skip inline code if needed
+        if 'inline_code' in rule.context_skip:
+            # Remove inline code for checking
+            check_line = re.sub(r'`[^`]+`', '', line)
+        else:
+            check_line = line
+
+        for match in pattern.finditer(check_line):
+            issue_counter += 1
+
+            # Generate suggestion based on rule
+            original = match.group(0)
+            suggested = _generate_suggestion(rule, original)
+
+            issue = EditorialIssue(
+                id=f"{filename}-{issue_counter:03d}",
+                category=rule.get_category_enum(),
+                severity=rule.get_fix_severity(),
+                line=line_num,
+                original=original,
+                suggested=suggested,
+                rule_id=rule.id,
+                rationale=rule.message
+            )
+            issues.append(issue)
+
+    return issues, issue_counter
+
+
+def _generate_suggestion(rule: EditorialRule, original: str) -> str:
+    """Generate a fix suggestion based on rule and matched text."""
+    # Common replacements based on rule ID patterns
+    replacements = {
+        'TERM_CLICK_ON': lambda m: re.sub(r'\bclick on\b', 'click', m, flags=re.I),
+        'TERM_IN_ORDER_TO': lambda m: re.sub(r'\bin order to\b', 'to', m, flags=re.I),
+        'TERM_UTILIZE': lambda m: re.sub(r'\butilize[sd]?\b', 'use', m, flags=re.I),
+        'TERM_ALLOWS_YOU_TO': lambda m: re.sub(r'\ballows you to\b', 'lets you', m, flags=re.I),
+        'TERM_MAKE_SURE': lambda m: re.sub(r'\b[Mm]ake sure\b', 'ensure', m),
+        'TERM_BLACKLIST': lambda m: re.sub(r'\bblacklist(?:ed|ing|s)?\b', 'blocked list', m, flags=re.I),
+        'TERM_WHITELIST': lambda m: re.sub(r'\bwhitelist(?:ed|ing|s)?\b', 'allowed list', m, flags=re.I),
+        'TERM_CISCO_SYSTEMS': lambda m: re.sub(r'\bCisco Systems\b', 'Cisco', m),
+        'TERM_REFER_TO': lambda m: re.sub(r'\b[Rr]efer to\b', 'see', m),
+        'PUNCT_DOUBLE_SPACE': lambda m: re.sub(r'  +', ' ', m),
+        'GRAMMAR_COMPOUND_WELL_KNOWN': lambda m: 'well-known',
+        'GRAMMAR_COMPOUND_REAL_TIME': lambda m: 'real-time',
+        'GRAMMAR_COMPOUND_END_TO_END': lambda m: 'end-to-end',
+    }
+
+    if rule.id in replacements:
+        return replacements[rule.id](original)
+
+    # Default: return original with suggestion note
+    return f"{original} -> [see suggestion]"
+
+
+def validate_acronyms(content: str, acronym_db: Dict[str, AcronymEntry], filename: str, issue_counter: int) -> Tuple[List[EditorialIssue], int]:
+    """
+    Validate acronyms in content against the database.
+
+    Checks for:
+    - Deprecated acronyms (FTD, FMC, DNA Center, etc.)
+    - Unknown acronyms not in database
+    - First-use expansion (REVIEW severity)
+
+    Args:
+        content: Text content to validate
+        acronym_db: Loaded acronym database
+        filename: Source filename for issue IDs
+        issue_counter: Starting counter for issue IDs
+
+    Returns:
+        Tuple of (list of issues found, updated counter)
+    """
+    issues = []
+
+    # Deprecated product names (multi-word)
+    DEPRECATED_PRODUCTS = {
+        "DNA Center": ("Cisco Catalyst Center", "DNA Center was rebranded to Cisco Catalyst Center"),
+        "Webex Teams": ("Webex", "Webex Teams was rebranded to simply 'Webex'"),
+        "Azure AD": ("Microsoft Entra ID", "Azure AD was rebranded to Microsoft Entra ID"),
+    }
+
+    lines = content.split('\n')
+
+    # Check deprecated product names
+    for line_num, line in enumerate(lines, 1):
+        for product, (replacement, notes) in DEPRECATED_PRODUCTS.items():
+            if product in line:
+                issue_counter += 1
+                issues.append(EditorialIssue(
+                    id=f"{filename}-{issue_counter:03d}",
+                    category=EditorialCategory.PRODUCT_NAMING,
+                    severity=FixSeverity.REVIEW,
+                    line=line_num,
+                    original=product,
+                    suggested=replacement,
+                    rule_id="PROD_DEPRECATED_NAME",
+                    rationale=notes
+                ))
+
+    # Acronym pattern: 2-6 uppercase letters
+    acronym_pattern = re.compile(r'\b([A-Z][A-Z0-9-]{1,5})\b')
+    seen_acronyms: set = set()
+
+    # Skip common terms that don't need expansion
+    SKIP_ACRONYMS = {
+        'OK', 'AM', 'PM', 'US', 'UK', 'TV', 'PC', 'ID', 'IP',
+        'GB', 'MB', 'KB', 'TB', 'CPU', 'RAM', 'ROM', 'USB', 'HTTP',
+        'HTTPS', 'HTML', 'CSS', 'JSON', 'XML', 'PDF', 'YAML', 'PNG',
+        'JPG', 'JPEG', 'GIF', 'SVG', 'MD', 'API', 'SDK', 'CLI', 'GUI',
+        'OS', 'VM', 'AWS', 'GCP', 'UI', 'UX', 'FAQ', 'TBD', 'TODO',
+        'NOTE', 'SD', 'WAN', 'LAN', 'GET', 'POST', 'PUT', 'DELETE',
+    }
+
+    in_code_block = False
+    for line_num, line in enumerate(lines, 1):
+        # Track code blocks
+        if line.strip().startswith('```'):
+            in_code_block = not in_code_block
+            continue
+
+        if in_code_block:
+            continue
+
+        # Remove inline code before scanning
+        check_line = re.sub(r'`[^`]+`', '', line)
+
+        for match in acronym_pattern.finditer(check_line):
+            acronym = match.group(1)
+
+            # Skip if already seen or in skip list
+            if acronym in seen_acronyms or acronym in SKIP_ACRONYMS:
+                continue
+
+            seen_acronyms.add(acronym)
+
+            # Look up in database
+            entry = acronym_db.get(acronym)
+
+            if entry:
+                # Check if deprecated
+                if entry.deprecated:
+                    issue_counter += 1
+                    suggested = entry.full_name or entry.first_use or f"[use full name instead of {acronym}]"
+                    issues.append(EditorialIssue(
+                        id=f"{filename}-{issue_counter:03d}",
+                        category=EditorialCategory.ACRONYM,
+                        severity=FixSeverity.REVIEW,
+                        line=line_num,
+                        original=acronym,
+                        suggested=suggested,
+                        rule_id="ACRONYM_DEPRECATED",
+                        rationale=entry.notes or f"'{acronym}' is deprecated"
+                    ))
+                elif not entry.well_known and not entry.skip_expansion:
+                    # Check if expanded on this line
+                    if f"({acronym})" not in line:
+                        issue_counter += 1
+                        suggested = entry.first_use or f"{entry.expansion} ({acronym})"
+                        issues.append(EditorialIssue(
+                            id=f"{filename}-{issue_counter:03d}",
+                            category=EditorialCategory.ACRONYM,
+                            severity=FixSeverity.REVIEW,
+                            line=line_num,
+                            original=acronym,
+                            suggested=suggested,
+                            rule_id="ACRONYM_FIRST_USE",
+                            rationale=f"Expand '{acronym}' on first use"
+                        ))
+            else:
+                # Unknown acronym - QUERY severity
+                issue_counter += 1
+                issues.append(EditorialIssue(
+                    id=f"{filename}-{issue_counter:03d}",
+                    category=EditorialCategory.ACRONYM,
+                    severity=FixSeverity.QUERY,
+                    line=line_num,
+                    original=acronym,
+                    suggested=f"[Please define '{acronym}']",
+                    rule_id="ACRONYM_UNKNOWN",
+                    rationale=f"Unknown acronym '{acronym}'. Please provide expansion."
+                ))
+
+    return issues, issue_counter
+
+
+def validate_product_naming(content: str, filename: str, issue_counter: int) -> Tuple[List[EditorialIssue], int]:
+    """
+    Validate Cisco product naming compliance.
+
+    Checks for:
+    - Possessive forms of Cisco products (Cisco ASA's -> the Cisco ASA)
+    - Deprecated product names
+
+    Args:
+        content: Text content to validate
+        filename: Source filename for issue IDs
+        issue_counter: Starting counter for issue IDs
+
+    Returns:
+        Tuple of (list of issues found, updated counter)
+    """
+    issues = []
+
+    # Cisco product possessive pattern
+    possessive_pattern = re.compile(r"Cisco\s+(\w+)'s\b")
+
+    lines = content.split('\n')
+    for line_num, line in enumerate(lines, 1):
+        for match in possessive_pattern.finditer(line):
+            issue_counter += 1
+            original = match.group(0)
+            product = match.group(1)
+            issues.append(EditorialIssue(
+                id=f"{filename}-{issue_counter:03d}",
+                category=EditorialCategory.PRODUCT_NAMING,
+                severity=FixSeverity.REVIEW,
+                line=line_num,
+                original=original,
+                suggested=f"the Cisco {product}",
+                rule_id="PROD_CISCO_POSSESSIVE",
+                rationale="Avoid possessive forms of Cisco product names; rephrase instead"
+            ))
+
+    return issues, issue_counter
 
 
 def load_topic_files(content_path: str) -> List[TopicFile]:
@@ -93,45 +469,75 @@ def preprocess_for_editorial(topic_file: TopicFile) -> TopicFile:
     return topic_file
 
 
-def validate_with_rules(topic_file: TopicFile, use_ai: bool = True) -> EditorialResult:
+def validate_with_rules(
+    topic_file: TopicFile,
+    use_ai: bool = True,
+    rules: Optional[List[EditorialRule]] = None,
+    acronym_db: Optional[Dict[str, AcronymEntry]] = None
+) -> EditorialResult:
     """
     Run editorial validation on preprocessed topic file content.
 
     Args:
         topic_file: TopicFile with clean_content populated
         use_ai: Whether to use AI enhancement (default: True)
+        rules: Optional list of EditorialRule objects (loads from YAML if not provided)
+        acronym_db: Optional acronym database (loads from JSON if not provided)
 
     Returns:
         EditorialResult with detected issues
     """
     issues = []
+    issue_counter = 0
 
-    # Try to use existing editorial_validation module
-    try:
-        from editorial_validation import validate_content, load_rules
-        rules = load_rules()
-        validation_results = validate_content(topic_file.clean_content, rules, use_ai=use_ai)
+    # Load rules if not provided
+    if rules is None:
+        rules = load_editorial_rules()
 
-        # Convert to our issue format
-        for i, result in enumerate(validation_results):
-            # Map line number back to original file
-            original_line = map_line_number(result.get('line', 1), topic_file.components)
+    # Load acronym database if not provided
+    if acronym_db is None:
+        acronym_db = load_acronym_database()
 
-            issue = EditorialIssue(
-                id=f"{topic_file.filename}-{i+1:03d}",
-                category=_map_category(result.get('category', 'grammar')),
-                severity=_map_severity(result.get('severity', 'REVIEW')),
-                line=original_line,
-                original=result.get('original', ''),
-                suggested=result.get('suggested', ''),
-                rule_id=result.get('rule_id', 'UNKNOWN'),
-                rationale=result.get('rationale', '')
+    if rules:
+        # Apply all loaded rules from editorial_rules.yaml
+        for rule in rules:
+            new_issues, issue_counter = apply_rule(
+                rule,
+                topic_file.clean_content,
+                topic_file.filename,
+                issue_counter
             )
-            issues.append(issue)
-
-    except ImportError:
+            # Map line numbers back to original file
+            for issue in new_issues:
+                issue.line = map_line_number(issue.line, topic_file.components)
+            issues.extend(new_issues)
+    else:
         # Fallback: basic validation without full rules engine
         issues = _basic_validation(topic_file)
+
+    # Run acronym validation (separate from YAML rules)
+    if acronym_db:
+        acronym_issues, issue_counter = validate_acronyms(
+            topic_file.clean_content,
+            acronym_db,
+            topic_file.filename,
+            issue_counter
+        )
+        # Map line numbers back to original file
+        for issue in acronym_issues:
+            issue.line = map_line_number(issue.line, topic_file.components)
+        issues.extend(acronym_issues)
+
+    # Run product naming validation
+    product_issues, issue_counter = validate_product_naming(
+        topic_file.clean_content,
+        topic_file.filename,
+        issue_counter
+    )
+    # Map line numbers back to original file
+    for issue in product_issues:
+        issue.line = map_line_number(issue.line, topic_file.components)
+    issues.extend(product_issues)
 
     return EditorialResult(file=topic_file, issues=issues)
 
@@ -205,6 +611,8 @@ def apply_safe_fixes(topic_file: TopicFile, issues: List[EditorialIssue], verbos
     """
     Apply SAFE severity fixes to the original file.
 
+    Preserves content inside LWC custom components - only fixes content in regular markdown.
+
     Args:
         topic_file: The TopicFile object with path to original file
         issues: List of editorial issues found
@@ -221,26 +629,69 @@ def apply_safe_fixes(topic_file: TopicFile, issues: List[EditorialIssue], verbos
     content = topic_file.raw_content
     fixes_applied = 0
 
-    # Apply fixes by rule type
+    # Extract components to preserve them
+    from component_skipper import extract_components, restore_components
+    clean_content, components = extract_components(content)
+
+    # Apply fixes to clean content only (components are protected)
+    modified_content = clean_content
+
+    # Group issues by rule_id to avoid duplicate fixes
+    applied_rules = set()
+
     for issue in safe_issues:
-        if issue.rule_id == 'DOUBLE_SPACE':
-            # Replace multiple consecutive spaces with single space (not in code blocks)
-            new_content = re.sub(r'(?<!`)  +(?!`)', ' ', content)
-            if new_content != content:
-                content = new_content
-                fixes_applied += 1
-        elif issue.rule_id == 'TRAILING_WHITESPACE':
+        if issue.rule_id in applied_rules:
+            continue
+
+        original_modified = modified_content
+
+        # Apply fix based on rule type
+        if issue.rule_id == 'DOUBLE_SPACE' or issue.rule_id == 'PUNCT_DOUBLE_SPACE':
+            # Replace multiple consecutive spaces with single space (not in code)
+            modified_content = re.sub(r'(?<!`)  +(?!`)', ' ', modified_content)
+        elif issue.rule_id == 'TRAILING_WHITESPACE' or issue.rule_id == 'PUNCT_TRAILING_SPACE':
             # Remove trailing whitespace from all lines
-            lines = content.split('\n')
-            new_lines = [line.rstrip() for line in lines]
-            new_content = '\n'.join(new_lines)
-            if new_content != content:
-                content = new_content
-                fixes_applied += 1
+            lines = modified_content.split('\n')
+            modified_content = '\n'.join(line.rstrip() for line in lines)
+        elif issue.rule_id == 'TERM_CLICK_ON':
+            modified_content = re.sub(r'\bclick on\b', 'click', modified_content, flags=re.I)
+        elif issue.rule_id == 'TERM_IN_ORDER_TO':
+            modified_content = re.sub(r'\bin order to\b', 'to', modified_content, flags=re.I)
+        elif issue.rule_id == 'TERM_UTILIZE':
+            modified_content = re.sub(r'\butilize[sd]?\b', 'use', modified_content, flags=re.I)
+        elif issue.rule_id == 'TERM_ALLOWS_YOU_TO':
+            modified_content = re.sub(r'\ballows you to\b', 'lets you', modified_content, flags=re.I)
+        elif issue.rule_id == 'TERM_MAKE_SURE':
+            modified_content = re.sub(r'\b[Mm]ake sure\b', 'ensure', modified_content)
+        elif issue.rule_id == 'TERM_BLACKLIST':
+            modified_content = re.sub(r'\bblacklist(?:ed|ing|s)?\b', 'blocked list', modified_content, flags=re.I)
+        elif issue.rule_id == 'TERM_WHITELIST':
+            modified_content = re.sub(r'\bwhitelist(?:ed|ing|s)?\b', 'allowed list', modified_content, flags=re.I)
+        elif issue.rule_id == 'TERM_CISCO_SYSTEMS':
+            modified_content = re.sub(r'\bCisco Systems\b', 'Cisco', modified_content)
+        elif issue.rule_id == 'TERM_REFER_TO':
+            modified_content = re.sub(r'\b[Rr]efer to\b', 'see', modified_content)
+        elif issue.rule_id == 'TERM_DATACENTER':
+            modified_content = re.sub(r'\bdata center\b', 'datacenter', modified_content, flags=re.I)
+        elif issue.rule_id.startswith('GRAMMAR_COMPOUND_'):
+            # Handle compound word hyphenation
+            if 'WELL_KNOWN' in issue.rule_id:
+                modified_content = re.sub(r'\bwell known\b', 'well-known', modified_content, flags=re.I)
+            elif 'REAL_TIME' in issue.rule_id:
+                modified_content = re.sub(r'\breal time\b', 'real-time', modified_content, flags=re.I)
+            elif 'END_TO_END' in issue.rule_id:
+                modified_content = re.sub(r'\bend to end\b', 'end-to-end', modified_content, flags=re.I)
+
+        if modified_content != original_modified:
+            fixes_applied += 1
+            applied_rules.add(issue.rule_id)
+
+    # Restore components back into the modified content
+    final_content = restore_components(modified_content, components)
 
     # Write back to file if changes were made
-    if content != topic_file.raw_content:
-        topic_file.path.write_text(content, encoding='utf-8')
+    if final_content != topic_file.raw_content:
+        topic_file.path.write_text(final_content, encoding='utf-8')
         if verbose:
             print(f"  - Applied {fixes_applied} fixes to {topic_file.filename}", file=sys.stderr)
 

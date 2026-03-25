@@ -16,6 +16,11 @@ class EditorialCategory(Enum):
     ACRONYM = 'acronym'
     GRAMMAR = 'grammar'
     TERMINOLOGY = 'terminology'
+    PUNCTUATION = 'punctuation'
+    HEADING = 'heading'
+    PRODUCT_NAMING = 'product_naming'
+    GUI_FORMAT = 'gui_format'
+    STRUCTURE = 'structure'
 
 
 class FixSeverity(Enum):
@@ -29,6 +34,72 @@ class LintingSeverity(Enum):
     """Severity levels for linting issues."""
     ERROR = 'error'     # Blocking - fails the check
     WARNING = 'warning' # Non-blocking - reported but continues
+
+
+@dataclass
+class EditorialRule:
+    """An editorial validation rule from editorial_rules.yaml."""
+    id: str                        # Unique ID (e.g., TERM_CLICK_ON)
+    name: str                      # Human-readable name
+    category: str                  # Rule category
+    severity: str                  # high, medium, low
+    fix_type: str                  # SAFE, REVIEW, QUERY
+    pattern: str                   # Regex pattern
+    pattern_type: str              # regex, stateful, ai_enhanced
+    message: str                   # Issue description
+    suggestion_template: str       # Fix suggestion template
+    enabled: bool = True           # Whether rule is active
+    priority: int = 50             # Lower = higher priority
+    context_skip: List[str] = field(default_factory=list)  # Contexts to skip
+
+    def get_fix_severity(self) -> 'FixSeverity':
+        """Convert fix_type string to FixSeverity enum."""
+        mapping = {
+            'SAFE': FixSeverity.SAFE,
+            'REVIEW': FixSeverity.REVIEW,
+            'QUERY': FixSeverity.QUERY,
+        }
+        return mapping.get(self.fix_type.upper(), FixSeverity.REVIEW)
+
+    def get_category_enum(self) -> 'EditorialCategory':
+        """Convert category string to EditorialCategory enum."""
+        mapping = {
+            'terminology': EditorialCategory.TERMINOLOGY,
+            'punctuation': EditorialCategory.PUNCTUATION,
+            'heading': EditorialCategory.HEADING,
+            'product_naming': EditorialCategory.PRODUCT_NAMING,
+            'gui_format': EditorialCategory.GUI_FORMAT,
+            'acronym': EditorialCategory.ACRONYM,
+            'grammar': EditorialCategory.GRAMMAR,
+            'structure': EditorialCategory.STRUCTURE,
+            'cisco_style': EditorialCategory.CISCO_STYLE,
+        }
+        return mapping.get(self.category.lower(), EditorialCategory.GRAMMAR)
+
+
+@dataclass
+class AcronymEntry:
+    """An acronym definition from the database."""
+    acronym: str                   # The acronym (e.g., VLAN)
+    expansion: str                 # Full expansion
+    category: str = ''             # Database category (cisco_products, networking, etc.)
+    full_name: Optional[str] = None  # Cisco full product name
+    first_use: Optional[str] = None  # Recommended first use text
+    subsequent: List[str] = field(default_factory=list)  # Acceptable subsequent uses
+    deprecated: bool = False       # Whether acronym is deprecated
+    well_known: bool = False       # Skip expansion check
+    skip_expansion: bool = False   # Never require expansion
+    notes: Optional[str] = None    # Additional guidance
+
+
+@dataclass
+class ContentSegment:
+    """A segment of content within a topic file."""
+    type: str                      # 'regular' or 'component'
+    content: str                   # Segment text
+    start_line: int                # Starting line number
+    end_line: int                  # Ending line number
+    component_name: Optional[str] = None  # Component name if type='component'
 
 
 @dataclass
