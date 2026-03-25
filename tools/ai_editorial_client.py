@@ -5,7 +5,8 @@ Provides AI-enhanced editorial suggestions for context-dependent rules.
 Falls back gracefully when AI is unavailable, converting ai_enhanced rules to QUERY.
 
 Key Features:
-    - AWS Bedrock Claude API integration
+    - AWS Bedrock integration (primary)
+    - Direct Anthropic API fallback
     - Response caching to reduce API calls
     - Confidence scoring for AI suggestions
     - Graceful degradation when AI unavailable
@@ -23,13 +24,20 @@ try:
 except ImportError:
     BOTO3_AVAILABLE = False
 
+try:
+    import requests
+    REQUESTS_AVAILABLE = True
+except ImportError:
+    REQUESTS_AVAILABLE = False
 
-# API Configuration - AWS Bedrock
-AWS_REGION = os.environ.get("AWS_REGION", "us-east-2")
-# Bedrock model IDs: https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html
-# Default: Claude 3.5 Sonnet v2 (on-demand, no inference profile needed)
-# For Opus 4.5+, set BEDROCK_MODEL_ID to an inference profile ARN
-BEDROCK_MODEL = os.environ.get("BEDROCK_MODEL_ID", "anthropic.claude-3-5-sonnet-20241022-v2:0")
+# API Configuration - Bedrock (primary)
+# Use inference profile ID for cross-region inference
+DEFAULT_BEDROCK_MODEL = "us.anthropic.claude-3-5-sonnet-20241022-v2:0"
+DEFAULT_AWS_REGION = "us-east-2"
+
+# API Configuration - Direct Anthropic (fallback)
+ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
+ANTHROPIC_MODEL = "claude-opus-4-5-20251101"  # Opus 4.5 - highest quality
 
 # Cache settings
 CACHE_TTL_HOURS = 24
@@ -59,33 +67,54 @@ class AIEditorialClient:
 
     Provides context-aware suggestions for rules that require
     understanding beyond simple pattern matching.
+
+    Supports AWS Bedrock (primary) and direct Anthropic API (fallback).
     """
 
     def __init__(self):
-        """Initialize the AI client with AWS Bedrock credentials."""
+        """Initialize the AI client with optional credentials."""
+        # Bedrock credentials (primary)
+        self.aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
+        self.aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
+        self.aws_region = os.environ.get("AWS_REGION", DEFAULT_AWS_REGION)
+        self.bedrock_model_id = os.environ.get("BEDROCK_MODEL_ID", DEFAULT_BEDROCK_MODEL)
+
+        # Direct Anthropic API (fallback)
+        self.api_key = os.environ.get("ANTHROPIC_API_KEY")
+
         self._cache: Dict[str, CacheEntry] = {}
         self._bedrock_client = None
 
-        # Initialize Bedrock client if boto3 is available
-        if BOTO3_AVAILABLE:
-            try:
-                self._bedrock_client = boto3.client(
-                    'bedrock-runtime',
-                    region_name=AWS_REGION
-                )
-            except Exception as e:
-                print(f"Warning: Failed to initialize Bedrock client: {e}")
+    @property
+    def bedrock_enabled(self) -> bool:
+        """Check if Bedrock is configured."""
+        return bool(
+            BOTO3_AVAILABLE and
+            self.aws_access_key_id and
+            self.aws_secret_access_key and
+            self.aws_region
+        )
+
+    @property
+    def anthropic_enabled(self) -> bool:
+        """Check if direct Anthropic API is configured."""
+        return bool(REQUESTS_AVAILABLE and self.api_key)
 
     @property
     def is_available(self) -> bool:
         """Check if AI client is available and configured."""
-        if not BOTO3_AVAILABLE:
-            return False
-        if self._bedrock_client is None:
-            return False
-        # boto3 will use AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY from env
-        # or IAM role if running in AWS
-        return True
+        return self.bedrock_enabled or self.anthropic_enabled
+
+    def _get_bedrock_client(self):
+        """Get or create Bedrock client."""
+        if self._bedrock_client is None and self.bedrock_enabled:
+            self._bedrock_client = boto3.client(
+                "bedrock-runtime",
+                aws_access_key_id=self.aws_access_key_id,
+                aws_secret_access_key=self.aws_secret_access_key,
+                region_name=self.aws_region,
+            )
+        return self._bedrock_client
 
     def _get_cache_key(self, content: str, rule_id: str) -> str:
         """Generate a cache key from content and rule ID."""
@@ -121,43 +150,88 @@ class AIEditorialClient:
         )
 
     def _make_request(self, prompt: str, content: str) -> Optional[str]:
-        """Make a request to AWS Bedrock Claude API."""
+        """Make a request to AI API (Bedrock primary, Anthropic fallback)."""
         if not self.is_available:
             return None
 
+        full_prompt = f"{prompt}\n\nContent to analyze:\n{content}"
+        system_prompt = "You are an editorial assistant for Cisco technical tutorials. Provide concise, specific suggestions for improving content quality."
+
+        # Try Bedrock first
+        if self.bedrock_enabled:
+            result = self._make_bedrock_request(full_prompt, system_prompt)
+            if result:
+                return result
+
+        # Fall back to direct Anthropic API
+        if self.anthropic_enabled:
+            return self._make_anthropic_request(full_prompt, system_prompt)
+
+        return None
+
+    def _make_bedrock_request(self, prompt: str, system_prompt: str) -> Optional[str]:
+        """Make a request to AWS Bedrock."""
         try:
-            # Build the request body for Bedrock Claude
-            request_body = {
+            client = self._get_bedrock_client()
+            if not client:
+                return None
+
+            request_body = json.dumps({
                 "anthropic_version": "bedrock-2023-05-31",
                 "max_tokens": 500,
-                "system": "You are an editorial assistant for Cisco technical tutorials. Provide concise, specific suggestions for improving content quality.",
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": f"{prompt}\n\nContent to analyze:\n{content}"
-                    }
-                ]
-            }
+                "system": system_prompt,
+                "messages": [{"role": "user", "content": prompt}],
+            })
 
-            # Invoke the Bedrock model
-            response = self._bedrock_client.invoke_model(
-                modelId=BEDROCK_MODEL,
-                body=json.dumps(request_body),
+            response = client.invoke_model(
+                modelId=self.bedrock_model_id,
+                body=request_body,
                 contentType="application/json",
-                accept="application/json"
+                accept="application/json",
             )
 
-            # Parse the response
-            response_body = json.loads(response['body'].read())
+            response_body = json.loads(response["body"].read())
+            content_blocks = response_body.get("content", [])
+            if content_blocks and content_blocks[0].get("type") == "text":
+                return content_blocks[0].get("text", "")
+            return None
 
-            # Bedrock Claude returns content as a list of content blocks
-            content_blocks = response_body.get('content', [])
+        except Exception as e:
+            print(f"Warning: Bedrock request failed: {e}")
+            return None
+
+    def _make_anthropic_request(self, prompt: str, system_prompt: str) -> Optional[str]:
+        """Make a request to direct Anthropic API."""
+        try:
+            headers = {
+                "Content-Type": "application/json",
+                "x-api-key": self.api_key,
+                "anthropic-version": "2023-06-01"
+            }
+
+            request_body = {
+                "model": ANTHROPIC_MODEL,
+                "max_tokens": 500,
+                "messages": [{"role": "user", "content": prompt}],
+                "system": system_prompt
+            }
+
+            response = requests.post(
+                ANTHROPIC_API_URL,
+                headers=headers,
+                json=request_body,
+                timeout=30
+            )
+            response.raise_for_status()
+
+            data = response.json()
+            content_blocks = data.get('content', [])
             if content_blocks and content_blocks[0].get('type') == 'text':
                 return content_blocks[0].get('text', '')
             return None
 
         except Exception as e:
-            print(f"Warning: AI request failed: {e}")
+            print(f"Warning: Anthropic API request failed: {e}")
             return None
 
     def analyze_procedural_intro(
